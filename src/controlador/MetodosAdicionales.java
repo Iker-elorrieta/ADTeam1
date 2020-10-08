@@ -34,7 +34,7 @@ public class MetodosAdicionales {
 		editorialNuevoLibro = sc.nextLine();
 		
 		
-		//do {
+		do {
 			//Pedir numero de paginas del libro
 			System.out.print("Escriba el numero de paginas que tiene el libro: ");
 			try{
@@ -51,12 +51,12 @@ public class MetodosAdicionales {
 			}
 					
 			//se hacen comprobaciones y si alguna se cumple lo pide otra vez
-		//}while(paginasNuevoLibro == 0 || error == true);
+		}while(paginasNuevoLibro == 0 || error == true);
 		
 		//se reinicia la variable de error
 		error = true;
 		
-		//do {
+		do {
 			
 			//Se pide la altura del libro y se compruba igual que las paginas
 			System.out.print("Escriba la altura del libro: ");
@@ -68,7 +68,7 @@ public class MetodosAdicionales {
 				sc.nextLine();
 			}
 			
-		//}while(alturaNuevoLibro == 0 || error== true);
+		}while(alturaNuevoLibro == 0 || error== true);
 
 		sc.nextLine();
 		//Se piden anotaciones del libro
