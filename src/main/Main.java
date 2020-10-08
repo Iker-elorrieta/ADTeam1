@@ -30,6 +30,7 @@ public class Main {
 				}
 				break;
 			case 2:
+				
 				System.out.println("Escribir ficheros");
 				try {
 					controlador.EscribirFichero.escribirFicheraDat(libros);
