@@ -1,15 +1,17 @@
 package controlador;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.xml.parsers.*;
+
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;
+
+
+import org.w3c.dom.*;
 
 import modelo.Libro;
 
@@ -48,7 +50,7 @@ public class EscribirFichero {
 	}
 		
 
-	 public static void escribirFicheraDat(ArrayList<Libro> pLibros) throws IOException {
+	 public static void escribirFicheroDat(ArrayList<Libro> pLibros) throws IOException {
 
 		 ArrayList<Libro> libros = pLibros;
 		 
@@ -67,6 +69,62 @@ public class EscribirFichero {
 		 }
 		 dataOS.close(); //cerrar stream de salida
 		 
+	}
+	 
+	public static void escribirFicheroXml(ArrayList<Libro> pLibros) throws IOException, ParserConfigurationException, TransformerException{
+		
+		ArrayList<Libro> libros = pLibros;
+		
+		DocumentBuilderFactory  dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dbBuilder.newDocument();
+		
+		Element elementoRaiz = doc.createElement("CATALOGO");
+		doc.appendChild(elementoRaiz);
+		
+		for (Libro libro : libros) {
+			
+			Element eLibro = doc.createElement("LIBRO");
+			elementoRaiz.appendChild(eLibro);
+			
+			Attr attrTitulo = doc.createAttribute("TITULO");
+			attrTitulo.setValue(libro.getTitulo());
+			eLibro.setAttributeNode(attrTitulo);
+			
+			Attr attrEditorial = doc.createAttribute("EDITORIAL");
+			attrEditorial.setValue(libro.getEditorial());
+			eLibro.setAttributeNode(attrEditorial);
+			
+			Attr attrPaginas = doc.createAttribute("PAGINAS");
+			attrPaginas.setValue(Integer.toString(libro.getPaginas()));
+			eLibro.setAttributeNode(attrPaginas);
+			
+			Attr attrAltura = doc.createAttribute("ALTURA");
+			attrAltura.setValue(Double.toString(libro.getAltura()));
+			eLibro.setAttributeNode(attrAltura);
+			
+			Attr attrNotas = doc.createAttribute("NOTAS");
+			attrNotas.setValue(libro.getNotas());
+			eLibro.setAttributeNode(attrNotas);
+			
+			Attr attrIsbn = doc.createAttribute("ISBN");
+			attrIsbn.setValue(libro.getIsbn());
+			eLibro.setAttributeNode(attrIsbn);
+			
+			Attr attrMaterias = doc.createAttribute("MATERIAS");
+			attrMaterias.setValue(libro.getMaterias());
+			eLibro.setAttributeNode(attrMaterias);
+			
+		}
+		
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer transformer = tf.newTransformer();		
+		
+		DOMSource source = new DOMSource(doc);
+		
+		StreamResult result = new StreamResult(new File("libros.xml"));
+		
+		transformer.transform(source, result);
 	}
 
 }

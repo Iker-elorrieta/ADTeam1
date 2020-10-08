@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import modelo.Libro;
 
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ParserConfigurationException, TransformerException {
 		// TODO Auto-generated method stub
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		int opcion = 0;
@@ -32,12 +34,22 @@ public class Main {
 			case 2:
 				
 				System.out.println("Escribir ficheros");
-				try {
-					controlador.EscribirFichero.escribirFicheraDat(libros);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				switch(modelo.Menu.crearSubmenu("Escribir")) {
+				
+				case 1: 
+					controlador.EscribirFichero.escribirFicheroTxt(libros);
+					break;
+				case 2:
+					controlador.EscribirFichero.escribirFicheroDat(libros);
+
+					break;
+				case 3:
+					controlador.EscribirFichero.escribirFicheroXml(libros);
+
+					break;
+					
 				}
+				
 				
 				break;
 				

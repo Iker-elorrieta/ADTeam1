@@ -10,10 +10,10 @@ public class Menu {
 		boolean error = false;
 		do {
 			System.out.println("Escoja una opcion: ");
-			System.out.println("0- Salir");
-			System.out.println("1- Leer ficheros");
-			System.out.println("2- Mostrar Datos");
-			System.out.println("3- Insertar libro");
+			System.out.println("0) Salir");
+			System.out.println("1) Leer ficheros");
+			System.out.println("2) Escribir ficheros");
+			System.out.println("3) Insertar libro");
 			try {
 				opcion = sc.nextInt();
 				error = true;
@@ -34,9 +34,9 @@ public class Menu {
 		boolean error = false;
 		do {
 			System.out.println("Que quiere " + categoria + ": ");
-			System.out.println("1- "+ categoria +" ficheros .txt");
-			System.out.println("2- "+ categoria +" ficheros .dat");
-			System.out.println("3- "+ categoria +" ficheros .xml");
+			System.out.println("1) "+ categoria +" ficheros .txt");
+			System.out.println("2) "+ categoria +" ficheros .dat");
+			System.out.println("3) "+ categoria +" ficheros .xml");
 			try {
 				opcion = sc.nextInt();
 				error = true;
