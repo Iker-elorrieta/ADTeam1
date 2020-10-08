@@ -21,14 +21,12 @@ public class LeerFichero {
 		ArrayList<Libro> libros = pLibros;
 		
 		try{
-			int contadorEntradas = 0;
 			
 			String sFichero = "libros.txt";
 			File fichero = new File(sFichero);
 			BufferedReader brFichero = new BufferedReader(new FileReader(fichero));
 			String linea;
 			while((linea = brFichero.readLine())!=null) {
-				contadorEntradas++;
 				
 				StringTokenizer st = new StringTokenizer(linea, ";");
 				
@@ -50,16 +48,15 @@ public class LeerFichero {
 			}
 			brFichero.close();
 			if (libros.isEmpty()){
-				JOptionPane.showMessageDialog(null, "No se ha cargado ningun mensaje ", "Warning", JOptionPane.WARNING_MESSAGE);
+				System.out.println("No se ha cargado ningun libro ");
 
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "Se han cargado en memoria " + contadorEntradas + " mensajes", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("Se han cargado en memoria " + libros.size() + " libros");
 			}
 		}
 		catch (FileNotFoundException fn ){
-			JOptionPane.showMessageDialog(null, "No se encuentra el fichero de carga", "ERROR", JOptionPane.ERROR_MESSAGE);
-			System.out.println("No se encuentra el fichero");}
+			System.out.println("No se encuentra el fichero de carga");}
 		catch (IOException io) {
 			System.out.println("Error de E/S ");}
 

@@ -29,6 +29,12 @@ public class Libro {
 		this.isbn = pIsbn;
 		this.materias = pMaterias;
 	}
+	
+	public String toString() {
+		
+		return (this.titulo + ";" + this.editorial + ";" + this.paginas + ";" + this.altura + ";" + this.notas + ";" + this.isbn + ";" + this.materias + ";");
+	}
+	
 
 	// GETTERs & SETTERS
 	public String getTitulo() {
