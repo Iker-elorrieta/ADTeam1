@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import controlador.MetodosAdicionales;
 import modelo.Libro;
 import modelo.Menu;
 
@@ -28,7 +29,7 @@ public class Main {
 			switch (opcion) {
 			
 			case 1:
-				System.out.println("\nLEER FICHEROS");
+				System.out.println("\n --LEER FICHEROS--");
 				try {
 					controlador.LeerFichero.leerFichero(libros);
 				} catch (ParseException e) {
@@ -54,10 +55,17 @@ public class Main {
 				break;
 				
 			case 3: 
-				System.out.println("Insertar libro");
+				Menu.mostrarIntro();
+				System.out.println("\n--INSERTAR LIBRO--");
 				libros = controlador.MetodosAdicionales.insertarLibro(libros);
 				
 				break;
+				
+			case 4:
+				MetodosAdicionales.mostrarLibros(libros);
+				
+				break;
+				
 			case 0:
 				System.out.println("Saliendo del programa...");
 				

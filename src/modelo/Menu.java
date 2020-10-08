@@ -17,20 +17,21 @@ public class Menu {
 			System.out.println(" 1) Leer ficheros");
 			System.out.println(" 2) Escribir ficheros");
 			System.out.println(" 3) Insertar libro");
+			System.out.println(" 4) Mostrar libros");
 			System.out.println(" 0) Salir");
 			System.out.print("\nEscoja una opcion: ");
 
 			try {
 				opcion = sc.nextInt();
 				error = true;
-				ExcepcionIntervalo.rango(3, 0, opcion);
+				ExcepcionIntervalo.rango(4, 0, opcion);
 			}catch(ExcepcionIntervalo ex) {
 				System.out.println(ex.getMessage());
 				sc.nextLine();
 				error = false;
 				
 			}catch(Exception e) {
-				System.out.println("\nERROR!\nDebe escribir un numero de los indicados en las opciones");
+				System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un numero de los indicados en las opciones");
 				sc.nextLine();
 				error = false;
 			}
@@ -65,7 +66,7 @@ public class Menu {
 				error = false; 
 				
 			}catch(Exception e) {
-				System.out.println("\nERROR!\nDebe escribir un numero de los indicados en las opciones");
+				System.out.println("\n\n--------\n ERROR!\n--------|\nDebe escribir un numero de los indicados en las opciones");
 				sc.nextLine();
 				error = false;
 			}

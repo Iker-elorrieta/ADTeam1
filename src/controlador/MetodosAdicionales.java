@@ -26,7 +26,7 @@ public class MetodosAdicionales {
 		boolean error = true;
 		 
 		//Pedir nombre del libro
-		System.out.print("Escriba el nombre del libro: ");
+		System.out.print("\nEscriba el nombre del libro: ");
 		tituloNuevoLibro = sc.nextLine();
 		
 		//pedir editorial del libro
@@ -40,12 +40,12 @@ public class MetodosAdicionales {
 			try{
 				//Recoger las paginas
 				paginasNuevoLibro = sc.nextInt();
-				//En caso de que no se a un int va al catch sino sigue
+				//En caso de que no sea un int va al catch sino sigue
 				//si es un int error cambia a false 
 				error = false;
 			}catch(Exception e) {
 				//Se muestra el mensaje indicando el error
-				System.out.println("ERROR: No introduzca caracteres no numericos a la hora de  indicar el numero de paginas del libro");
+				System.out.println("ERROR: No introduzca caracteres no numericos a la hora de indicar el numero de paginas del libro");
 				//Se limpia el buffer del scanner para no entrar en un bucle infinito
 				sc.nextLine();
 			}
@@ -89,5 +89,20 @@ public class MetodosAdicionales {
 		libros.add(libro);
 		//Devuelve el array con los libros
 		return libros;
+	}
+	
+	public static void mostrarLibros(ArrayList<Libro> pLibros) {
+		
+		ArrayList<Libro> libros = pLibros;
+		
+		if (libros.isEmpty()) {
+			System.out.println("\nNO SE HA ENCONTRADO NINGUN LIBRO QUE MOSTRAR\n");
+		}
+		else {
+			for(Libro libro : libros) {
+				
+				System.out.println("\n" + " Titulo: " + libro.getTitulo() + "Editorial: " + libro.getEditorial() + "Paginas: " + libro.getPaginas() + "Altura: " + libro.getAltura() + "Notas; " + libro.getNotas() + "ISBN: " + libro.getIsbn() + "Materias: " + libro.getMaterias());
+			}
+		}
 	}
 }

@@ -11,7 +11,7 @@ public class ExcepcionIntervalo extends Exception{
 
 		if (num < min || num > max) {
 			
-			throw new ExcepcionIntervalo("\nERROR!\nLa opcion seleccionada no es correcta");
+			throw new ExcepcionIntervalo("\n\n--------\n ERROR! \n--------\nLa opcion seleccionada no es correcta");
 			
 		}
 	}

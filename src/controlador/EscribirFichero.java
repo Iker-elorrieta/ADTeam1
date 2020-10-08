@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
 import javax.xml.parsers.*;
 
 import javax.xml.transform.*;
@@ -25,7 +24,7 @@ public class EscribirFichero {
 		ArrayList<Libro> libros = pLibros;
 
 		try{
-			String sFichero = "libros.txt";
+			String sFichero = (solicitarNombreFichero() + ".txt");
 		
 			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(sFichero, comprobarFicheroExistente(sFichero)));
 			
@@ -36,7 +35,7 @@ public class EscribirFichero {
 			}
 			bwFichero.close();
 			
-			System.out.println("Se han guardado " + libros.size() + " libros en el fichero " + sFichero);
+			System.out.println("\nSe han guardado " + libros.size() + " libros en el fichero " + sFichero);
 	}
 		catch (FileNotFoundException fn ){
 			 System.out.println("No se encuentra el fichero");}
@@ -50,7 +49,7 @@ public class EscribirFichero {
 		ArrayList<Libro> libros = pLibros;
 		 
 		Libro libro;
-		String sFichero = "libros.dat";	
+		String sFichero = (solicitarNombreFichero() + ".dat");	
 		 
 		File fichero = new File(sFichero);//declara el fichero
 		
@@ -65,7 +64,7 @@ public class EscribirFichero {
 		}
 		dataOS.close(); //cerrar stream de salida
 		 
-		System.out.println("Se han guardado " + libros.size() + " libros en el fichero " + sFichero);
+		System.out.println("\nSe han guardado " + libros.size() + " libros en el fichero " + sFichero);
 
 		 
 	}
@@ -74,7 +73,7 @@ public class EscribirFichero {
 		
 		ArrayList<Libro> libros = pLibros;
 		
-		String sFichero = "libros.xml";
+		String sFichero = (solicitarNombreFichero() + ".xml");
 		
 		File fichero = new File(sFichero);
 		
@@ -130,7 +129,7 @@ public class EscribirFichero {
 		
 		transformer.transform(source, result);
 		
-		System.out.println("Se han guardado " + libros.size() + " libros en el fichero " + sFichero);
+		System.out.println("\nSe han guardado " + libros.size() + " libros en el fichero " + sFichero);
 
 	}
 	
@@ -147,17 +146,23 @@ public class EscribirFichero {
 			boolean error = false;
 			do {		
 				
-				System.out.print("El fichero " + sFichero + " existe.\n ¿Que desea realizar?\n  1) Sobreescribir datos\n  2) Añadir datos\nIntroduzca una opcion:");
+				System.out.print("\nEl fichero " + sFichero + " ya existe.\n ¿Que desea realizar?\n\n 1) Sobreescribir datos\n 2) Añadir datos\n\nIntroduzca una opcion: ");
 
 				try {
 					opcion = sc.nextInt();
 					error = true;
-				}catch(Exception e) {
-					System.out.println("Debe escribir un numero de los indicados en las opciones");
+					ExcepcionIntervalo.rango(2, 1, opcion);
+				}catch(ExcepcionIntervalo ex) {
+					System.out.println(ex.getMessage());
 					sc.nextLine();
+					error = false;
+				}catch(Exception e) {
+					System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un numero de los indicados en las opciones");
+					sc.nextLine();
+					error = false;
 				}
 				
-			}while(error = false || opcion < 1 || opcion > 2);
+			}while(!error);
 			
 			switch(opcion) {
 			
@@ -175,6 +180,12 @@ public class EscribirFichero {
 		}
 		
 		return añadir;
+	}
+	
+	public static String solicitarNombreFichero() {
+		
+		System.out.print("\nIntroduce el nombre del archivo: ");
+		return sc.next();
 	}
 
 }
