@@ -39,7 +39,7 @@ public class EscribirFichero {
 			}
 			bwFichero.close();
 			
-			JOptionPane.showMessageDialog(null, "Se han guardado " + libros.size() + " mensajes en el fichero " + sFichero, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Se han guardado " + libros.size() + " libros en el fichero " + sFichero, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 	}
 		catch (FileNotFoundException fn ){
 			 System.out.println("No se encuentra el fichero");}

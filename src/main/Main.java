@@ -32,7 +32,7 @@ public class Main {
 			case 2:
 				System.out.println("Escribir ficheros");
 				try {
-					controlador.EscribirFichero.escribirFichero(libros);
+					controlador.EscribirFichero.escribirFicheraDat(libros);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

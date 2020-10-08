@@ -32,13 +32,7 @@ public class Libro {
 	
 	
 	public static void insertarLibro() {
-		this.titulo = pTitulo;
-		this.editorial = pEditorial;
-		this.paginas = pPaginas;
-		this.altura = pAltura;
-		this.notas = pNotas;
-		this.isbn = pIsbn;
-		this.materias = pMaterias;
+		
 		
 	}
 
