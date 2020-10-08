@@ -42,7 +42,7 @@ public class Main {
 				
 			case 3: 
 				System.out.println("Insertar libro");
-				libros = modelo.Libro.insertarLibro(libros);
+				libros = controlador.MetodosAdicionales.insertarLibro(libros);
 				
 			case 0:
 				System.out.println("Saliendo al menu...");
