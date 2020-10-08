@@ -31,18 +31,18 @@ public class Main {
 				break;
 			case 2:
 				System.out.println("Escribir ficheros");
-				try {
-					controlador.EscribirFichero.escribirFichero(libros);
+				/*try {
+					//controlador.EscribirFichero.escribirFichero(libros);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 				
 				break;
 				
 			case 3: 
 				System.out.println("Insertar libro");
-				modelo.Libro.insertarLibro();
+				libros = modelo.Libro.insertarLibro(libros);
 				
 			case 0:
 				System.out.println("Saliendo al menu...");
