@@ -42,7 +42,7 @@ public class Main {
 				
 			case 3: 
 				System.out.println("Insertar libro");
-				modelo.Libro.insertarLibro();
+				libros = modelo.Libro.insertarLibro(libros);
 				
 			case 0:
 				System.out.println("Saliendo al menu...");
