@@ -38,9 +38,9 @@ public class EscribirFichero {
 			System.out.println("\nSe han guardado " + libros.size() + " libros en el fichero " + sFichero);
 	}
 		catch (FileNotFoundException fn ){
-			 System.out.println("No se encuentra el fichero");}
+			 System.out.println("\nNo se encuentra el fichero");}
 		catch (IOException io) {
-			 System.out.println("Error de E/S ");}
+			 System.out.println("\nError de E/S ");}
 	}
 		
 
@@ -176,7 +176,7 @@ public class EscribirFichero {
 			
 		}
 		else {
-			System.out.println("Se ha creado el archivo " + sFichero);
+			System.out.println("\nSe ha creado el archivo " + sFichero);
 		}
 		
 		return añadir;
@@ -184,8 +184,22 @@ public class EscribirFichero {
 	
 	public static String solicitarNombreFichero() {
 		
-		System.out.print("\nIntroduce el nombre del archivo: ");
-		return sc.next();
+		String nombreFichero;
+		boolean error = true;
+		
+		do {
+			System.out.print("\nIntroduce el nombre del archivo: ");
+			nombreFichero =  sc.next();
+			
+			if (!Validadores.validador(nombreFichero, Patron.devolverPatron("nombreFichero"))){
+				System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un nombre valido. (Caracteres admitidos: Letras minusculas/mayusculas, numeros o guion bajo)");
+			}
+			else {
+				error = false;
+			}
+		}while(error);
+		
+		return nombreFichero;
 	}
 
 }
