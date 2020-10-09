@@ -1,8 +1,10 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Libro {
+@SuppressWarnings("serial")
+public class Libro implements Serializable{
 
 	static Scanner sc = new Scanner(System.in);
 	

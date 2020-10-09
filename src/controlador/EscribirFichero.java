@@ -59,7 +59,7 @@ public class EscribirFichero {
 		
 		for (int i=0;i<libros.size(); i++){ //recorro los arrays
 			libro = libros.get(i);
-		 	dataOS.writeObject(libro); //escribo la persona en el fichero
+		 	dataOS.writeObject(libro); //escribo el libro en el fichero
 		 
 		}
 		dataOS.close(); //cerrar stream de salida

@@ -101,7 +101,7 @@ public class MetodosAdicionales {
 		else {
 			for(Libro libro : libros) {
 				
-				System.out.println("\n" + " Titulo: " + libro.getTitulo() + "Editorial: " + libro.getEditorial() + "Paginas: " + libro.getPaginas() + "Altura: " + libro.getAltura() + "Notas; " + libro.getNotas() + "ISBN: " + libro.getIsbn() + "Materias: " + libro.getMaterias());
+				System.out.println("\n" + " Titulo: " + libro.getTitulo() + " || Editorial: " + libro.getEditorial() + " || Paginas: " + libro.getPaginas() + " || Altura: " + libro.getAltura() + " || Notas: " + libro.getNotas() + " || ISBN: " + libro.getIsbn() + " || Materias: " + libro.getMaterias());
 			}
 		}
 	}
