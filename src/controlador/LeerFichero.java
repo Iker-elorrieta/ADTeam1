@@ -56,7 +56,7 @@ public class LeerFichero {
 					contadorEntradas++;
 				}
 								
-				System.out.println(linea);
+				//System.out.println(linea);
 				libros.add(libro);
 			}
 			brFichero.close();
