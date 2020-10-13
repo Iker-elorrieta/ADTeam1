@@ -116,7 +116,7 @@ public class LeerFichero {
 			}
 	        
 		} catch (FileNotFoundException e) {
-			System.out.println("\nNo se encuentra el fichero");
+			System.out.println("\nNo se encuentra el fichero de carga");
 		}
 		
 		return libros;
@@ -179,6 +179,8 @@ public class LeerFichero {
   				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
   			}
             
+		} catch (FileNotFoundException e) {
+			System.out.println("\nNo se encuentra el fichero de carga");
 		}
 		catch (Exception e) {
             e.printStackTrace();
