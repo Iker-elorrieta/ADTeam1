@@ -138,7 +138,7 @@ public class EscribirFichero {
 	
 	public static boolean aniadirDatosFicheroExistente(String pSFichero) {
 		
-		boolean añadir = true;
+		boolean aniadir = true;
 		String sFichero = pSFichero;
 		
 		File fichero = new File(sFichero);
@@ -149,7 +149,7 @@ public class EscribirFichero {
 			boolean error = false;
 			do {		
 				
-				System.out.print("\nEl fichero " + sFichero + " ya existe.\n ¿Que desea realizar?\n\n 1) Sobreescribir datos\n 2) Añadir datos\n\nIntroduzca una opcion: ");
+				System.out.print("\nEl fichero " + sFichero + " ya existe.\n ï¿½Que desea realizar?\n\n 1) Sobreescribir datos\n 2) Aï¿½adir datos\n\nIntroduzca una opcion: ");
 
 				try {
 					opcion = sc.nextInt();
@@ -170,10 +170,10 @@ public class EscribirFichero {
 			switch(opcion) {
 			
 			case 1:
-				añadir = false;
+				aniadir = false;
 				break;
 			case 2: 
-				añadir = true;
+				aniadir = true;
 				break;
 			}
 			
@@ -182,7 +182,7 @@ public class EscribirFichero {
 			System.out.println("\nSe ha creado el archivo " + sFichero);
 		}
 		
-		return añadir;
+		return aniadir;
 	}
 	
 	public static String solicitarNombreFichero() {
