@@ -143,4 +143,9 @@ public class MetodosAdicionales {
 		return libros;
 		
 	}
+	
+	public static String comprobarOS() {
+		
+		return System.getProperty("os.name");
+	}
 }

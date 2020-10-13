@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.Scanner;
 
+import controlador.MetodosAdicionales;
 import excepciones.ExcepcionIntervalo;
 
 public class Menu {
@@ -90,7 +91,7 @@ public class Menu {
 	}
 	
 	public static void mostrarIntro() {
-		System.out.println("\n\n********************************\n*          BIBLIOTECA          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n");
+		System.out.println("\n\n********************************\n*          BIBLIOTECA          *\n*          " + MetodosAdicionales.comprobarOS() + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n");
 	}
 
 }
