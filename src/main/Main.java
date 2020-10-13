@@ -14,7 +14,7 @@ import modelo.Menu;
 
 public class Main {
 	
-	public static void main(String[] args) throws IOException, ParserConfigurationException, TransformerException {
+	public static void main(String[] args) throws IOException, ParserConfigurationException, TransformerException, ParseException, ClassNotFoundException, InterruptedException {
 
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
@@ -29,17 +29,23 @@ public class Main {
 			switch (opcion) {
 			
 			case 1:
-				System.out.println("\n --LEER FICHEROS--");
-				try {
-					controlador.LeerFichero.leerFichero(libros);
-				} catch (ParseException e) {
-
-					e.printStackTrace();
+				switch(modelo.Menu.crearSubmenu("Leer")) {
+				
+				case 1: 
+					controlador.LeerFichero.leerFicheroTxt(libros);
+					break;
+				case 2:
+					controlador.LeerFichero.leerFicheroDat(libros);
+					break;
+				case 3:
+					controlador.LeerFichero.leerFicheroXml(libros);
+					break;
 				}
+
 				break;
 			case 2:
 				
-				switch(modelo.Menu.crearSubmenuEscribirFichero("Escribir")) {
+				switch(modelo.Menu.crearSubmenu("Escribir")) {
 				
 				case 1: 
 					controlador.EscribirFichero.escribirFicheroTxt(libros);
@@ -66,6 +72,10 @@ public class Main {
 				
 				break;
 				
+			case 5:
+				MetodosAdicionales.borrarMemoria(libros);
+				
+				break;
 			case 0:
 				System.out.println("Saliendo del programa...");
 				

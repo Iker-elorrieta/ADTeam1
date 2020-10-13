@@ -3,6 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import excepciones.ExcepcionRespuesta;
 import modelo.Libro;
 
 public class MetodosAdicionales {
@@ -103,6 +104,43 @@ public class MetodosAdicionales {
 				
 				System.out.println("\n" + " Titulo: " + libro.getTitulo() + " || Editorial: " + libro.getEditorial() + " || Paginas: " + libro.getPaginas() + " || Altura: " + libro.getAltura() + " || Notas: " + libro.getNotas() + " || ISBN: " + libro.getIsbn() + " || Materias: " + libro.getMaterias());
 			}
+			System.out.println("\n Nº de total de libros: " + libros.size());
 		}
+	}
+	
+	public static ArrayList<Libro> borrarMemoria(ArrayList<Libro> pLibros) throws InterruptedException{
+		
+		ArrayList<Libro> libros = pLibros;
+		
+		boolean error = true;
+		String respuesta = null;
+		
+		do {
+		
+			System.out.println("\n¿Esta seguro de que desea borrar la memoria? (S/N): ");
+			try{
+				respuesta = sc.nextLine();
+				ExcepcionRespuesta.comprobarRespuesta(respuesta);
+				error = false;
+						
+			}
+			catch(ExcepcionRespuesta exR) {
+				
+				System.out.println(exR.getMessage());
+			}
+		} while(error);
+		
+		if (respuesta.equalsIgnoreCase("S")) {
+			libros.clear();
+			
+			System.out.println("\nMEMORIA BORRADA");
+			
+		}
+		else {
+			System.out.println("\nOperacion cancelada\nVolviendo al menu principal...");
+		}
+		
+		return libros;
+		
 	}
 }

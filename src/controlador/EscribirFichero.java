@@ -13,6 +13,7 @@ import javax.xml.transform.stream.*;
 
 import org.w3c.dom.*;
 
+import excepciones.ExcepcionIntervalo;
 import modelo.Libro;
 
 public class EscribirFichero {
@@ -23,19 +24,23 @@ public class EscribirFichero {
 
 		ArrayList<Libro> libros = pLibros;
 
+		int numLibros = 0;
+
+		
 		try{
 			String sFichero = (solicitarNombreFichero() + ".txt");
 		
-			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(sFichero, comprobarFicheroExistente(sFichero)));
+			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(sFichero, aniadirDatosFicheroExistente(sFichero)));
 			
-			for (int i=0; i<libros.size(); i++){
+			for (int i = 0; i < libros.size(); i++){
 				Libro libro = libros.get(i);
 				bwFichero.write(libro.toString()); 
 				bwFichero.newLine(); 
+				numLibros++;
 			}
 			bwFichero.close();
 			
-			System.out.println("\nSe han guardado " + libros.size() + " libros en el fichero " + sFichero);
+			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
 	}
 		catch (FileNotFoundException fn ){
 			 System.out.println("\nNo se encuentra el fichero");}
@@ -48,23 +53,21 @@ public class EscribirFichero {
 		
 		ArrayList<Libro> libros = pLibros;
 		 
+		int numLibros = 0;
 		Libro libro;
-		String sFichero = (solicitarNombreFichero() + ".dat");	
-		 
-		File fichero = new File(sFichero);//declara el fichero
+		String sFichero = (solicitarNombreFichero() + ".dat");			
 		
-		FileOutputStream fileout = new FileOutputStream(fichero,comprobarFicheroExistente(sFichero)); //crea el flujo de salida
-		//conecta el flujo de bytes al flujo de datos
-		ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
+		ObjectOutputStream dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero)));
 		
-		for (int i=0;i<libros.size(); i++){ //recorro los arrays
+		for (int i = 0; i < libros.size(); i++){
 			libro = libros.get(i);
-		 	dataOS.writeObject(libro); //escribo el libro en el fichero
+		 	dataOS.writeObject(libro); 
+		 	numLibros++;
 		 
 		}
-		dataOS.close(); //cerrar stream de salida
+		dataOS.close(); 
 		 
-		System.out.println("\nSe han guardado " + libros.size() + " libros en el fichero " + sFichero);
+		System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
 
 		 
 	}
@@ -129,11 +132,11 @@ public class EscribirFichero {
 		
 		transformer.transform(source, result);
 		
-		System.out.println("\nSe han guardado " + libros.size() + " libros en el fichero " + sFichero);
+		System.out.println("\nSe ha(n) guardado " + libros.size() + " libro(s) en el fichero " + sFichero);
 
 	}
 	
-	public static boolean comprobarFicheroExistente(String pSFichero) {
+	public static boolean aniadirDatosFicheroExistente(String pSFichero) {
 		
 		boolean añadir = true;
 		String sFichero = pSFichero;

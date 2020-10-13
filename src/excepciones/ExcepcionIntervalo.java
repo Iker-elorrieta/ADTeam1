@@ -1,4 +1,4 @@
-package controlador;
+package excepciones;
 
 @SuppressWarnings("serial")
 public class ExcepcionIntervalo extends Exception{

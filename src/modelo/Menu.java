@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Scanner;
 
-import controlador.ExcepcionIntervalo;
+import excepciones.ExcepcionIntervalo;
 
 public class Menu {
 	static Scanner sc = new Scanner(System.in);
@@ -18,13 +18,14 @@ public class Menu {
 			System.out.println(" 2) Escribir ficheros");
 			System.out.println(" 3) Insertar libro");
 			System.out.println(" 4) Mostrar libros");
+			System.out.println(" 5) Borrar memoria");
 			System.out.println(" 0) Salir");
 			System.out.print("\nEscoja una opcion: ");
 
 			try {
 				opcion = sc.nextInt();
 				error = true;
-				ExcepcionIntervalo.rango(4, 0, opcion);
+				ExcepcionIntervalo.rango(5, 0, opcion);
 			}catch(ExcepcionIntervalo ex) {
 				System.out.println(ex.getMessage());
 				sc.nextLine();
@@ -42,14 +43,22 @@ public class Menu {
 		return opcion;
 	}
 	
-	public static int crearSubmenuEscribirFichero(String categoria) {
+	public static int crearSubmenu(String categoria) {
 		
 		int opcion = 0;
 		boolean error = false;
 		do {
 			mostrarIntro();
-			System.out.println("\n  --ESCRIBIR FICHEROS--");
-			System.out.println("\nEn que formato desea guardar los datos:\n");
+			if (categoria.equalsIgnoreCase("leer")) {
+				
+				System.out.println("\n  --LEER FICHEROS--");
+			}
+			else if(categoria.equalsIgnoreCase("escribir")) {
+				
+				System.out.println("\n  --ESCRIBIR FICHEROS--");
+			}
+			
+			System.out.println("\nEn que formato desea " + categoria + " los datos:\n");
 			System.out.println(" 1) "+ categoria +" ficheros .txt");
 			System.out.println(" 2) "+ categoria +" ficheros .dat");
 			System.out.println(" 3) "+ categoria +" ficheros .xml");
@@ -60,6 +69,7 @@ public class Menu {
 				opcion = sc.nextInt();
 				error = true;
 				ExcepcionIntervalo.rango(3, 0, opcion);
+			
 			}catch(ExcepcionIntervalo ex) {
 				System.out.println(ex.getMessage());
 				sc.nextLine();
