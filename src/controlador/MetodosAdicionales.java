@@ -86,7 +86,7 @@ public class MetodosAdicionales {
 		
 		//Se crea el nuevo libro
 		Libro libro = new Libro(tituloNuevoLibro, editorialNuevoLibro, paginasNuevoLibro, alturaNuevoLibro,notasNuevoLibro,isbnNuevoLibro,materiasNuevoLibro );
-		//se añade el nuevo libro al array
+		//se aï¿½ade el nuevo libro al array
 		libros.add(libro);
 		//Devuelve el array con los libros
 		return libros;
@@ -104,7 +104,7 @@ public class MetodosAdicionales {
 				
 				System.out.println("\n" + " Titulo: " + libro.getTitulo() + " || Editorial: " + libro.getEditorial() + " || Paginas: " + libro.getPaginas() + " || Altura: " + libro.getAltura() + " || Notas: " + libro.getNotas() + " || ISBN: " + libro.getIsbn() + " || Materias: " + libro.getMaterias());
 			}
-			System.out.println("\n Nº de total de libros: " + libros.size());
+			System.out.println("\n Nï¿½ de total de libros: " + libros.size());
 		}
 	}
 	
@@ -117,7 +117,7 @@ public class MetodosAdicionales {
 		
 		do {
 		
-			System.out.println("\n¿Esta seguro de que desea borrar la memoria? (S/N): ");
+			System.out.println("\nEsta seguro de que desea borrar la memoria? (S/N): ");
 			try{
 				respuesta = sc.nextLine();
 				ExcepcionRespuesta.comprobarRespuesta(respuesta);
@@ -146,6 +146,12 @@ public class MetodosAdicionales {
 	
 	public static String comprobarOS() {
 		
-		return System.getProperty("os.name");
+		String sOS = System.getProperty("os.name");
+
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			sOS = "  " + System.getProperty("os.name") + "   ";
+		}
+		
+		return sOS;
 	}
 }
