@@ -7,7 +7,7 @@ public class ExcepcionIntervalo extends Exception{
 		super(msg);
 	}
 	
-	public static void rango(int max, int min, int num) throws ExcepcionIntervalo, InterruptedException {
+	public static void rango(int num, int max, int min) throws ExcepcionIntervalo, InterruptedException {
 
 		if (num < min || num > max) {
 			

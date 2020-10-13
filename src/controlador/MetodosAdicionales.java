@@ -3,8 +3,10 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import excepciones.ExcepcionIntervalo;
 import excepciones.ExcepcionRespuesta;
 import modelo.Libro;
+import modelo.Menu;
 
 public class MetodosAdicionales {
 
@@ -26,6 +28,10 @@ public class MetodosAdicionales {
 		//Inicializar la variable para las comprobaciones
 		boolean error = true;
 		 
+		Menu.mostrarIntro();
+
+		System.out.println("\n--INSERTAR LIBRO--");
+
 		//Pedir nombre del libro
 		System.out.print("\nEscriba el nombre del libro: ");
 		tituloNuevoLibro = sc.nextLine();
@@ -104,9 +110,50 @@ public class MetodosAdicionales {
 				
 				System.out.println("\n" + " Titulo: " + libro.getTitulo() + " || Editorial: " + libro.getEditorial() + " || Paginas: " + libro.getPaginas() + " || Altura: " + libro.getAltura() + " || Notas: " + libro.getNotas() + " || ISBN: " + libro.getIsbn() + " || Materias: " + libro.getMaterias());
 			}
-			System.out.println("\n N� de total de libros: " + libros.size());
+			System.out.println("\n Numero de total de libros: " + libros.size());
 		}
 	}
+	
+	public static int solicitarOpcion(int maxOpcion, int minOpcion, String tipoMenu) {
+		
+		boolean error = true;
+		int opcion = 0;
+		
+		do {
+			
+			System.out.print("\nEscoja una opcion: ");
+	
+			try {
+				opcion = sc.nextInt();	
+				sc.nextLine();
+				ExcepcionIntervalo.rango(opcion, maxOpcion, minOpcion);
+				error = false;
+				break;
+				
+			}catch(ExcepcionIntervalo ex) {
+				System.out.println(ex.getMessage());
+				sc.nextLine();
+				
+			}catch(Exception e) {
+				System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un numero de los indicados en las opciones");
+				sc.nextLine();
+			}
+			
+			if (tipoMenu.equalsIgnoreCase("menuPrincipal")) {
+				Menu.mostrarMenu();
+			}
+			else if (tipoMenu.equalsIgnoreCase("submenuLeer")) {
+				Menu.mostrarSubmenu("leer");
+			}
+			else if (tipoMenu.equalsIgnoreCase("submenuEscribir")) {
+				Menu.mostrarSubmenu("escribir");
+			}
+		}while(error);
+		
+		return opcion;
+		
+	}
+	
 	
 	public static ArrayList<Libro> borrarMemoria(ArrayList<Libro> pLibros) throws InterruptedException{
 		
