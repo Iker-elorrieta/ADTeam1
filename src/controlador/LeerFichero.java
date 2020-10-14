@@ -21,20 +21,22 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import exploradorDeArchivos.ExploradorAbrir;
+import exploradorDeArchivos.ExploradorGuardar;
 import modelo.Libro;
 
 public class LeerFichero {
 
-	
-	public static ArrayList<Libro> leerFicheroTxt(ArrayList<Libro> pLibros) throws ParseException {
+
+	public static ArrayList<Libro> leerFicheroTxt(ArrayList<Libro> pLibros) throws ParseException, InterruptedException {
 		
 		ArrayList<Libro> libros = pLibros;
 		
 		try{
 			
 			int contadorEntradas = 0;
-
-			String sFichero = "libros.txt";
+			String sFichero = "libros";
+			
 			File fichero = new File(sFichero);
 			BufferedReader brFichero = new BufferedReader(new FileReader(fichero));
 			String linea;
@@ -67,11 +69,12 @@ public class LeerFichero {
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas + " libro(s)");
 			}
-		}
-		catch (FileNotFoundException fn ){
-			System.out.println("\nNo se encuentra el fichero de carga");}
-		catch (IOException io) {
+		}catch (FileNotFoundException fn ){
+			System.out.println("\nNo se encuentra el fichero de carga");
+		
+		}catch (IOException io) {
 			System.out.println("\nError de E/S ");}
+		
 
 		return libros;
 		
@@ -80,7 +83,6 @@ public class LeerFichero {
 	public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) throws ParseException, IOException, ClassNotFoundException {
 		
 		ArrayList<Libro> libros = pLibros;
-		boolean cont= true ;
 		
 		try {
 			int contadorEntradas = 0;
@@ -89,16 +91,15 @@ public class LeerFichero {
 			ObjectInputStream oi = new ObjectInputStream(fi);
 	   
 	        try {
-	            while (cont) {
+	            while (true) {
 
-	                Object liburu = oi.readObject();
+	                Libro liburu = (Libro)oi.readObject();
 
 	                if (liburu != null) {
-	                    libros.add((Libro) liburu);
+	                    libros.add(liburu);
 	                    contadorEntradas++;
 	                }
-	                else
-	                    cont = false;
+	                
 	            }
         	} catch (EOFException eo) {
 	        	System.out.println("\nFIN DE LECTURA");
@@ -138,25 +139,15 @@ public class LeerFichero {
             DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
             Document document = documentBuilder.parse(archivo);
             document.getDocumentElement().normalize();
-            //System.out.println("Elemento raiz:" + document.getDocumentElement().getNodeName());
             NodeList listalibros = document.getElementsByTagName("LIBRO");
             
             
             for (int temp = 0; temp < listalibros.getLength(); temp++) {
                 Node nodo = listalibros.item(temp);
-              //System.out.println("Elemento:" + nodo.getNodeName());
+
                 if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) nodo;
                     
-                    /*
-                    System.out.println("Titulo: " + element.getAttribute("TITULO"));
-                    System.out.println("Editorial: " + element.getAttribute("EDITORIAL"));
-                    System.out.println("Paginas: " + element.getAttribute("PAGINAS"));
-                    System.out.println("Altura: " + element.getAttribute("ALTURA"));
-                    System.out.println("Notas: " + element.getAttribute("NOTAS"));
-                    System.out.println("Isbn: " + element.getAttribute("ISBN"));
-                    System.out.println("Materias: " + element.getAttribute("MATERIAS"));
-                	*/
                     
                     Libro liburu= new Libro();
                     liburu.setTitulo(element.getAttribute("TITULO"));
