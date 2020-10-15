@@ -16,7 +16,7 @@ class PruebasElegirOpcionTest {
 		PruebasElegirOpcion elegir = new PruebasElegirOpcion();
 		
 		
-		String input = "9 \n 1 \n 5  \n 2";
+		String input = "1 \n 1 \n 1  \n 1";
 		int maxOpcion = 5;
 		int minOpcion = 0;
 		String tipoMenu = "menuPrincipal";
