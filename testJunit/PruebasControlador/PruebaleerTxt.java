@@ -26,12 +26,12 @@ import modelo.Libro;
 public class PruebaleerTxt {
 	
 
-	public  ArrayList<Libro> leerFicheroTxt(ArrayList<Libro> pLibros,BufferedReader brFichero ) throws ParseException, InterruptedException {
+	public  ArrayList<Libro> leerFicheroTxt(ArrayList<Libro> pLibros,BufferedReader brFichero) throws ParseException, InterruptedException {
 		
 		ArrayList<Libro> libros = pLibros;
 		
 		try{
-			
+
 			int contadorEntradas = 0;
 			String sFichero = "libros.txt";
 			
