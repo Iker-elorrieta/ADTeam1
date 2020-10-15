@@ -3,12 +3,11 @@ package exploradorDeArchivos;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ExploradorAbrir implements Runnable{
+public class ProcesoExplorador {
 
-	String rutaFichero;
+	private static String rutaFichero;
 	
-	@Override
-	public void run() {
+	public static void Main(String[]args) {
 		System.out.println("Explorador");
 		JFileChooser fc = new JFileChooser("D:\\Descargas");
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
@@ -17,7 +16,7 @@ public class ExploradorAbrir implements Runnable{
 	    int seleccionUsuario = fc.showOpenDialog(null);
 	   
 	    if(seleccionUsuario == JFileChooser.APPROVE_OPTION) {
-	      String rutaFichero = fc.getSelectedFile().getAbsolutePath();
+	      rutaFichero = fc.getSelectedFile().getAbsolutePath();
 	      System.out.println(rutaFichero);
 	    }
 	    

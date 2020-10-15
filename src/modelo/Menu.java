@@ -41,7 +41,7 @@ public class Menu {
 	}
 	
 	public static void mostrarSubmenuSobreescribir() {
-		System.out.print("\nEl nombre del fichero introducido ya existe.\n Que desea realizar?\n\n 1) Sobreescribir datos\n 2) Aniadir datos\n");
+		System.out.print("\nEl nombre del fichero introducido ya existe.\n Que desea realizar?\n\n 1) Sobreescribir datos\n 2) Añadir datos\n");
 
 	}
 	
