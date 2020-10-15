@@ -21,12 +21,7 @@ public class ControladorMenu {
 		do {
 				
 			Menu.mostrarMenu();		
-			
-			
-			
-			
-			
-			
+					
 			
 			switch (MetodosAdicionales.solicitarOpcion(5, 0, "menuPrincipal")) {
 			
