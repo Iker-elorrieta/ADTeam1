@@ -25,6 +25,7 @@ class PruebaInsertarLibroTest {
 		Scanner sc = new Scanner(System.in);
 		
 		assertEquals(true,  fdsafa.insertarLibro(sc));
+		
 	}
 	
 
