@@ -135,10 +135,12 @@ public class MetodosAdicionales {
 				
 			}catch(ExcepcionIntervalo ex) {
 				System.out.println(ex.getMessage());
+				error = true;
 				sc.nextLine();
 				
 			}catch(Exception e) {
 				System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un numero de los indicados en las opciones");
+				error = true;
 				sc.nextLine();
 			}
 			
