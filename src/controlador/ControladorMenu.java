@@ -17,9 +17,7 @@ public class ControladorMenu {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
 		boolean salir = false;
-		
-		int opcion = 0;
-		
+				
 		do {
 				
 			Menu.mostrarMenu();		
@@ -81,7 +79,7 @@ public class ControladorMenu {
 				break;
 				
 			case 0:
-				System.out.println("Saliendo del programa...");
+				System.out.println("\nSaliendo del programa...");
 				
 				salir = true;
 				break;

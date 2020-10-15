@@ -37,6 +37,11 @@ public class Libro implements Serializable{
 		return (this.titulo + ";" + this.editorial + ";" + this.paginas + ";" + this.altura + ";" + this.notas + ";" + this.isbn + ";" + this.materias + ";");
 	}
 	
+	public String toStringFormateado() {
+		
+		return ("\n" + " Titulo: " + this.getTitulo() + " || Editorial: " + this.getEditorial() + " || Paginas: " + this.getPaginas() + " || Altura: " + this.getAltura() + " || Notas: " + this.getNotas() + " || ISBN: " + this.getIsbn() + " || Materias: " + this.getMaterias());
+	}
+	
 
 	// GETTERs & SETTERS
 	public String getTitulo() {

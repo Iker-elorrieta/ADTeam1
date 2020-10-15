@@ -3,7 +3,6 @@ package modelo;
 import java.util.Scanner;
 
 import controlador.MetodosAdicionales;
-import excepciones.ExcepcionIntervalo;
 
 public class Menu {
 	static Scanner sc = new Scanner(System.in);
@@ -41,8 +40,20 @@ public class Menu {
 
 	}
 	
+	public static void mostrarSubmenuSobreescribir() {
+		System.out.print("\nEl nombre del fichero introducido ya existe.\n Que desea realizar?\n\n 1) Sobreescribir datos\n 2) Aniadir datos\n");
+
+	}
+	
 	public static void mostrarIntro() {
-		System.out.println("\n\n********************************\n*          BIBLIOTECA          *\n*          " + MetodosAdicionales.comprobarOS() + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n");
+		
+		String sOS = MetodosAdicionales.comprobarOS();
+		
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			sOS = "  " + System.getProperty("os.name") + "   ";
+		}
+		
+		System.out.println("\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n");
 	}
 
 }

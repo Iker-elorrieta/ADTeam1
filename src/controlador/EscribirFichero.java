@@ -13,14 +13,15 @@ import javax.xml.transform.stream.*;
 
 import org.w3c.dom.*;
 
-import excepciones.ExcepcionIntervalo;
+import excepciones.ExcepcionNombreArchivo;
 import modelo.Libro;
+import modelo.Menu;
 
 public class EscribirFichero {
 	
 	static Scanner sc = new Scanner(System.in);
 	
-	public static void escribirFicheroTxt(ArrayList<Libro> pLibros) throws IOException {
+	public static void escribirFicheroTxt(ArrayList<Libro> pLibros) throws IOException, InterruptedException {
 
 		ArrayList<Libro> libros = pLibros;
 
@@ -49,7 +50,7 @@ public class EscribirFichero {
 	}
 		
 
-	public static void escribirFicheroDat(ArrayList<Libro> pLibros) throws IOException {
+	public static void escribirFicheroDat(ArrayList<Libro> pLibros) throws IOException, InterruptedException {
 		
 		ArrayList<Libro> libros = pLibros;
 		 
@@ -57,7 +58,7 @@ public class EscribirFichero {
 		Libro libro;
 		String sFichero = (solicitarNombreFichero() + ".dat");			
 		
-		ObjectOutputStream dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero)));
+		ObjectOutputStream dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero), aniadirDatosFicheroExistente(sFichero)));
 		
 		for (int i = 0; i < libros.size(); i++){
 			libro = libros.get(i);
@@ -72,7 +73,7 @@ public class EscribirFichero {
 		 
 	}
 	 
-	public static void escribirFicheroXml(ArrayList<Libro> pLibros) throws IOException, ParserConfigurationException, TransformerException{
+	public static void escribirFicheroXml(ArrayList<Libro> pLibros) throws IOException, ParserConfigurationException, TransformerException, InterruptedException{
 		
 		ArrayList<Libro> libros = pLibros;
 		
@@ -145,29 +146,8 @@ public class EscribirFichero {
 		
 		if (fichero.exists()) {
 			
-			int opcion = 0;
-			boolean error = false;
-			do {		
-				
-				System.out.print("\nEl fichero " + sFichero + " ya existe.\n �Que desea realizar?\n\n 1) Sobreescribir datos\n 2) A�adir datos\n\nIntroduzca una opcion: ");
-
-				try {
-					opcion = sc.nextInt();
-					error = true;
-					ExcepcionIntervalo.rango(2, 1, opcion);
-				}catch(ExcepcionIntervalo ex) {
-					System.out.println(ex.getMessage());
-					sc.nextLine();
-					error = false;
-				}catch(Exception e) {
-					System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un numero de los indicados en las opciones");
-					sc.nextLine();
-					error = false;
-				}
-				
-			}while(!error);
-			
-			switch(opcion) {
+			Menu.mostrarSubmenuSobreescribir();
+			switch(MetodosAdicionales.solicitarOpcion(2, 1, "submenuSobreescribir")) {
 			
 			case 1:
 				aniadir = false;
@@ -185,21 +165,22 @@ public class EscribirFichero {
 		return aniadir;
 	}
 	
-	public static String solicitarNombreFichero() {
+	public static String solicitarNombreFichero() throws InterruptedException {
 		
-		String nombreFichero;
+		String nombreFichero = "";
 		boolean error = true;
 		
 		do {
-			System.out.print("\nIntroduce el nombre del archivo: ");
-			nombreFichero =  sc.next();
-			
-			if (!Validadores.validador(nombreFichero, Patron.devolverPatron("nombreFichero"))){
-				System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un nombre valido. (Caracteres admitidos: Letras minusculas/mayusculas, numeros o guion bajo)");
-			}
-			else {
+			try{
+				System.out.print("\nIntroduce el nombre del archivo: ");
+				nombreFichero =  sc.next();
+				ExcepcionNombreArchivo.comprobarNombreFichero(nombreFichero);
 				error = false;
+			}catch(ExcepcionNombreArchivo exNA) {
+				
+				System.out.println(exNA.getMessage());
 			}
+			
 		}while(error);
 		
 		return nombreFichero;

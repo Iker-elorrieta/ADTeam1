@@ -30,7 +30,7 @@ public class MetodosAdicionales {
 		 
 		Menu.mostrarIntro();
 
-		System.out.println("\n--INSERTAR LIBRO--");
+		System.out.println("\n  --INSERTAR LIBRO--");
 
 		//Pedir nombre del libro
 		System.out.print("\nEscriba el nombre del libro: ");
@@ -94,6 +94,9 @@ public class MetodosAdicionales {
 		Libro libro = new Libro(tituloNuevoLibro, editorialNuevoLibro, paginasNuevoLibro, alturaNuevoLibro,notasNuevoLibro,isbnNuevoLibro,materiasNuevoLibro );
 		//se aï¿½ade el nuevo libro al array
 		libros.add(libro);
+		//se muestra la informacion del libro añadido
+		System.out.println(libro.toStringFormateado());
+		System.out.println("\nLIBRO AÑADIDO A LA MEMORIA CON EXITO");
 		//Devuelve el array con los libros
 		return libros;
 	}
@@ -108,7 +111,7 @@ public class MetodosAdicionales {
 		else {
 			for(Libro libro : libros) {
 				
-				System.out.println("\n" + " Titulo: " + libro.getTitulo() + " || Editorial: " + libro.getEditorial() + " || Paginas: " + libro.getPaginas() + " || Altura: " + libro.getAltura() + " || Notas: " + libro.getNotas() + " || ISBN: " + libro.getIsbn() + " || Materias: " + libro.getMaterias());
+				System.out.println(libro.toStringFormateado());	
 			}
 			System.out.println("\n Numero de total de libros: " + libros.size());
 		}
@@ -121,7 +124,7 @@ public class MetodosAdicionales {
 		
 		do {
 			
-			System.out.print("\nEscoja una opcion: ");
+			System.out.print("\nIntroduzca una opcion: ");
 	
 			try {
 				opcion = sc.nextInt();	
@@ -148,6 +151,9 @@ public class MetodosAdicionales {
 			else if (tipoMenu.equalsIgnoreCase("submenuEscribir")) {
 				Menu.mostrarSubmenu("escribir");
 			}
+			else if (tipoMenu.equalsIgnoreCase("submenuSobreescribir")) {
+				Menu.mostrarSubmenuSobreescribir();
+			}
 		}while(error);
 		
 		return opcion;
@@ -164,7 +170,7 @@ public class MetodosAdicionales {
 		
 		do {
 		
-			System.out.println("\nEsta seguro de que desea borrar la memoria? (S/N): ");
+			System.out.print("\nEsta seguro de que desea borrar la memoria? (S/N): ");
 			try{
 				respuesta = sc.nextLine();
 				ExcepcionRespuesta.comprobarRespuesta(respuesta);
@@ -194,10 +200,6 @@ public class MetodosAdicionales {
 	public static String comprobarOS() {
 		
 		String sOS = System.getProperty("os.name");
-
-		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
-			sOS = "  " + System.getProperty("os.name") + "   ";
-		}
 		
 		return sOS;
 	}
