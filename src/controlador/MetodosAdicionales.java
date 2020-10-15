@@ -3,6 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import excepciones.ExcepcionCampoVacio;
 import excepciones.ExcepcionIntervalo;
 import excepciones.ExcepcionRespuesta;
 import modelo.Libro;
@@ -12,7 +13,7 @@ public class MetodosAdicionales {
 
 	static Scanner sc = new Scanner(System.in);
 	
-	public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros){
+	public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws InterruptedException{
 		
 		//Recoger ArrayList de la memoria
 		ArrayList<Libro> libros = pLibros;
@@ -33,32 +34,29 @@ public class MetodosAdicionales {
 		System.out.println("\n  --INSERTAR LIBRO--");
 
 		//Pedir nombre del libro
-		System.out.print("\nEscriba el nombre del libro: ");
-		tituloNuevoLibro = sc.nextLine();
+		tituloNuevoLibro = verificarInsercionDatos("\nEscriba el nombre del libro: ");
+		
 		
 		//pedir editorial del libro
-		System.out.print("Escriba la editorial del libro: ");
-		editorialNuevoLibro = sc.nextLine();
+		editorialNuevoLibro = verificarInsercionDatos("\nEscriba la editorial del libro: ");
 		
 		
 		do {
 			//Pedir numero de paginas del libro
-			System.out.print("Escriba el numero de paginas que tiene el libro: ");
 			try{
 				//Recoger las paginas
-				paginasNuevoLibro = sc.nextInt();
+				paginasNuevoLibro = Integer.parseInt(verificarInsercionDatos("\nEscriba el numero de paginas que tiene el libro: "));
 				//En caso de que no sea un int va al catch sino sigue
 				//si es un int error cambia a false 
 				error = false;
 			}catch(Exception e) {
 				//Se muestra el mensaje indicando el error
-				System.out.println("ERROR: No introduzca caracteres no numericos a la hora de indicar el numero de paginas del libro");
+				System.out.println("\nERROR: No introduzca caracteres no numericos a la hora de indicar el numero de paginas del libro");
 				//Se limpia el buffer del scanner para no entrar en un bucle infinito
-				sc.nextLine();
 			}
 					
 			//se hacen comprobaciones y si alguna se cumple lo pide otra vez
-		}while(paginasNuevoLibro == 0 || error == true);
+		}while(paginasNuevoLibro <= 0 || error == true);
 		
 		//se reinicia la variable de error
 		error = true;
@@ -66,37 +64,31 @@ public class MetodosAdicionales {
 		do {
 			
 			//Se pide la altura del libro y se compruba igual que las paginas
-			System.out.print("Escriba la altura del libro: ");
 			try{
-				alturaNuevoLibro = sc .nextDouble();
+				alturaNuevoLibro = Integer.parseInt(verificarInsercionDatos("\nEscriba la altura del libro: "));
 				error = false;
 			}catch(Exception w) {
-				System.out.println("ERROR: No introduzca caracteres no numericos a la hora de indicar la altura del libro");
-				sc.nextLine();
+				System.out.println("\nERROR: No introduzca caracteres no numericos a la hora de indicar la altura del libro");
 			}
 			
 		}while(alturaNuevoLibro == 0 || error== true);
 
-		sc.nextLine();
 		//Se piden anotaciones del libro
-		System.out.print("Escriba alguna anotacion para el libro: ");
-		notasNuevoLibro = sc.nextLine();
+		notasNuevoLibro = verificarInsercionDatos("\nEscriba alguna anotacion para el libro: ");
 		
 		//Se pide el ISBN del libro
-		System.out.print("Escriba el ISBN del libro: ");
-		isbnNuevoLibro = sc.nextLine();
+		isbnNuevoLibro = verificarInsercionDatos("\nEscriba el ISBN del libro: ");
 		
 		//Se pide la materia del libro
-		System.out.print("Escriba la materia para la que fue creado el libro: ");
-		materiasNuevoLibro = sc.nextLine();
+		materiasNuevoLibro = verificarInsercionDatos("\nEscriba la materia para la que fue creado el libro: ");
 		
 		//Se crea el nuevo libro
 		Libro libro = new Libro(tituloNuevoLibro, editorialNuevoLibro, paginasNuevoLibro, alturaNuevoLibro,notasNuevoLibro,isbnNuevoLibro,materiasNuevoLibro );
 		//se aï¿½ade el nuevo libro al array
 		libros.add(libro);
-		//se muestra la informacion del libro añadido
+		//se muestra la informacion del libro aï¿½adido
 		System.out.println(libro.toStringFormateado());
-		System.out.println("\nLIBRO AÑADIDO A LA MEMORIA CON EXITO");
+		System.out.println("\nLIBRO AÃ‘ADIDO A LA MEMORIA CON EXITO");
 		//Devuelve el array con los libros
 		return libros;
 	}
@@ -123,23 +115,18 @@ public class MetodosAdicionales {
 		int opcion = 0;
 		
 		do {
-			
-			System.out.print("\nIntroduzca una opcion: ");
-	
+				
 			try {
-				opcion = sc.nextInt();	
-				sc.nextLine();
+				opcion = Integer.parseInt(verificarInsercionDatos("\nIntroduzca una opcion: "));	
 				ExcepcionIntervalo.rango(opcion, maxOpcion, minOpcion);
 				error = false;
 				break;
 				
 			}catch(ExcepcionIntervalo ex) {
 				System.out.println(ex.getMessage());
-				sc.nextLine();
 				
 			}catch(Exception e) {
 				System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un numero de los indicados en las opciones");
-				sc.nextLine();
 			}
 			
 			if (tipoMenu.equalsIgnoreCase("menuPrincipal")) {
@@ -195,6 +182,25 @@ public class MetodosAdicionales {
 		
 		return libros;
 		
+	}
+	
+	public static String verificarInsercionDatos(String pMensaje) throws InterruptedException {;
+		
+		boolean error = true;
+		String str = "";
+		do {
+			System.out.print(pMensaje);
+			try {
+				str = sc.nextLine();
+				ExcepcionCampoVacio.comprobarCampoVacio(str);
+				error = false;
+			} catch (ExcepcionCampoVacio exCV) {
+				System.out.println(exCV.getMessage());
+			}
+			
+		}while(error);
+		
+		return str;
 	}
 	
 	public static String comprobarOS() {
