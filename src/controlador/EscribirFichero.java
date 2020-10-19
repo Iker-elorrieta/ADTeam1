@@ -185,5 +185,33 @@ public class EscribirFichero {
 		
 		return nombreFichero;
 	}
+	
+	public static void escribirFicheroCsv(ArrayList<Libro> pLibros) throws IOException, InterruptedException {
+
+		ArrayList<Libro> libros = pLibros;
+
+		int numLibros = 0;
+
+		
+		try{
+			String sFichero = (solicitarNombreFichero() + ".csv");
+		
+			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(sFichero));
+			
+			for (int i = 0; i < libros.size(); i++){
+				Libro libro = libros.get(i);
+				bwFichero.write(libro.toString()); 
+				bwFichero.newLine(); 
+				numLibros++;
+			}
+			bwFichero.close();
+			
+			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
+	}
+		catch (FileNotFoundException fn ){
+			 System.out.println("\nNo se encuentra el fichero");}
+		catch (IOException io) {
+			 System.out.println("\nError de E/S ");}
+	}
 
 }

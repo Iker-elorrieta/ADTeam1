@@ -14,8 +14,6 @@ public class Menu {
 		System.out.println(" 1) Leer ficheros");
 		System.out.println(" 2) Escribir ficheros");
 		System.out.println(" 3) Insertar libro");
-		System.out.println(" 4) Mostrar libros");
-		System.out.println(" 5) Borrar memoria");
 		System.out.println(" 0) Salir");
 
 	}
