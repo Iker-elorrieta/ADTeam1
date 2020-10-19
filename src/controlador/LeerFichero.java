@@ -38,14 +38,14 @@ public class LeerFichero {
 		try{
 			
 			int contadorEntradas = 0;
-			String sFichero = "";
+			String sFichero = "libros.txt";
 			
-			ExploradorArchivos.main(null);
-			
-			HiloExplorador eG = new HiloExplorador();
-			Thread hilo = new Thread(eG);
-			hilo.start();
-			hilo.join();
+//			ExploradorArchivos.main(null);
+//			
+//			HiloExplorador eG = new HiloExplorador();
+//			Thread hilo = new Thread(eG);
+//			hilo.start();
+//			hilo.join();
 
 			
 			File fichero = new File(sFichero);

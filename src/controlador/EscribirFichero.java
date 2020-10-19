@@ -21,7 +21,7 @@ public class EscribirFichero {
 	
 	static Scanner sc = new Scanner(System.in);
 	
-	public static void escribirFicheroTxt(ArrayList<Libro> pLibros) throws IOException, InterruptedException {
+	public static void escribirFicheroTxt(ArrayList<Libro> pLibros) throws InterruptedException {
 
 		ArrayList<Libro> libros = pLibros;
 
