@@ -8,11 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.OutputStream;
 import java.io.StreamCorruptedException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,9 +21,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import exploradorDeArchivos.ProcesoExplorador;
-import exploradorDeArchivos.ExploradorArchivos;
-import exploradorDeArchivos.HiloExplorador;
 import modelo.Libro;
 
 public class LeerFichero {
@@ -38,15 +33,8 @@ public class LeerFichero {
 		try{
 			
 			int contadorEntradas = 0;
-			String sFichero = "libros.txt";
-			
-//			ExploradorArchivos.main(null);
-//			
-//			HiloExplorador eG = new HiloExplorador();
-//			Thread hilo = new Thread(eG);
-//			hilo.start();
-//			hilo.join();
-
+			String sFichero = "libros.txt";			
+		
 			
 			File fichero = new File(sFichero);
 			BufferedReader brFichero = new BufferedReader(new FileReader(fichero));

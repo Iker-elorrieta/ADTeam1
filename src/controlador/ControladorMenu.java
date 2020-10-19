@@ -64,21 +64,6 @@ public class ControladorMenu {
 				
 				break;
 				
-			case 3: 
-				libros = MetodosAdicionales.insertarLibro(libros);
-				
-				break;
-				
-			case 4:
-				MetodosAdicionales.mostrarLibros(libros);
-				
-				break;
-				
-			case 5:
-				MetodosAdicionales.borrarMemoria(libros);
-				
-				break;
-				
 			case 0:
 				System.out.println("\nSaliendo del programa...");
 				
