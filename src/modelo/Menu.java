@@ -34,6 +34,7 @@ public class Menu {
 		System.out.println(" 1) "+ categoria +" ficheros .txt");
 		System.out.println(" 2) "+ categoria +" ficheros .dat");
 		System.out.println(" 3) "+ categoria +" ficheros .xml");
+		System.out.println(" 4) "+ categoria +" ficheros .csv");
 		System.out.println(" 0) Cancelar");		
 
 	}
