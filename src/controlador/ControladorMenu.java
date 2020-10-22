@@ -3,6 +3,7 @@ package controlador;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -11,7 +12,7 @@ import modelo.Libro;
 import modelo.Menu;
 
 public class ControladorMenu {
-
+	static Scanner sc = new Scanner(System.in);
 	public static void iniciarControladorMenu() throws InterruptedException, IOException, ParseException, ClassNotFoundException, ParserConfigurationException, TransformerException {
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
@@ -19,16 +20,16 @@ public class ControladorMenu {
 		boolean salir = false;
 				
 		do {
-				
+		
 			Menu.mostrarMenu();		
 					
 			
-			switch (MetodosAdicionales.solicitarOpcion(5, 0, "menuPrincipal")) {
+			switch (MetodosAdicionales.solicitarOpcion(sc,5, 0, "menuPrincipal")) {
 			
 			case 1:
 				Menu.mostrarSubmenu("Leer");
 								
-				switch(MetodosAdicionales.solicitarOpcion(4, 0, "submenuLeer")) {
+				switch(MetodosAdicionales.solicitarOpcion(sc,4, 0, "submenuLeer")) {
 				
 				case 1: 
 					LeerFichero.leerFicheroTxt(libros);
@@ -51,7 +52,7 @@ public class ControladorMenu {
 			case 2:							
 				Menu.mostrarSubmenu("Escribir");
 									
-				switch(MetodosAdicionales.solicitarOpcion(4, 0, "submenuEscribir")) {
+				switch(MetodosAdicionales.solicitarOpcion(sc,4, 0, "submenuEscribir")) {
 				
 				case 1: 
 					EscribirFichero.escribirFicheroTxt(libros);
@@ -73,7 +74,7 @@ public class ControladorMenu {
 				break;
 				
 			case 3:
-				MetodosAdicionales.insertarLibro(libros);
+				MetodosAdicionales.insertarLibro(libros,sc);
 				break;
 			
 			case 0:

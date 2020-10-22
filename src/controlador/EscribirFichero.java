@@ -26,7 +26,6 @@ public class EscribirFichero {
 		ArrayList<Libro> libros = pLibros;
 
 		int numLibros = 0;
-
 		
 		try{
 			String sFichero = (solicitarNombreFichero() + ".txt");
@@ -147,7 +146,7 @@ public class EscribirFichero {
 		if (fichero.exists()) {
 			
 			Menu.mostrarSubmenuSobreescribir();
-			switch(MetodosAdicionales.solicitarOpcion(2, 1, "submenuSobreescribir")) {
+			switch(MetodosAdicionales.solicitarOpcion(sc,2, 1, "submenuSobreescribir")) {
 			
 			case 1:
 				aniadir = false;

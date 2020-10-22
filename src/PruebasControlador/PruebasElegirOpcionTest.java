@@ -8,12 +8,14 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
+import controlador.MetodosAdicionales;
+
 class PruebasElegirOpcionTest {
 
 	@org.junit.jupiter.api.Test
 	void testElegirOpcion() {
 		//instanciar la vlase
-		PruebasElegirOpcion elegir = new PruebasElegirOpcion();
+		//PruebasElegirOpcion elegir = new PruebasElegirOpcion();
 		
 		
 		String input = "9 \n 1 \n 1  \n 1";
@@ -23,8 +25,8 @@ class PruebasElegirOpcionTest {
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
-		
-		assertEquals(1,  elegir.solicitarOpcion(sc, maxOpcion, minOpcion, tipoMenu));
+	
+		assertEquals(1,  MetodosAdicionales.solicitarOpcion( sc, maxOpcion, minOpcion, tipoMenu));
 	}
 
 }

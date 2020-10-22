@@ -11,8 +11,7 @@ import modelo.Menu;
 public class MetodosAdicionales {
 	
 	
-public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws InterruptedException{
-		
+public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros, Scanner sc) throws InterruptedException{		
 		//Recoger ArrayList de la memoria
 		ArrayList<Libro> libros = pLibros;
 		
@@ -32,18 +31,18 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws In
 		System.out.println("\n  --INSERTAR LIBRO--");
 
 		//Pedir nombre del libro
-		tituloNuevoLibro = verificarInsercionDatos("\nEscriba el nombre del libro: ");
+		tituloNuevoLibro = verificarInsercionDatos(sc, "\nEscriba el nombre del libro: ");
 		
 		
 		//pedir editorial del libro
-		editorialNuevoLibro = verificarInsercionDatos("\nEscriba la editorial del libro: ");
-		
+		editorialNuevoLibro = verificarInsercionDatos(sc, "\nEscriba la editorial del libro: ");
+	
 		
 		do {
 			//Pedir numero de paginas del libro
 			try{
 				//Recoger las paginas
-				paginasNuevoLibro = Integer.parseInt(verificarInsercionDatos("\nEscriba el numero de paginas que tiene el libro: "));
+				paginasNuevoLibro = Integer.parseInt(verificarInsercionDatos(sc, "\nEscriba el numero de paginas que tiene el libro: "));
 				//En caso de que no sea un int va al catch sino sigue
 				//si es un int error cambia a false 
 				error = false;
@@ -51,6 +50,7 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws In
 				//Se muestra el mensaje indicando el error
 				System.out.println("\nERROR: No introduzca caracteres no numericos a la hora de indicar el numero de paginas del libro");
 				//Se limpia el buffer del scanner para no entrar en un bucle infinito
+				sc.nextLine();
 			}
 					
 			//se hacen comprobaciones y si alguna se cumple lo pide otra vez
@@ -63,22 +63,23 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws In
 			
 			//Se pide la altura del libro y se compruba igual que las paginas
 			try{
-				alturaNuevoLibro = Integer.parseInt(verificarInsercionDatos("\nEscriba la altura del libro: "));
+				alturaNuevoLibro = Integer.parseInt(verificarInsercionDatos(sc, "\nEscriba la altura del libro: "));
 				error = false;
 			}catch(Exception w) {
 				System.out.println("\nERROR: No introduzca caracteres no numericos a la hora de indicar la altura del libro");
+				sc.nextLine();
 			}
 			
 		}while(alturaNuevoLibro == 0 || error== true);
 
 		//Se piden anotaciones del libro
-		notasNuevoLibro = verificarInsercionDatos("\nEscriba alguna anotacion para el libro: ");
+		notasNuevoLibro = verificarInsercionDatos(sc, "\nEscriba alguna anotacion para el libro: ");
 		
 		//Se pide el ISBN del libro
-		isbnNuevoLibro = verificarInsercionDatos("\nEscriba el ISBN del libro: ");
+		isbnNuevoLibro = verificarInsercionDatos(sc, "\nEscriba el ISBN del libro: ");
 		
 		//Se pide la materia del libro
-		materiasNuevoLibro = verificarInsercionDatos("\nEscriba la materia para la que fue creado el libro: ");
+		materiasNuevoLibro = verificarInsercionDatos(sc, "\nEscriba la materia para la que fue creado el libro: ");
 		
 		//Se crea el nuevo libro
 		Libro libro = new Libro(tituloNuevoLibro, editorialNuevoLibro, paginasNuevoLibro, alturaNuevoLibro,notasNuevoLibro,isbnNuevoLibro,materiasNuevoLibro );
@@ -91,9 +92,9 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws In
 		return libros;
 	}
 
-	static Scanner sc = new Scanner(System.in);
+	//static Scanner sc = new Scanner(System.in);
 	
-	public static int solicitarOpcion(int maxOpcion, int minOpcion, String tipoMenu) {
+	public static int solicitarOpcion( Scanner sc, int maxOpcion, int minOpcion, String tipoMenu) {
 		
 		boolean error = true;
 		int opcion = 0;
@@ -101,7 +102,7 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws In
 		do {
 				
 			try {
-				opcion = Integer.parseInt(verificarInsercionDatos("\nIntroduzca una opcion: "));	
+				opcion = Integer.parseInt(verificarInsercionDatos(sc,"\nIntroduzca una opcion: "));	
 				ExcepcionIntervalo.rango(opcion, maxOpcion, minOpcion);
 				error = false;
 				break;
@@ -134,11 +135,11 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros) throws In
 		}while(error);
 		
 		return opcion;
-		
+	
 	}
 	
 	
-	public static String verificarInsercionDatos(String pMensaje) throws InterruptedException {;
+	public static String verificarInsercionDatos(Scanner sc,String pMensaje) throws InterruptedException {;
 		
 		boolean error = true;
 		String str = "";

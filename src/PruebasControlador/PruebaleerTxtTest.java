@@ -10,30 +10,73 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import controlador.LeerFichero;
 import modelo.Libro;
 
 class PruebaleerTxtTest {
 
 	@Test
-	void test() throws ParseException, InterruptedException {
-		PruebaleerTxt leertxt = new PruebaleerTxt();
+	void test() {
+		
 		ArrayList<Libro> pLibros = new ArrayList<Libro>();
-		BufferedReader prueba = null;
-		assertEquals(pLibros,  leertxt.leerFicheroTxt(pLibros, prueba));
+		//BufferedReader prueba = null;
+		try {
+			assertEquals(pLibros,  LeerFichero.leerFicheroTxt(pLibros));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test
+	void test2() {
+		
+		ArrayList<Libro> pLibros = new ArrayList<Libro>();
+		try {
+			assertEquals(pLibros,  LeerFichero.leerFicheroDat(pLibros));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
-	void test2() throws ParseException, InterruptedException, ClassNotFoundException, IOException {
-		PruebaleerTxt leerdat = new PruebaleerTxt();
+	void test3() {
+		
 		ArrayList<Libro> pLibros = new ArrayList<Libro>();
-		assertEquals(pLibros,  leerdat.leerFicheroDat(pLibros));
-	}
-	
-	@Test
-	void test3() throws ParseException, InterruptedException, ClassNotFoundException, IOException {
-		PruebaleerTxt leerXml = new PruebaleerTxt();
-		ArrayList<Libro> pLibros = new ArrayList<Libro>();
-		assertEquals(pLibros,  leerXml.leerFicheroXml(pLibros));
+		try {
+			assertEquals(pLibros,  LeerFichero.leerFicheroXml(pLibros));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	@Test
+	void test4() {
+		ArrayList<Libro> pLibros = new ArrayList<Libro>();
+
+		try {
+			assertEquals(pLibros, LeerFichero.leerFicheroCsv(pLibros));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
