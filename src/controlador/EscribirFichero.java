@@ -21,7 +21,7 @@ public class EscribirFichero {
 	
 	static Scanner sc = new Scanner(System.in);
 	
-	public static void escribirFicheroTxt(ArrayList<Libro> pLibros) throws InterruptedException {
+	public static void escribirFicheroTxt(ArrayList<Libro> pLibros){
 
 		ArrayList<Libro> libros = pLibros;
 
@@ -49,7 +49,7 @@ public class EscribirFichero {
 	}
 		
 
-	public static void escribirFicheroDat(ArrayList<Libro> pLibros) throws IOException, InterruptedException {
+	public static void escribirFicheroDat(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
 		 
@@ -57,22 +57,40 @@ public class EscribirFichero {
 		Libro libro;
 		String sFichero = (solicitarNombreFichero() + ".dat");			
 		
-		ObjectOutputStream dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero), aniadirDatosFicheroExistente(sFichero)));
+		ObjectOutputStream dataOS = null;
+		try {
+			dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero), aniadirDatosFicheroExistente(sFichero)));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		for (int i = 0; i < libros.size(); i++){
 			libro = libros.get(i);
-		 	dataOS.writeObject(libro); 
+		 	try {
+				dataOS.writeObject(libro);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 		 	numLibros++;
 		 
 		}
-		dataOS.close(); 
+		try {
+			dataOS.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 		 
 		System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
 
 		 
 	}
 	 
-	public static void escribirFicheroXml(ArrayList<Libro> pLibros) throws IOException, ParserConfigurationException, TransformerException, InterruptedException{
+	public static void escribirFicheroXml(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
 		
@@ -82,7 +100,14 @@ public class EscribirFichero {
 		
 		
 		DocumentBuilderFactory  dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
+		DocumentBuilder dbBuilder = null;
+		
+		try {
+			dbBuilder = dbFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		
 		Document doc = dbBuilder.newDocument();
 		
 		Element elementoRaiz = doc.createElement("CATALOGO");
@@ -124,13 +149,24 @@ public class EscribirFichero {
 		}
 		
 		TransformerFactory tf = TransformerFactory.newInstance();
-		Transformer transformer = tf.newTransformer();		
+		Transformer transformer = null;
+		try {
+			transformer = tf.newTransformer();
+		} catch (TransformerConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 		
 		DOMSource source = new DOMSource(doc);
 		
 		StreamResult result = new StreamResult(fichero);
 		
-		transformer.transform(source, result);
+		try {
+			transformer.transform(source, result);
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println("\nSe ha(n) guardado " + libros.size() + " libro(s) en el fichero " + sFichero);
 
@@ -145,7 +181,7 @@ public class EscribirFichero {
 		
 		if (fichero.exists()) {
 			
-			Menu.mostrarSubmenuSobreescribir();
+			System.out.println(Menu.mostrarSubmenuSobreescribir());
 			switch(MetodosAdicionales.solicitarOpcion(sc,2, 1, "submenuSobreescribir")) {
 			
 			case 1:
@@ -164,7 +200,7 @@ public class EscribirFichero {
 		return aniadir;
 	}
 	
-	public static String solicitarNombreFichero() throws InterruptedException {
+	public static String solicitarNombreFichero(){
 		
 		String nombreFichero = "";
 		boolean error = true;
@@ -174,6 +210,7 @@ public class EscribirFichero {
 				System.out.print("\nIntroduce el nombre del archivo: ");
 				nombreFichero =  sc.next();
 				ExcepcionNombreArchivo.comprobarNombreFichero(nombreFichero);
+				sc.nextLine();
 				error = false;
 			}catch(ExcepcionNombreArchivo exNA) {
 				
@@ -185,7 +222,7 @@ public class EscribirFichero {
 		return nombreFichero;
 	}
 	
-	public static void escribirFicheroCsv(ArrayList<Libro> pLibros) throws IOException, InterruptedException {
+	public static void escribirFicheroCsv(ArrayList<Libro> pLibros){
 
 		ArrayList<Libro> libros = pLibros;
 

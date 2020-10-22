@@ -1,5 +1,7 @@
 package excepciones;
 
+import java.util.Scanner;
+
 @SuppressWarnings("serial")
 public class ExcepcionCampoVacio extends Exception{
 
@@ -7,7 +9,7 @@ public class ExcepcionCampoVacio extends Exception{
 		super(msg);
 	}
 	
-	public static void comprobarCampoVacio(String pStr) throws ExcepcionCampoVacio, InterruptedException{
+	public static void comprobarCampoVacio(String pStr) throws ExcepcionCampoVacio{
 
 		if (pStr.equals("")){
 			throw new ExcepcionCampoVacio("\n\n--------\n ERROR! \n--------\nDebe rellenar el campo");

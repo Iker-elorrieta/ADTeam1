@@ -1,19 +1,14 @@
 package controlador;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 
 import modelo.Libro;
 import modelo.Menu;
 
 public class ControladorMenu {
 	static Scanner sc = new Scanner(System.in);
-	public static void iniciarControladorMenu() throws InterruptedException, IOException, ParseException, ClassNotFoundException, ParserConfigurationException, TransformerException {
+	public static void iniciarControladorMenu(){
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
@@ -23,8 +18,7 @@ public class ControladorMenu {
 		
 			System.out.println(Menu.mostrarMenu());		
 					
-			
-			switch (MetodosAdicionales.solicitarOpcion(sc,5, 0, "menuPrincipal")) {
+			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, "menuPrincipal")) {
 			
 			case 1:
 				System.out.println(Menu.mostrarSubmenu("Leer"));

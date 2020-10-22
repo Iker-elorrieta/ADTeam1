@@ -11,7 +11,7 @@ import modelo.Menu;
 public class MetodosAdicionales {
 	
 	
-public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros, Scanner sc) throws InterruptedException{		
+public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros, Scanner sc){		
 		//Recoger ArrayList de la memoria
 		ArrayList<Libro> libros = pLibros;
 		
@@ -26,7 +26,7 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros, Scanner s
 		//Inicializar la variable para las comprobaciones
 		boolean error = true;
 		 
-		Menu.mostrarIntro();
+		System.out.println(Menu.mostrarIntro());
 
 		System.out.println("\n  --INSERTAR LIBRO--");
 
@@ -111,26 +111,24 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros, Scanner s
 				System.out.println(ex.getMessage());
 
 				error = true;
-				sc.nextLine();
 				
 			}catch(Exception e) {
 				System.out.println("\n\n--------\n ERROR! \n--------\nDebe escribir un numero de los indicados en las opciones");
 
 				error = true;
-				sc.nextLine();
 			}
 			
 			if (tipoMenu.equalsIgnoreCase("menuPrincipal")) {
-				Menu.mostrarMenu();
+				System.out.println(Menu.mostrarMenu());
 			}
 			else if (tipoMenu.equalsIgnoreCase("submenuLeer")) {
-				Menu.mostrarSubmenu("leer");
+				System.out.println(Menu.mostrarSubmenu("leer"));
 			}
 			else if (tipoMenu.equalsIgnoreCase("submenuEscribir")) {
-				Menu.mostrarSubmenu("escribir");
+				System.out.println(Menu.mostrarSubmenu("escribir"));
 			}
 			else if (tipoMenu.equalsIgnoreCase("submenuSobreescribir")) {
-				Menu.mostrarSubmenuSobreescribir();
+				System.out.println(Menu.mostrarSubmenuSobreescribir());
 			}
 		}while(error);
 		
@@ -139,10 +137,10 @@ public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros, Scanner s
 	}
 	
 	
-	public static String verificarInsercionDatos(Scanner sc,String pMensaje) throws InterruptedException {;
+	public static String verificarInsercionDatos(Scanner sc, String pMensaje){;
 		
 		boolean error = true;
-		String str = "";
+		String str = null;
 		do {
 			System.out.print(pMensaje);
 			try {

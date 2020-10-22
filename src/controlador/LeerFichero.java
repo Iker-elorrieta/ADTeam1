@@ -26,7 +26,7 @@ import modelo.Libro;
 public class LeerFichero {
 
 
-	public static ArrayList<Libro> leerFicheroTxt(ArrayList<Libro> pLibros) throws ParseException, InterruptedException {
+	public static ArrayList<Libro> leerFicheroTxt(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
 		
@@ -79,54 +79,75 @@ public class LeerFichero {
 		
 	}
 	
-	public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) throws ParseException, IOException, ClassNotFoundException {
+	public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
+		ObjectInputStream oi = null;
+
 		
 		try {
+			FileInputStream fi = new FileInputStream(new File("libros.dat"));
 			int contadorEntradas = 0;
 			
-			FileInputStream fi = new FileInputStream(new File("libros.dat"));
-			ObjectInputStream oi = new ObjectInputStream(fi);
+			
+			try {
+				oi = new ObjectInputStream(fi);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	   
 	        try {
-	            while (true) {
+				while (oi.available()>0) {
 
-	                Libro liburu = (Libro)oi.readObject();
+				    Libro liburu = null;
+					try {
+						liburu = (Libro)oi.readObject();
+						
+					}catch (EOFException eof) {
+						eof.printStackTrace();
+					}catch (ClassNotFoundException e) {
+					
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
-	                if (liburu != null) {
-	                    libros.add(liburu);
-	                    contadorEntradas++;
-	                }
-	                
-	            }
-        	} catch (EOFException eo) {
-	        	System.out.println("\nFIN DE LECTURA");
-        	} 
-	        catch (StreamCorruptedException x) {
-	        }
-
-			oi.close();
+				    if (liburu != null) {
+				        libros.add(liburu);
+				        contadorEntradas++;
+				    }
+				    if (libros.isEmpty()){
+						System.out.println("\nNo se ha cargado ningun libro");
+					}
+					else {
+						System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-	        if (libros.isEmpty()){
-				System.out.println("\nNo se ha cargado ningun libro");
-			}
-			else {
-				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
-			}
+	       
 	        
 		} catch (FileNotFoundException e) {
 			System.out.println("\nNo se encuentra el fichero de carga");
 		}
-		
-		return libros;
-	
-	
-	
+		try {
+			oi.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return libros;	
 	}
 	
 	
-	public static ArrayList<Libro> leerFicheroXml(ArrayList<Libro> pLibros) throws ParseException, IOException, ClassNotFoundException {
+	public static ArrayList<Libro> leerFicheroXml(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
 		
@@ -179,7 +200,7 @@ public class LeerFichero {
 		return libros;
 	}
 	
-	public static ArrayList<Libro> leerFicheroCsv(ArrayList<Libro> pLibros) throws ParseException {
+	public static ArrayList<Libro> leerFicheroCsv(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
 		
@@ -209,7 +230,6 @@ public class LeerFichero {
 					contadorEntradas++;
 				}
 								
-				//System.out.println(linea);
 				libros.add(libro);
 			}
 			brFichero.close();

@@ -19,12 +19,7 @@ class MetodosAdicionalesTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 
-		try {
-			assertEquals("prueba",MetodosAdicionales.verificarInsercionDatos(sc,"escriba dato"));
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		assertEquals("prueba",MetodosAdicionales.verificarInsercionDatos(sc,"escriba dato"));
 	}
 	
 

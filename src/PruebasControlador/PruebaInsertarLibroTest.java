@@ -24,12 +24,7 @@ class PruebaInsertarLibroTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 		
-	try {
-			assertEquals(libro,  MetodosAdicionales.insertarLibro( libro, sc));
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	assertEquals(libro,  MetodosAdicionales.insertarLibro( libro, sc));
 	
 	}
 	
