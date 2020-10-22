@@ -7,44 +7,43 @@ import controlador.MetodosAdicionales;
 public class Menu {
 	static Scanner sc = new Scanner(System.in);
 	
-	public static void mostrarMenu(){
+	public static String mostrarMenu(){
 		
-		mostrarIntro();
-		System.out.println("\n  --MENU PRINCIPAL--\n");
-		System.out.println(" 1) Leer ficheros");
-		System.out.println(" 2) Escribir ficheros");
-		System.out.println(" 3) Insertar libro");
-		System.out.println(" 0) Salir");
-
+		System.out.println(mostrarIntro());
+		
+		return "\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 2) Escribir ficheros\n 3) Insertar libro\n 0) Salir";
 	}
 	
-	public static void mostrarSubmenu(String categoria) {
+	public static String mostrarSubmenu(String categoria) {
 			
-		mostrarIntro();
+		String cabecera = "";
+		System.out.println(mostrarIntro());
 		if (categoria.equalsIgnoreCase("leer")) {
 			
-			System.out.println("\n  --LEER FICHEROS--");
+			cabecera = "\n  --LEER FICHEROS--\n";
 		}
 		else if(categoria.equalsIgnoreCase("escribir")) {
 			
-			System.out.println("\n  --ESCRIBIR FICHEROS--");
+			cabecera = "\n  --ESCRIBIR FICHEROS--";
 		}
 		
-		System.out.println("\nEn que formato desea " + categoria.toLowerCase() + " los datos:\n");
-		System.out.println(" 1) "+ categoria +" ficheros .txt");
-		System.out.println(" 2) "+ categoria +" ficheros .dat");
-		System.out.println(" 3) "+ categoria +" ficheros .xml");
-		System.out.println(" 4) "+ categoria +" ficheros .csv");
-		System.out.println(" 0) Cancelar");		
+		return (cabecera + "\nEn que formato desea " + categoria.toLowerCase() + " los datos:\n\n"
+				+ " 1) " + categoria + " ficheros .txt\n"
+				+ " 2) " + categoria + " ficheros .dat\n"
+				+ " 3) " + categoria + " ficheros .xml\n"
+				+ " 4) " + categoria + " ficheros .csv\n"
+				+ " 0) Cancelar");
+	}
+	
+	public static String mostrarSubmenuSobreescribir() {
+		return "\nEl nombre del fichero introducido ya existe.\n"
+				+ " Que desea realizar?\n\n"
+				+ " 1) Sobreescribir datos\n"
+				+ " 2) Añadir datos\n";
 
 	}
 	
-	public static void mostrarSubmenuSobreescribir() {
-		System.out.print("\nEl nombre del fichero introducido ya existe.\n Que desea realizar?\n\n 1) Sobreescribir datos\n 2) Añadir datos\n");
-
-	}
-	
-	public static void mostrarIntro() {
+	public static String mostrarIntro() {
 		
 		String sOS = MetodosAdicionales.comprobarOS();
 		
@@ -52,7 +51,7 @@ public class Menu {
 			sOS = "  " + System.getProperty("os.name") + "   ";
 		}
 		
-		System.out.println("\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n");
+		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n";
 	}
 
 }

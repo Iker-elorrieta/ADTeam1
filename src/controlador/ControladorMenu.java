@@ -21,13 +21,13 @@ public class ControladorMenu {
 				
 		do {
 		
-			Menu.mostrarMenu();		
+			System.out.println(Menu.mostrarMenu());		
 					
 			
 			switch (MetodosAdicionales.solicitarOpcion(sc,5, 0, "menuPrincipal")) {
 			
 			case 1:
-				Menu.mostrarSubmenu("Leer");
+				System.out.println(Menu.mostrarSubmenu("Leer"));
 								
 				switch(MetodosAdicionales.solicitarOpcion(sc,4, 0, "submenuLeer")) {
 				
@@ -50,7 +50,7 @@ public class ControladorMenu {
 				break;
 				
 			case 2:							
-				Menu.mostrarSubmenu("Escribir");
+				System.out.println(Menu.mostrarSubmenu("Escribir"));
 									
 				switch(MetodosAdicionales.solicitarOpcion(sc,4, 0, "submenuEscribir")) {
 				
