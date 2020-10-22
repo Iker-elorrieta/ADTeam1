@@ -24,7 +24,7 @@ public class Menu {
 		}
 		else if(categoria.equalsIgnoreCase("escribir")) {
 			
-			cabecera = "\n  --ESCRIBIR FICHEROS--";
+			cabecera = "\n  --ESCRIBIR FICHEROS--\n";
 		}
 		
 		return (cabecera + "\nEn que formato desea " + categoria.toLowerCase() + " los datos:\n\n"
