@@ -83,11 +83,12 @@ public class LeerFichero {
 		
 		ArrayList<Libro> libros = pLibros;
 		ObjectInputStream oi = null;
+		boolean finLectura = false;
+		int contadorEntradas = 0;
 
 		
 		try {
 			FileInputStream fi = new FileInputStream(new File("libros.dat"));
-			int contadorEntradas = 0;
 			
 			
 			try {
@@ -97,38 +98,30 @@ public class LeerFichero {
 				e.printStackTrace();
 			}
 	   
-	        try {
-				while (oi.available()>0) {
+	        while (!finLectura) {
 
-				    Libro liburu = null;
-					try {
-						liburu = (Libro)oi.readObject();
-						
-					}catch (EOFException eof) {
-						eof.printStackTrace();
-					}catch (ClassNotFoundException e) {
+			    Libro liburu = null;
+				try {
+					liburu = (Libro)oi.readObject();
 					
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				    if (liburu != null) {
-				        libros.add(liburu);
-				        contadorEntradas++;
-				    }
-				    if (libros.isEmpty()){
-						System.out.println("\nNo se ha cargado ningun libro");
-					}
-					else {
-						System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
-					}
+				}catch (EOFException eof) {
+					
+					System.out.println("\nFIN DE LECTURA\n");
+					finLectura = true;
+				}catch (ClassNotFoundException e) {
+				
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+			    if (liburu != null) {
+			        libros.add(liburu);
+			        contadorEntradas++;
+			    }
+			   
 			}
 			
 	       
@@ -143,6 +136,12 @@ public class LeerFichero {
 			e.printStackTrace();
 		}
 
+		if (libros.isEmpty()){
+				System.out.println("\nNo se ha cargado ningun libro");
+		}
+		else {
+			System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
+		}
 		return libros;	
 	}
 	
