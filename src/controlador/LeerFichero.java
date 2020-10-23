@@ -15,11 +15,13 @@ import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import modelo.Libro;
 
@@ -30,15 +32,17 @@ public class LeerFichero {
 		
 		ArrayList<Libro> libros = pLibros;
 		
-		try{
-			
-			int contadorEntradas = 0;
-			String sFichero = "libros.txt";			
 		
-			
-			File fichero = new File(sFichero);
+		int contadorEntradas = 0;
+		String sFichero = "libros.txt";			
+	
+		
+		File fichero = new File(sFichero);
+		String linea;
+		
+		try{
 			BufferedReader brFichero = new BufferedReader(new FileReader(fichero));
-			String linea;
+			
 			while((linea = brFichero.readLine())!=null) {
 				
 				StringTokenizer st = new StringTokenizer(linea, ";");
@@ -57,27 +61,24 @@ public class LeerFichero {
 					contadorEntradas++;
 				}
 								
-				//System.out.println(linea);
 				libros.add(libro);
 			}
 			brFichero.close();
+			
 			if (libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro ");
-
 			}
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas + " libro(s)");
 			}
 		}catch (FileNotFoundException fn ){
 			System.out.println("\nNo se encuentra el fichero de carga");
-		
 		}catch (IOException io) {
-			System.out.println("\nError de E/S ");}
-		
-
+			System.out.println("\nError de E/S ");
+		}
 		return libros;
-		
 	}
+	
 	
 	public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros){
 		
@@ -86,54 +87,46 @@ public class LeerFichero {
 		boolean finLectura = false;
 		int contadorEntradas = 0;
 
-		
 		try {
 			FileInputStream fi = new FileInputStream(new File("libros.dat"));
-			
 			
 			try {
 				oi = new ObjectInputStream(fi);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("\nError de E/S0\n");
 			}
 	   
 	        while (!finLectura) {
 
 			    Libro liburu = null;
 				try {
-					liburu = (Libro)oi.readObject();
+						liburu = (Libro)oi.readObject();
 					
+				
 				}catch (EOFException eof) {
 					
 					System.out.println("\nFIN DE LECTURA\n");
 					finLectura = true;
-				}catch (ClassNotFoundException e) {
-				
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("rrrr");
+					
+				} catch (ClassNotFoundException e) {
+					System.out.println("\nError al intentar cargar la clase\n");
 				}
+			
 
 			    if (liburu != null) {
 			        libros.add(liburu);
 			        contadorEntradas++;
-			    }
-			   
+			    }  
 			}
-			
-	       
-	        
 		} catch (FileNotFoundException e) {
 			System.out.println("\nNo se encuentra el fichero de carga");
 		}
 		try {
 			oi.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("\nError de E/S1 ");
 		}
 
 		if (libros.isEmpty()){
@@ -152,49 +145,54 @@ public class LeerFichero {
 		
 		int contadorEntradas = 0;
 		
+		File archivo = new File("libros.xml");
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder documentBuilder = null;
 		try {
-            File archivo = new File("libros.xml");
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
-            Document document = documentBuilder.parse(archivo);
-            document.getDocumentElement().normalize();
-            NodeList listalibros = document.getElementsByTagName("LIBRO");
-            
-            
-            for (int temp = 0; temp < listalibros.getLength(); temp++) {
-                Node nodo = listalibros.item(temp);
-
-                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) nodo;
-                    
-                    
-                    Libro liburu= new Libro();
-                    liburu.setTitulo(element.getAttribute("TITULO"));
-                    liburu.setEditorial(element.getAttribute("EDITORIAL"));
-                    liburu.setPaginas(Integer.parseInt(element.getAttribute("PAGINAS")));
-                    liburu.setAltura(Double.parseDouble(element.getAttribute("ALTURA")));
-                    liburu.setNotas(element.getAttribute("NOTAS"));
-                    liburu.setIsbn(element.getAttribute("ISBN"));
-                    liburu.setMaterias(element.getAttribute("MATERIAS"));
-                    
-                    libros.add(liburu);
-                    contadorEntradas++;
-                    
-                }
-            }
-            if (libros.isEmpty()){
-  				System.out.println("\nNo se ha cargado ningun libro");
-  			}
-  			else {
-  				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
-  			}
-            
-		} catch (FileNotFoundException e) {
-			System.out.println("\nNo se encuentra el fichero de carga");
+			documentBuilder = dbf.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch (Exception e) {
-            e.printStackTrace();
-        }
+		Document document = null;
+		try {
+			document = documentBuilder.parse(archivo);
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		document.getDocumentElement().normalize();
+		NodeList listalibros = document.getElementsByTagName("LIBRO");
+		
+		for (int temp = 0; temp < listalibros.getLength(); temp++) {
+		    Node nodo = listalibros.item(temp);
+
+		    if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+		        Element element = (Element) nodo;
+		        
+		        Libro liburu= new Libro();
+		        liburu.setTitulo(element.getAttribute("TITULO"));
+		        liburu.setEditorial(element.getAttribute("EDITORIAL"));
+		        liburu.setPaginas(Integer.parseInt(element.getAttribute("PAGINAS")));
+		        liburu.setAltura(Double.parseDouble(element.getAttribute("ALTURA")));
+		        liburu.setNotas(element.getAttribute("NOTAS"));
+		        liburu.setIsbn(element.getAttribute("ISBN"));
+		        liburu.setMaterias(element.getAttribute("MATERIAS"));
+		        
+		        libros.add(liburu);
+		        contadorEntradas++;
+		    }
+		}
+		if (libros.isEmpty()){
+			System.out.println("\nNo se ha cargado ningun libro");
+		}
+		else {
+			System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
+		}
+		
 		
 		return libros;
 	}

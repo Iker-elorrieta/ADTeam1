@@ -41,11 +41,12 @@ public class EscribirFichero {
 			bwFichero.close();
 			
 			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
-	}
-		catch (FileNotFoundException fn ){
-			 System.out.println("\nNo se encuentra el fichero");}
-		catch (IOException io) {
-			 System.out.println("\nError de E/S ");}
+		
+		}catch (FileNotFoundException fn ){
+			 System.out.println("\nNo se encuentra el fichero");
+		}catch (IOException io) {
+			 System.out.println("\nError de E/S ");
+		}
 	}
 		
 
@@ -54,50 +55,42 @@ public class EscribirFichero {
 		ArrayList<Libro> libros = pLibros;
 		 
 		int numLibros = 0;
-		Libro libro;
 		String sFichero = (solicitarNombreFichero() + ".dat");			
 		
 		ObjectOutputStream dataOS = null;
 		try {
 			dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero), aniadirDatosFicheroExistente(sFichero)));
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("\nNo se encuentra el fichero");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("\nError de E/S ");
 		}
 		
-		for (int i = 0; i < libros.size(); i++){
-			libro = libros.get(i);
+		for (Libro libro : libros){
+			
 		 	try {
 				dataOS.writeObject(libro);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				 System.out.println("\nError de E/S ");
 			} 
 		 	numLibros++;
-		 
 		}
 		try {
 			dataOS.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			 System.out.println("\nError de E/S ");
 		} 
 		 
-		System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
-
-		 
+		System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);		 
 	}
 	 
+	
 	public static void escribirFicheroXml(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
 		
 		String sFichero = (solicitarNombreFichero() + ".xml");
-		
 		File fichero = new File(sFichero);
-		
 		
 		DocumentBuilderFactory  dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dbBuilder = null;
@@ -105,7 +98,7 @@ public class EscribirFichero {
 		try {
 			dbBuilder = dbFactory.newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+			System.out.println("\nError en la configuracion para la creacion del DocumentBuilder");
 		}
 		
 		Document doc = dbBuilder.newDocument();
@@ -144,8 +137,7 @@ public class EscribirFichero {
 			
 			Attr attrMaterias = doc.createAttribute("MATERIAS");
 			attrMaterias.setValue(libro.getMaterias());
-			eLibro.setAttributeNode(attrMaterias);
-			
+			eLibro.setAttributeNode(attrMaterias);	
 		}
 		
 		TransformerFactory tf = TransformerFactory.newInstance();
@@ -153,8 +145,7 @@ public class EscribirFichero {
 		try {
 			transformer = tf.newTransformer();
 		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("\nError en la configuracion para la transformacion del archivo XML");
 		}		
 		
 		DOMSource source = new DOMSource(doc);
@@ -164,19 +155,17 @@ public class EscribirFichero {
 		try {
 			transformer.transform(source, result);
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("\nError en la transformacion del archivo XML");
 		}
 		
 		System.out.println("\nSe ha(n) guardado " + libros.size() + " libro(s) en el fichero " + sFichero);
-
 	}
+	
 	
 	public static boolean aniadirDatosFicheroExistente(String pSFichero) {
 		
 		boolean aniadir = true;
 		String sFichero = pSFichero;
-		
 		File fichero = new File(sFichero);
 		
 		if (fichero.exists()) {
@@ -200,6 +189,7 @@ public class EscribirFichero {
 		return aniadir;
 	}
 	
+	
 	public static String solicitarNombreFichero(){
 		
 		String nombreFichero = "";
@@ -222,13 +212,13 @@ public class EscribirFichero {
 		return nombreFichero;
 	}
 	
+	
 	public static void escribirFicheroCsv(ArrayList<Libro> pLibros){
 
 		ArrayList<Libro> libros = pLibros;
 
 		int numLibros = 0;
 
-		
 		try{
 			String sFichero = (solicitarNombreFichero() + ".csv");
 		
@@ -245,9 +235,10 @@ public class EscribirFichero {
 			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
 	}
 		catch (FileNotFoundException fn ){
-			 System.out.println("\nNo se encuentra el fichero");}
+			 System.out.println("\nNo se encuentra el fichero");
+		}
 		catch (IOException io) {
-			 System.out.println("\nError de E/S ");}
+			 System.out.println("\nError de E/S ");
+		}
 	}
-
 }

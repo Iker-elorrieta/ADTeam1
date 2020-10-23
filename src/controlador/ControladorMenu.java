@@ -7,7 +7,10 @@ import modelo.Libro;
 import modelo.Menu;
 
 public class ControladorMenu {
+	
 	static Scanner sc = new Scanner(System.in);
+	
+	
 	public static void iniciarControladorMenu(){
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
@@ -15,7 +18,6 @@ public class ControladorMenu {
 		boolean salir = false;
 				
 		do {
-		
 			System.out.println(Menu.mostrarMenu());		
 					
 			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, "menuPrincipal")) {
@@ -41,8 +43,17 @@ public class ControladorMenu {
 					LeerFichero.leerFicheroCsv(libros);
 					break;
 				}
-				break;
+//////////////////////////////////////////////////////////////////////////
+//				DESCOMENTAR PARA MOSTRAR LOS LIBROS QUE HAY EN LA MEMORIA DESPUES DE REALIZAR UNA LECTURA DE FICHERO
+//				
+				for(Libro libro : libros) {
+					System.out.println(libro.toString());
+				}
+				System.out.println("\nNum libros en memoria: \n" + libros.size());
+//////////////////////////////////////////////////////////////////////////				
 				
+				break;
+
 			case 2:							
 				System.out.println(Menu.mostrarSubmenu("Escribir"));
 									
@@ -76,10 +87,7 @@ public class ControladorMenu {
 				
 				salir = true;
 				break;
-			
 			}
-			
 		}while (!salir);
-
 	}
 }
