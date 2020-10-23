@@ -20,7 +20,7 @@ public class ControladorMenu {
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, "menuPrincipal")) {
+			switch (MetodosAdicionales.solicitarOpcion(sc,1, 0, "menuPrincipal")) {
 			
 			case 1:
 				System.out.println(Menu.mostrarSubmenu("Leer"));
@@ -54,34 +54,6 @@ public class ControladorMenu {
 				
 				break;
 
-			case 2:							
-				System.out.println(Menu.mostrarSubmenu("Escribir"));
-									
-				switch(MetodosAdicionales.solicitarOpcion(sc,4, 0, "submenuEscribir")) {
-				
-				case 1: 
-					EscribirFichero.escribirFicheroTxt(libros);
-					break;
-					
-				case 2:
-					EscribirFichero.escribirFicheroDat(libros);
-					break;
-					
-				case 3:
-					EscribirFichero.escribirFicheroXml(libros);
-					break;
-				
-				case 4:
-					EscribirFichero.escribirFicheroCsv(libros);
-					break;
-				}
-				
-				break;
-				
-			case 3:
-				MetodosAdicionales.insertarLibro(libros,sc);
-				break;
-			
 			case 0:
 				System.out.println("\nSaliendo del programa...");
 				

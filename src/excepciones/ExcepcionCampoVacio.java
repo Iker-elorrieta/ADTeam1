@@ -1,7 +1,5 @@
 package excepciones;
 
-import java.util.Scanner;
-
 @SuppressWarnings("serial")
 public class ExcepcionCampoVacio extends Exception{
 
