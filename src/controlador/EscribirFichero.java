@@ -59,7 +59,7 @@ public class EscribirFichero {
 		
 		ObjectOutputStream dataOS = null;
 		try {
-			dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero), aniadirDatosFicheroExistente(sFichero)));
+			dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero)));
 		} catch (FileNotFoundException e1) {
 			System.out.println("\nNo se encuentra el fichero");
 		} catch (IOException e1) {

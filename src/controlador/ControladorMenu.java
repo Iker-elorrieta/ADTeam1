@@ -46,10 +46,10 @@ public class ControladorMenu {
 //////////////////////////////////////////////////////////////////////////
 //				DESCOMENTAR PARA MOSTRAR LOS LIBROS QUE HAY EN LA MEMORIA DESPUES DE REALIZAR UNA LECTURA DE FICHERO
 //				
-				for(Libro libro : libros) {
-					System.out.println(libro.toString());
-				}
-				System.out.println("\nNum libros en memoria: \n" + libros.size());
+//				for(Libro libro : libros) {
+//					System.out.println(libro.toString());
+//				}
+//				System.out.println("\nNum libros en memoria: " + libros.size());
 //////////////////////////////////////////////////////////////////////////				
 				
 				break;

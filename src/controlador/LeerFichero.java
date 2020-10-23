@@ -79,65 +79,58 @@ public class LeerFichero {
 		return libros;
 	}
 	
-	
-	public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros){
+public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 		
 		ArrayList<Libro> libros = pLibros;
-		ObjectInputStream oi = null;
-		boolean finLectura = false;
-		int contadorEntradas = 0;
-
+		
 		try {
+			int contadorEntradas = 0;
+			
 			FileInputStream fi = new FileInputStream(new File("libros.dat"));
-			
-			try {
-				oi = new ObjectInputStream(fi);
-			} catch (IOException e) {
-				System.out.println("\nError de E/S0\n");
-			}
+			ObjectInputStream oi = new ObjectInputStream(fi);
 	   
-	        while (!finLectura) {
+	        try {
+	            while (true) {
 
-			    Libro liburu = null;
-				try {
-						liburu = (Libro)oi.readObject();
-					
-				
-				}catch (EOFException eof) {
-					
-					System.out.println("\nFIN DE LECTURA\n");
-					finLectura = true;
-				} catch (IOException e) {
-					System.out.println("rrrr");
-					
-				} catch (ClassNotFoundException e) {
-					System.out.println("\nError al intentar cargar la clase\n");
-				}
+	                Libro liburu = (Libro)oi.readObject();
+
+	                if (liburu != null) {
+	                    libros.add(liburu);
+	                    contadorEntradas++;
+	                }
+	                
+	            }
+        	} catch (EOFException eo) {
+	        	System.out.println("\nFIN DE LECTURA");
+	        	oi.close();
+	        	
+        	} 
+	        catch (StreamCorruptedException x) {
+	        	System.out.println("Stream corrupto");
+	        } catch (ClassNotFoundException e) {
+				System.out.println("Class not found");			}
+
+		
 			
-
-			    if (liburu != null) {
-			        libros.add(liburu);
-			        contadorEntradas++;
-			    }  
+	        if (libros.isEmpty()){
+				System.out.println("\nNo se ha cargado ningun libro");
 			}
+			else {
+				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
+			}
+	        
 		} catch (FileNotFoundException e) {
 			System.out.println("\nNo se encuentra el fichero de carga");
-		}
-		try {
-			oi.close();
 		} catch (IOException e) {
-			System.out.println("\nError de E/S1 ");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		if (libros.isEmpty()){
-				System.out.println("\nNo se ha cargado ningun libro");
-		}
-		else {
-			System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
-		}
-		return libros;	
-	}
+		
+		return libros;
 	
+	
+	
+	}
 	
 	public static ArrayList<Libro> leerFicheroXml(ArrayList<Libro> pLibros){
 		
