@@ -81,25 +81,31 @@ public class ControladorMenu {
 				
 				case 1: 
 				
-					File ficheroTxt = new File(EscritorFichero.solicitarNombreFichero() + ".txt");
-					escFichero.escribirFicheroTxt(ficheroTxt);
+					File ficheroTxt = new File(EscritorFichero.solicitarNombreFichero(sc) + ".txt");
+					boolean sobreescribir = EscritorFichero.aniadirDatosFicheroExistente(sc, ficheroTxt);
+					escFichero.escribirFicheroTxt(ficheroTxt, sobreescribir);
 					break;
 					
 				case 2:
-					File ficheroDat = new File(EscritorFichero.solicitarNombreFichero() + ".dat");
+					File ficheroDat = new File(EscritorFichero.solicitarNombreFichero(sc) + ".dat");
 					escFichero.escribirFicheroDat(ficheroDat);
 					break;
 					
 				case 3:
-					File ficheroXml = new File(EscritorFichero.solicitarNombreFichero() + ".xml");
+					File ficheroXml = new File(EscritorFichero.solicitarNombreFichero(sc) + ".xml");
 					escFichero.escribirFicheroXml(ficheroXml);
 					break;
 					
 				case 4:
-					File ficheroCsv = new File(EscritorFichero.solicitarNombreFichero() + ".csv");
+					File ficheroCsv = new File(EscritorFichero.solicitarNombreFichero(sc) + ".csv");
 					escFichero.escribirFicheroCsv(ficheroCsv);
 					break;
 				}
+				
+				break;
+			case 3:
+				MetodosAdicionales.insertarLibro(sc, libros);
+				break;
 			case 0:
 				System.out.println("\nSaliendo del programa...");
 				

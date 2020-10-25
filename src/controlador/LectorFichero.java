@@ -73,6 +73,7 @@ public class LectorFichero {
 			
 			if (this.libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro ");
+				aniadido = false;
 			}
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas + " libro(s)");

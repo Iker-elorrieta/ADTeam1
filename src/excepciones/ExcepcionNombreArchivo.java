@@ -1,5 +1,7 @@
 package excepciones;
 
+import java.util.Scanner;
+
 import controlador.Patron;
 import controlador.Validadores;
 

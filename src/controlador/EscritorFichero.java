@@ -28,13 +28,13 @@ public class EscritorFichero {
 	}
 	
 	
-	public boolean escribirFicheroTxt(File pFichero){
+	public boolean escribirFicheroTxt(File pFichero, boolean sobreeescribir){
 
 		numLibros = 0;
-		
+		cargado = true;
 		try{
 		
-			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(pFichero, aniadirDatosFicheroExistente(pFichero)));
+			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(pFichero, sobreeescribir));
 			
 			for (int i = 0; i < libros.size(); i++){
 				Libro libro = libros.get(i);
@@ -48,10 +48,11 @@ public class EscritorFichero {
 		
 		}catch (FileNotFoundException fn ){
 			 System.out.println("\nNo se encuentra el fichero");
+			 cargado = false;
 		}catch (IOException io) {
 			 System.out.println("\nError de E/S ");
 		}
-		return true;
+		return cargado;
 	}
 		
 
@@ -137,6 +138,8 @@ public class EscritorFichero {
 			Attr attrMaterias = doc.createAttribute("MATERIAS");
 			attrMaterias.setValue(libro.getMaterias());
 			eLibro.setAttributeNode(attrMaterias);	
+			
+			numLibros++;
 		}
 		
 		TransformerFactory tf = TransformerFactory.newInstance();
@@ -167,7 +170,6 @@ public class EscritorFichero {
 		int numLibros = 0;
 
 		try{
-			String sFichero = (solicitarNombreFichero() + ".csv");
 		
 			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(pFichero));
 			
@@ -191,8 +193,7 @@ public class EscritorFichero {
 	}
 	
 	
-	public static boolean aniadirDatosFicheroExistente(File pFichero) {
-		Scanner sc = new Scanner(System.in);
+	public static boolean aniadirDatosFicheroExistente(Scanner sc, File pFichero) {
 
 		boolean aniadir = true;
 		
@@ -217,8 +218,7 @@ public class EscritorFichero {
 	}
 	
 	
-	public static String solicitarNombreFichero(){
-		Scanner sc = new Scanner(System.in);
+	public static String solicitarNombreFichero(Scanner sc){
 
 		String nombreFichero = "";
 		boolean error = true;

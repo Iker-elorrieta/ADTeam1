@@ -20,25 +20,25 @@ class LectorFicheroTest {
 	LectorFichero lecFichero = new LectorFichero(pLibros);
 	@Test
 	void test() {		
-		assertTrue(lecFichero.leerFicheroTxt(new File("libros.txt")));
+		assertTrue(lecFichero.leerFicheroTxt(new File("ficherosTestLector\\libros.txt")));
 		assertFalse(lecFichero.leerFicheroTxt(new File("noExiste.txt")));
 	}
 	
 	
 	@Test
 	void test2() {
-		assertTrue(lecFichero.leerFicheroDat(new File("libros.dat")));
+		assertTrue(lecFichero.leerFicheroDat(new File("ficherosTestLector\\libros.dat")));
 		assertFalse(lecFichero.leerFicheroDat(new File("noExiste.dat")));
 	}
 	
 	@Test
 	void test3() {
-		assertTrue(lecFichero.leerFicheroXml(new File("libros.xml")));
+		assertTrue(lecFichero.leerFicheroXml(new File("ficherosTestLector\\libros.xml")));
 	}
 
 	@Test
 	void test4() {
-		assertTrue(lecFichero.leerFicheroCsv(new File("libros.csv")));
+		assertTrue(lecFichero.leerFicheroCsv(new File("ficherosTestLector\\libros.csv")));
 		assertFalse(lecFichero.leerFicheroCsv(new File("noExiste.csv")));
 	}
 }

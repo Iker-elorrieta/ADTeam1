@@ -12,11 +12,12 @@ import controlador.ControladorMenu;
 
 class ControladorMenuTest {
 
+	ControladorMenu cM = new ControladorMenu();
+
 	@Test
 	void testControladorMenu() {
 		
-		ControladorMenu cM = new ControladorMenu();
-		String input = " \n\n1\na\n1\n1\n1\n1\n2\n1\n3\n1\n4\n0\n";
+		String input = "\n1\na\n1\n1\n2\n1\n3\n1\n4\n2\na\n2\n*\nlibros\n2\n3\nlibros\n2\n4\nlibros\n0\n0\n";
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
@@ -24,6 +25,4 @@ class ControladorMenuTest {
 		
 		assertTrue(cM.iniciarControladorMenu(sc));
 	}
-	
-
 }
