@@ -28,6 +28,7 @@ import modelo.Libro;
 public class LectorFichero {
 
 	private ArrayList<Libro> libros;
+	boolean aniadido = true;
 	
 	public LectorFichero(ArrayList<Libro> pLibros) {
 		this.libros = pLibros;
@@ -78,11 +79,11 @@ public class LectorFichero {
 			}
 		}catch (FileNotFoundException fn ){
 			System.out.println("\nNo se encuentra el fichero de carga");
-			return false;
+			aniadido =  false;
 		}catch (IOException io) {
 			System.out.println("\nError de E/S ");
 		}
-		return true;
+		return aniadido;
 	}
 	
 	public boolean leerFicheroDat(File pFichero) {
@@ -118,6 +119,7 @@ public class LectorFichero {
 			
 	        if (libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro");
+				aniadido = false;
 			}
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
@@ -131,7 +133,7 @@ public class LectorFichero {
 			e.printStackTrace();
 		}
 		
-		return true;
+		return aniadido;
 	}
 	
 	public boolean leerFicheroXml(File pFichero){
@@ -181,13 +183,14 @@ public class LectorFichero {
 		}
 		if (this.libros.isEmpty()){
 			System.out.println("\nNo se ha cargado ningun libro");
+			aniadido = false;
 		}
 		else {
 			System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
 		}
 		
 		
-		return true;
+		return aniadido;
 	}
 	
 	public boolean leerFicheroCsv(File pFichero){
@@ -221,7 +224,7 @@ public class LectorFichero {
 			brFichero.close();
 			if (this.libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro ");
-
+				aniadido = false;
 			}
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas + " libro(s)");
@@ -234,7 +237,7 @@ public class LectorFichero {
 		}catch (IOException io) {
 			System.out.println("\nError de E/S ");}
 
-		return true;
+		return aniadido;
 		
 	}
 }
