@@ -1,4 +1,4 @@
-package pruebasControlador;
+package pruebasJUnit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,18 +8,21 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import controlador.MetodosAdicionales;
+import controlador.ControladorMenu;
 
-class MetodosAdicionalesTest {
+class ControladorMenuTest {
 
 	@Test
-	void test() {
-		String input = "prueba\n";
+	void testControladorMenu() {
+		
+		ControladorMenu cM = new ControladorMenu();
+		String input = " \n\n1\na\n1\n1\n1\n2\n1\n3\n1\n4\n0\n";
+		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
-
-		assertEquals("prueba",MetodosAdicionales.verificarInsercionDatos(sc,"escriba dato"));
+		
+		assertTrue(cM.iniciarControladorMenu(sc));
 	}
 	
 

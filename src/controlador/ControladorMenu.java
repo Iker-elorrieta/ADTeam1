@@ -1,5 +1,6 @@
 package controlador;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class ControladorMenu {
 	
 	public boolean iniciarControladorMenu(Scanner sc){
 		
-		this.sc = sc;
+		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
 		boolean salir = false;
@@ -27,33 +28,45 @@ public class ControladorMenu {
 			switch (MetodosAdicionales.solicitarOpcion(sc,1, 0, "menuPrincipal")) {
 			
 			case 1:
+				LectorFichero lecFichero = new LectorFichero(libros);
+
 				System.out.println(Menu.mostrarSubmenu("Leer"));
 								
-				switch(MetodosAdicionales.solicitarOpcion(sc,4, 0, "submenuLeer")) {
+				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, "submenuLeer")) {
 				
 				case 1: 
-					LeerFichero.leerFicheroTxt(libros);
+				
+					File ficheroTxt = new File("libros.txt");
+					lecFichero.leerFicheroTxt(ficheroTxt);
 					break;
 					
 				case 2:
-					LeerFichero.leerFicheroDat(libros);
+					File ficheroDat = new File("libros.dat");
+					lecFichero.leerFicheroDat(ficheroDat);
 					break;
 					
 				case 3:
-					LeerFichero.leerFicheroXml(libros);
+					File ficheroXml = new File("libros.xml");
+					lecFichero.leerFicheroXml(ficheroXml);
 					break;
 					
 				case 4:
-					LeerFichero.leerFicheroCsv(libros);
+					File ficheroCsv = new File("libros.csv");
+					lecFichero.leerFicheroCsv(ficheroCsv);
 					break;
 				}
+				
+				libros = lecFichero.getLibros();
+				
+				
 //////////////////////////////////////////////////////////////////////////
 //				DESCOMENTAR PARA MOSTRAR LOS LIBROS QUE HAY EN LA MEMORIA DESPUES DE REALIZAR UNA LECTURA DE FICHERO
 //				
-//				for(Libro libro : libros) {
-//					System.out.println(libro.toString());
-//				}
-//				System.out.println("\nNum libros en memoria: " + libros.size());
+				
+				for(Libro libro : libros) {
+					System.out.println(libro.toString());
+				}
+				System.out.println("\nNum libros en memoria: " + libros.size());
 //////////////////////////////////////////////////////////////////////////				
 				
 				break;

@@ -1,4 +1,4 @@
-package pruebasControlador;
+package pruebasJUnit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +10,7 @@ class MenuTest {
 
 	@Test
 	void test() {
+		Menu menu = new Menu();
 		assertEquals("\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 0) Salir", Menu.mostrarMenu());
 	}
 	

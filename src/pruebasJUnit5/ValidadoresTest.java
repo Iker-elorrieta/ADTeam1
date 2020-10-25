@@ -1,4 +1,4 @@
-package pruebasControlador;
+package pruebasJUnit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +10,7 @@ class ValidadoresTest {
 
 	@Test
 	void test() {
-		Validadores validar = new Validadores();
+		Validadores validador = new Validadores();
 		String pDatoAValidar = "";
 		String pPatron = "12345";
 		assertEquals(false, Validadores.validador(pDatoAValidar, pPatron));

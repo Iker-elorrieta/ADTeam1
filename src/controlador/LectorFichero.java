@@ -25,23 +25,28 @@ import org.xml.sax.SAXException;
 
 import modelo.Libro;
 
-public class LeerFichero {
+public class LectorFichero {
 
+	private ArrayList<Libro> libros;
+	
+	public LectorFichero(ArrayList<Libro> pLibros) {
+		this.libros = pLibros;
+	}	
+	
+	public ArrayList<Libro> getLibros(){
+		return this.libros;
+	}
+	
+	
+	public boolean leerFicheroTxt(File pFichero){
 
-	public static ArrayList<Libro> leerFicheroTxt(ArrayList<Libro> pLibros){
-		
-		ArrayList<Libro> libros = pLibros;
-		
-		
 		int contadorEntradas = 0;
-		String sFichero = "libros.txt";			
 	
 		
-		File fichero = new File(sFichero);
 		String linea;
 		
 		try{
-			BufferedReader brFichero = new BufferedReader(new FileReader(fichero));
+			BufferedReader brFichero = new BufferedReader(new FileReader(pFichero));
 			
 			while((linea = brFichero.readLine())!=null) {
 				
@@ -61,11 +66,11 @@ public class LeerFichero {
 					contadorEntradas++;
 				}
 								
-				libros.add(libro);
+				this.libros.add(libro);
 			}
 			brFichero.close();
 			
-			if (libros.isEmpty()){
+			if (this.libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro ");
 			}
 			else {
@@ -73,20 +78,19 @@ public class LeerFichero {
 			}
 		}catch (FileNotFoundException fn ){
 			System.out.println("\nNo se encuentra el fichero de carga");
+			return false;
 		}catch (IOException io) {
 			System.out.println("\nError de E/S ");
 		}
-		return libros;
+		return true;
 	}
 	
-public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
-		
-		ArrayList<Libro> libros = pLibros;
-		
+	public boolean leerFicheroDat(File pFichero) {
+				
 		try {
 			int contadorEntradas = 0;
 			
-			FileInputStream fi = new FileInputStream(new File("libros.dat"));
+			FileInputStream fi = new FileInputStream(pFichero);
 			ObjectInputStream oi = new ObjectInputStream(fi);
 	   
 	        try {
@@ -95,7 +99,7 @@ public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 	                Libro liburu = (Libro)oi.readObject();
 
 	                if (liburu != null) {
-	                    libros.add(liburu);
+	                    this.libros.add(liburu);
 	                    contadorEntradas++;
 	                }
 	                
@@ -121,24 +125,20 @@ public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 	        
 		} catch (FileNotFoundException e) {
 			System.out.println("\nNo se encuentra el fichero de carga");
+			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return libros;
-	
-	
-	
+		return true;
 	}
 	
-	public static ArrayList<Libro> leerFicheroXml(ArrayList<Libro> pLibros){
+	public boolean leerFicheroXml(File pFichero){
 		
-		ArrayList<Libro> libros = pLibros;
 		
 		int contadorEntradas = 0;
 		
-		File archivo = new File("libros.xml");
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = null;
 		try {
@@ -149,7 +149,7 @@ public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 		}
 		Document document = null;
 		try {
-			document = documentBuilder.parse(archivo);
+			document = documentBuilder.parse(pFichero);
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -175,11 +175,11 @@ public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 		        liburu.setIsbn(element.getAttribute("ISBN"));
 		        liburu.setMaterias(element.getAttribute("MATERIAS"));
 		        
-		        libros.add(liburu);
+		        this.libros.add(liburu);
 		        contadorEntradas++;
 		    }
 		}
-		if (libros.isEmpty()){
+		if (this.libros.isEmpty()){
 			System.out.println("\nNo se ha cargado ningun libro");
 		}
 		else {
@@ -187,20 +187,16 @@ public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 		}
 		
 		
-		return libros;
+		return true;
 	}
 	
-	public static ArrayList<Libro> leerFicheroCsv(ArrayList<Libro> pLibros){
-		
-		ArrayList<Libro> libros = pLibros;
-		
+	public boolean leerFicheroCsv(File pFichero){
+				
 		try{
 			
 			int contadorEntradas = 0;
 
-			String sFichero = "libros.csv";
-			File fichero = new File(sFichero);
-			BufferedReader brFichero = new BufferedReader(new FileReader(fichero));
+			BufferedReader brFichero = new BufferedReader(new FileReader(pFichero));
 			String linea;
 			while((linea = brFichero.readLine())!=null) {
 				
@@ -220,10 +216,10 @@ public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 					contadorEntradas++;
 				}
 								
-				libros.add(libro);
+				this.libros.add(libro);
 			}
 			brFichero.close();
-			if (libros.isEmpty()){
+			if (this.libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro ");
 
 			}
@@ -232,11 +228,13 @@ public static ArrayList<Libro> leerFicheroDat(ArrayList<Libro> pLibros) {
 			}
 		}
 		catch (FileNotFoundException fn ){
-			System.out.println("\nNo se encuentra el fichero de carga");}
-		catch (IOException io) {
+			System.out.println("\nNo se encuentra el fichero de carga");
+			return false;
+				
+		}catch (IOException io) {
 			System.out.println("\nError de E/S ");}
 
-		return libros;
+		return true;
 		
 	}
 }
