@@ -156,12 +156,9 @@ public class LectorFichero {
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}catch (FileNotFoundException e) {
-
-			aniadido = false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			aniadido = false;
+			System.out.println("Error de entrada/salida");
 		}
 		document.getDocumentElement().normalize();
 		NodeList listalibros = document.getElementsByTagName("LIBRO");

@@ -36,6 +36,8 @@ class LectorFicheroTest {
 	void test3() {
 		LectorFichero lecFichero = new LectorFichero(pLibros);
 		assertTrue(lecFichero.leerFicheroXml(new File("ficherosTestLector\\libros.xml")));
+		//assertFalse(lecFichero.leerFicheroXml(new File("noExiste.xml")));
+
 	}
 
 	@Test
