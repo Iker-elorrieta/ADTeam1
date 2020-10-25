@@ -19,7 +19,6 @@ import modelo.Menu;
 
 public class EscritorFichero {
 	
-	static Scanner sc = new Scanner(System.in);
 	ArrayList<Libro> libros;
 	boolean cargado = true;
 	int numLibros = 0;
@@ -193,7 +192,8 @@ public class EscritorFichero {
 	
 	
 	public static boolean aniadirDatosFicheroExistente(File pFichero) {
-		
+		Scanner sc = new Scanner(System.in);
+
 		boolean aniadir = true;
 		
 		if (pFichero.exists()) {
@@ -218,7 +218,8 @@ public class EscritorFichero {
 	
 	
 	public static String solicitarNombreFichero(){
-		
+		Scanner sc = new Scanner(System.in);
+
 		String nombreFichero = "";
 		boolean error = true;
 		
