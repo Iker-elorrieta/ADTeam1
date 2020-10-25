@@ -9,7 +9,7 @@ import modelo.Menu;
 public class MetodosAdicionales {
 	
 
-	public static int solicitarOpcion( Scanner sc, int maxOpcion, int minOpcion, String tipoMenu) {
+	public static int solicitarOpcion(Scanner sc, int maxOpcion, int minOpcion, String tipoMenu) {
 		
 		boolean error = true;
 		int opcion = 0;
@@ -39,12 +39,7 @@ public class MetodosAdicionales {
 			else if (tipoMenu.equalsIgnoreCase("submenuLeer")) {
 				System.out.println(Menu.mostrarSubmenu("leer"));
 			}
-			else if (tipoMenu.equalsIgnoreCase("submenuEscribir")) {
-				System.out.println(Menu.mostrarSubmenu("escribir"));
-			}
-			else if (tipoMenu.equalsIgnoreCase("submenuSobreescribir")) {
-				System.out.println(Menu.mostrarSubmenuSobreescribir());
-			}
+			
 		}while(error);
 		
 		return opcion;

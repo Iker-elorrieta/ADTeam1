@@ -8,11 +8,15 @@ import modelo.Menu;
 
 public class ControladorMenu {
 	
-	static Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 	
-	
-	public static void iniciarControladorMenu(){
+	public ControladorMenu() {
 		
+	}
+	
+	public boolean iniciarControladorMenu(Scanner sc){
+		
+		this.sc = sc;
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
 		boolean salir = false;
@@ -61,5 +65,6 @@ public class ControladorMenu {
 				break;
 			}
 		}while (!salir);
+		return true;
 	}
 }

@@ -1,4 +1,4 @@
-package PruebasControlador;
+package pruebasControlador;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +26,7 @@ class PruebasElegirOpcionTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 	
-		assertEquals(1,  MetodosAdicionales.solicitarOpcion( sc, maxOpcion, minOpcion, tipoMenu));
+		assertEquals(1,  MetodosAdicionales.solicitarOpcion(sc, maxOpcion, minOpcion, tipoMenu));
 	}
 
 }
