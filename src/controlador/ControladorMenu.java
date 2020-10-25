@@ -25,7 +25,7 @@ public class ControladorMenu {
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(sc,1, 0, "menuPrincipal")) {
+			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, "menuPrincipal")) {
 			
 			case 1:
 				LectorFichero lecFichero = new LectorFichero(libros);
@@ -58,7 +58,7 @@ public class ControladorMenu {
 				
 				libros = lecFichero.getLibros();
 				
-				
+			
 //////////////////////////////////////////////////////////////////////////
 //				DESCOMENTAR PARA MOSTRAR LOS LIBROS QUE HAY EN LA MEMORIA DESPUES DE REALIZAR UNA LECTURA DE FICHERO
 //				
@@ -71,6 +71,35 @@ public class ControladorMenu {
 				
 				break;
 
+			case 2:
+				
+				EscritorFichero escFichero = new EscritorFichero(libros);
+				
+				System.out.println(Menu.mostrarSubmenu("Escribir"));
+								
+				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, "submenuEscribir")) {
+				
+				case 1: 
+				
+					File ficheroTxt = new File(EscritorFichero.solicitarNombreFichero() + ".txt");
+					escFichero.escribirFicheroTxt(ficheroTxt);
+					break;
+					
+				case 2:
+					File ficheroDat = new File(EscritorFichero.solicitarNombreFichero() + ".dat");
+					escFichero.escribirFicheroDat(ficheroDat);
+					break;
+					
+				case 3:
+					File ficheroXml = new File(EscritorFichero.solicitarNombreFichero() + ".xml");
+					escFichero.escribirFicheroXml(ficheroXml);
+					break;
+					
+				case 4:
+					File ficheroCsv = new File(EscritorFichero.solicitarNombreFichero() + ".csv");
+					escFichero.escribirFicheroCsv(ficheroCsv);
+					break;
+				}
 			case 0:
 				System.out.println("\nSaliendo del programa...");
 				

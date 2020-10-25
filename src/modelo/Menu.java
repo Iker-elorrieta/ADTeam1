@@ -11,7 +11,7 @@ public class Menu {
 		
 		System.out.println(mostrarIntro());
 		
-		return "\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 0) Salir";
+		return "\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 2) Escribir ficheros\n 3) Insertar libro\n\n 0) Salir";
 	}
 	
 	public static String mostrarSubmenu(String categoria) {

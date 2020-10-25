@@ -39,6 +39,9 @@ public class MetodosAdicionales {
 			else if (tipoMenu.equalsIgnoreCase("submenuLeer")) {
 				System.out.println(Menu.mostrarSubmenu("leer"));
 			}
+			else if (tipoMenu.equalsIgnoreCase("submenuEscribir")) {
+				System.out.println(Menu.mostrarSubmenu("escribir"));
+			}
 			
 		}while(error);
 		

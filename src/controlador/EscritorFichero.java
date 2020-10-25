@@ -20,17 +20,22 @@ import modelo.Menu;
 public class EscritorFichero {
 	
 	static Scanner sc = new Scanner(System.in);
+	ArrayList<Libro> libros;
+	boolean cargado = true;
+	int numLibros = 0;
 	
-	public static void escribirFicheroTxt(ArrayList<Libro> pLibros){
+	public EscritorFichero(ArrayList<Libro> pLibros) {
+		this.libros = pLibros;
+	}
+	
+	
+	public boolean escribirFicheroTxt(File pFichero){
 
-		ArrayList<Libro> libros = pLibros;
-
-		int numLibros = 0;
+		numLibros = 0;
 		
 		try{
-			String sFichero = (solicitarNombreFichero() + ".txt");
 		
-			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(sFichero, aniadirDatosFicheroExistente(sFichero)));
+			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(pFichero, aniadirDatosFicheroExistente(pFichero)));
 			
 			for (int i = 0; i < libros.size(); i++){
 				Libro libro = libros.get(i);
@@ -40,33 +45,31 @@ public class EscritorFichero {
 			}
 			bwFichero.close();
 			
-			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
+			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + pFichero.getName());
 		
 		}catch (FileNotFoundException fn ){
 			 System.out.println("\nNo se encuentra el fichero");
 		}catch (IOException io) {
 			 System.out.println("\nError de E/S ");
 		}
+		return true;
 	}
 		
 
-	public static void escribirFicheroDat(ArrayList<Libro> pLibros){
+	public boolean escribirFicheroDat(File pFichero){
 		
-		ArrayList<Libro> libros = pLibros;
-		 
-		int numLibros = 0;
-		String sFichero = (solicitarNombreFichero() + ".dat");			
+		numLibros = 0;
 		
 		ObjectOutputStream dataOS = null;
 		try {
-			dataOS = new ObjectOutputStream(new FileOutputStream(new File(sFichero)));
+			dataOS = new ObjectOutputStream(new FileOutputStream(pFichero));
 		} catch (FileNotFoundException e1) {
 			System.out.println("\nNo se encuentra el fichero");
 		} catch (IOException e1) {
 			System.out.println("\nError de E/S ");
 		}
 		
-		for (Libro libro : libros){
+		for (Libro libro : this.libros){
 			
 		 	try {
 				dataOS.writeObject(libro);
@@ -81,19 +84,16 @@ public class EscritorFichero {
 			 System.out.println("\nError de E/S ");
 		} 
 		 
-		System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);		 
+		System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + pFichero.getName());
+		return cargado;
 	}
 	 
 	
-	public static void escribirFicheroXml(ArrayList<Libro> pLibros){
-		
-		ArrayList<Libro> libros = pLibros;
-		
-		String sFichero = (solicitarNombreFichero() + ".xml");
-		File fichero = new File(sFichero);
-		
+	public boolean escribirFicheroXml(File pFichero){
+						
 		DocumentBuilderFactory  dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dbBuilder = null;
+		numLibros = 0;
 		
 		try {
 			dbBuilder = dbFactory.newDocumentBuilder();
@@ -106,7 +106,7 @@ public class EscritorFichero {
 		Element elementoRaiz = doc.createElement("CATALOGO");
 		doc.appendChild(elementoRaiz);
 		
-		for (Libro libro : libros) {
+		for (Libro libro : this.libros) {
 			
 			Element eLibro = doc.createElement("LIBRO");
 			elementoRaiz.appendChild(eLibro);
@@ -150,7 +150,7 @@ public class EscritorFichero {
 		
 		DOMSource source = new DOMSource(doc);
 		
-		StreamResult result = new StreamResult(fichero);
+		StreamResult result = new StreamResult(pFichero);
 		
 		try {
 			transformer.transform(source, result);
@@ -158,17 +158,45 @@ public class EscritorFichero {
 			System.out.println("\nError en la transformacion del archivo XML");
 		}
 		
-		System.out.println("\nSe ha(n) guardado " + libros.size() + " libro(s) en el fichero " + sFichero);
+		System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + pFichero.getName());
+		
+		return cargado;
+	}
+	
+	public boolean escribirFicheroCsv(File pFichero){
+
+		int numLibros = 0;
+
+		try{
+			String sFichero = (solicitarNombreFichero() + ".csv");
+		
+			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(pFichero));
+			
+			for (int i = 0; i < this.libros.size(); i++){
+				Libro libro = this.libros.get(i);
+				bwFichero.write(libro.toString()); 
+				bwFichero.newLine(); 
+				numLibros++;
+			}
+			bwFichero.close();
+			
+			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + pFichero.getName());
+		}
+		catch (FileNotFoundException fn ){
+			 System.out.println("\nNo se encuentra el fichero");
+		}
+		catch (IOException io) {
+			 System.out.println("\nError de E/S ");
+		}
+		return cargado;
 	}
 	
 	
-	public static boolean aniadirDatosFicheroExistente(String pSFichero) {
+	public static boolean aniadirDatosFicheroExistente(File pFichero) {
 		
 		boolean aniadir = true;
-		String sFichero = pSFichero;
-		File fichero = new File(sFichero);
 		
-		if (fichero.exists()) {
+		if (pFichero.exists()) {
 			
 			System.out.println(Menu.mostrarSubmenuSobreescribir());
 			switch(MetodosAdicionales.solicitarOpcion(sc,2, 1, "submenuSobreescribir")) {
@@ -183,9 +211,8 @@ public class EscritorFichero {
 			
 		}
 		else {
-			System.out.println("\nSe ha creado el archivo " + sFichero);
+			System.out.println("\nSe ha creado el archivo " + pFichero.getName());
 		}
-		
 		return aniadir;
 	}
 	
@@ -210,35 +237,5 @@ public class EscritorFichero {
 		}while(error);
 		
 		return nombreFichero;
-	}
-	
-	
-	public static void escribirFicheroCsv(ArrayList<Libro> pLibros){
-
-		ArrayList<Libro> libros = pLibros;
-
-		int numLibros = 0;
-
-		try{
-			String sFichero = (solicitarNombreFichero() + ".csv");
-		
-			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(sFichero));
-			
-			for (int i = 0; i < libros.size(); i++){
-				Libro libro = libros.get(i);
-				bwFichero.write(libro.toString()); 
-				bwFichero.newLine(); 
-				numLibros++;
-			}
-			bwFichero.close();
-			
-			System.out.println("\nSe ha(n) guardado " + numLibros + " libro(s) en el fichero " + sFichero);
-	}
-		catch (FileNotFoundException fn ){
-			 System.out.println("\nNo se encuentra el fichero");
-		}
-		catch (IOException io) {
-			 System.out.println("\nError de E/S ");
-		}
 	}
 }
