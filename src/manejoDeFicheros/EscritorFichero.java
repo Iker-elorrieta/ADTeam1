@@ -1,4 +1,4 @@
-package controlador;
+package manejoDeFicheros;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import javax.xml.transform.stream.*;
 
 import org.w3c.dom.*;
 
+import controlador.MetodosAdicionales;
 import excepciones.ExcepcionNombreArchivo;
 import modelo.Libro;
 import modelo.Menu;

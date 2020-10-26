@@ -1,4 +1,4 @@
-package controladorTestJUnit5;
+package manejoDeFIcherosTestJUnit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import controlador.LectorFichero;
+import manejoDeFicheros.LectorFichero;
 import modelo.Libro;
 
 class LectorFicheroTest {

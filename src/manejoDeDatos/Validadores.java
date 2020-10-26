@@ -1,4 +1,4 @@
-package controlador;
+package manejoDeDatos;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

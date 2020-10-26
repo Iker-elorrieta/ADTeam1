@@ -47,9 +47,13 @@ public class Menu {
 		
 		String sOS = MetodosAdicionales.comprobarOS();
 		
-		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+		
+		//Descomentar en equipos Linux
+		/*if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			
+			
 			sOS = "  " + System.getProperty("os.name") + "   ";
-		}
+		}*/
 		
 		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n";
 	}

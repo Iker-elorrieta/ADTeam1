@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import manejoDeFicheros.EscritorFichero;
+import manejoDeFicheros.LectorFichero;
 import modelo.Libro;
 import modelo.Menu;
 
@@ -36,22 +38,22 @@ public class ControladorMenu {
 				
 				case 1: 
 				
-					File ficheroTxt = new File("libros.txt");
+					File ficheroTxt = new File("ficherosDeSalida\\libros.txt");
 					lecFichero.leerFicheroTxt(ficheroTxt);
 					break;
 					
 				case 2:
-					File ficheroDat = new File("libros.dat");
+					File ficheroDat = new File("ficherosDeSalida\\libros.dat");
 					lecFichero.leerFicheroDat(ficheroDat);
 					break;
 					
 				case 3:
-					File ficheroXml = new File("libros.xml");
+					File ficheroXml = new File("ficherosDeSalida\\libros.xml");
 					lecFichero.leerFicheroXml(ficheroXml);
 					break;
 					
 				case 4:
-					File ficheroCsv = new File("libros.csv");
+					File ficheroCsv = new File("ficherosDeSalida\\libros.csv");
 					lecFichero.leerFicheroCsv(ficheroCsv);
 					break;
 				}
@@ -81,23 +83,23 @@ public class ControladorMenu {
 				
 				case 1: 
 				
-					File ficheroTxt = new File(EscritorFichero.solicitarNombreFichero(sc) + ".txt");
+					File ficheroTxt = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".txt");
 					boolean sobreescribir = EscritorFichero.aniadirDatosFicheroExistente(sc, ficheroTxt);
 					escFichero.escribirFicheroTxt(ficheroTxt, sobreescribir);
 					break;
 					
 				case 2:
-					File ficheroDat = new File(EscritorFichero.solicitarNombreFichero(sc) + ".dat");
+					File ficheroDat = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".dat");
 					escFichero.escribirFicheroDat(ficheroDat);
 					break;
 					
 				case 3:
-					File ficheroXml = new File(EscritorFichero.solicitarNombreFichero(sc) + ".xml");
+					File ficheroXml = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".xml");
 					escFichero.escribirFicheroXml(ficheroXml);
 					break;
 					
 				case 4:
-					File ficheroCsv = new File(EscritorFichero.solicitarNombreFichero(sc) + ".csv");
+					File ficheroCsv = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".csv");
 					escFichero.escribirFicheroCsv(ficheroCsv);
 					break;
 				}

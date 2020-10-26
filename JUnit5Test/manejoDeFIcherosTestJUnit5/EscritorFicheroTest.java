@@ -1,4 +1,4 @@
-package controladorTestJUnit5;
+package manejoDeFIcherosTestJUnit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import controlador.EscritorFichero;
+import manejoDeFicheros.EscritorFichero;
 import modelo.Libro;
 
 class EscritorFicheroTest {
@@ -22,32 +22,32 @@ class EscritorFicheroTest {
 	@Test
 	void test() {		
 
-		assertTrue(escFichero.escribirFicheroTxt(new File("libros.txt"),true));
+		assertTrue(escFichero.escribirFicheroTxt(new File("ficherosTestEscritor\\libros.txt"),true));
 		pLibros.add(libro);
-		assertTrue(escFichero.escribirFicheroTxt(new File("libros.txt"),true));
+		assertTrue(escFichero.escribirFicheroTxt(new File("ficherosTestEscritor\\libros.txt"),true));
 
 	}
 	
 	
 	@Test
 	void test2() {
-		assertTrue(escFichero.escribirFicheroDat(new File("libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor\\libros.dat")));
 		pLibros.add(libro);
-		assertTrue(escFichero.escribirFicheroDat(new File("libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor\\libros.dat")));
 	}
 	
 	@Test
 	void test3() {
 		pLibros.add(libro);
 
-		assertTrue(escFichero.escribirFicheroXml(new File("libros.xml")));
+		assertTrue(escFichero.escribirFicheroXml(new File("ficherosTestEscritor\\libros.xml")));
 	}
 
 	@Test
 	void test4() {
 		pLibros.add(libro);
 
-		assertTrue(escFichero.escribirFicheroCsv(new File("libros.csv")));
+		assertTrue(escFichero.escribirFicheroCsv(new File("ficherosTestEscritor\\libros.csv")));
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ class EscritorFicheroTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 		
-		assertFalse(EscritorFichero.aniadirDatosFicheroExistente(sc, new File("libros.txt")));
+		assertFalse(EscritorFichero.aniadirDatosFicheroExistente(sc, new File("ficherosTestEscritor\\libros.txt")));
 	}	
 	
 	@Test
@@ -69,7 +69,7 @@ class EscritorFicheroTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 		
-		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File("libros.txt")));
+		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File("ficherosTestEscritor\\libros.txt")));
 	}
 	
 	@Test

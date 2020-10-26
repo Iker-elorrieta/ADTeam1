@@ -2,8 +2,8 @@ package excepciones;
 
 import java.util.Scanner;
 
-import controlador.Patron;
-import controlador.Validadores;
+import manejoDeDatos.Patron;
+import manejoDeDatos.Validadores;
 
 @SuppressWarnings("serial")
 public class ExcepcionNombreArchivo extends Exception{

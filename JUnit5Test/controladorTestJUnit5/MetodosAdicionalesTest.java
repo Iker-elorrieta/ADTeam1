@@ -37,7 +37,19 @@ class MetodosAdicionalesTest {
 		assertEquals(pLibros, MetodosAdicionales.insertarLibro(sc, pLibros));
 	}
 	
+	@Test
+	void testElegirOpcion() {
+		
+		String input = "9\n1\n1\n1";
+		int maxOpcion = 5;
+		int minOpcion = 0;
+		String tipoMenu = "menuPrincipal";
+		InputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		Scanner sc = new Scanner(System.in);
 	
+		assertEquals(1,  MetodosAdicionales.solicitarOpcion(sc, maxOpcion, minOpcion, tipoMenu));
+	}
 	
 	
 
