@@ -1,7 +1,5 @@
 package excepciones;
 
-import java.util.Scanner;
-
 import manejoDeDatos.Patron;
 import manejoDeDatos.Validadores;
 

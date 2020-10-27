@@ -10,6 +10,7 @@ class ValidadoresTest {
 
 	@Test
 	void test() {
+		@SuppressWarnings("unused")
 		Validadores validador = new Validadores();
 		String pDatoAValidar = "";
 		String pPatron = "12345";

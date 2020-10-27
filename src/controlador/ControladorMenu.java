@@ -11,6 +11,17 @@ import modelo.Menu;
 
 public class ControladorMenu {
 	
+	private static final String FDS = "ficherosDeSalida";
+	private static final String MP = "menuPrincipal";
+	private static final String SUB_L = "submenuLeer";
+	private static final String SUB_E = "submenuEscribir";
+	private static final String LEER = "leer";
+	private static final String ESCR = "escribir";
+	
+	private static File FICHERO_ENTRADA;
+	private static File FICHERO_SALIDA;
+
+
 	Scanner sc = new Scanner(System.in);
 	
 	public ControladorMenu() {
@@ -27,34 +38,34 @@ public class ControladorMenu {
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, "menuPrincipal")) {
+			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, MP)) {
 			
 			case 1:
 				LectorFichero lecFichero = new LectorFichero(libros);
 
-				System.out.println(Menu.mostrarSubmenu("Leer"));
+				System.out.println(Menu.mostrarSubmenu(LEER));
 								
-				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, "submenuLeer")) {
+				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, SUB_L)) {
 				
 				case 1: 
 				
-					File ficheroTxt = new File("ficherosDeSalida\\libros.txt");
-					lecFichero.leerFicheroTxt(ficheroTxt);
+					FICHERO_ENTRADA = new File(FDS + File.separator + "libros.txt");
+					lecFichero.leerFicheroTxt(FICHERO_ENTRADA);
 					break;
 					
 				case 2:
-					File ficheroDat = new File("ficherosDeSalida\\libros.dat");
-					lecFichero.leerFicheroDat(ficheroDat);
+					FICHERO_ENTRADA = new File(FDS + File.separator + "libros.dat");
+					lecFichero.leerFicheroDat(FICHERO_ENTRADA);
 					break;
 					
 				case 3:
-					File ficheroXml = new File("ficherosDeSalida\\libros.xml");
-					lecFichero.leerFicheroXml(ficheroXml);
+					FICHERO_ENTRADA = new File(FDS + File.separator + "libros.xml");
+					lecFichero.leerFicheroXml(FICHERO_ENTRADA);
 					break;
 					
 				case 4:
-					File ficheroCsv = new File("ficherosDeSalida\\libros.csv");
-					lecFichero.leerFicheroCsv(ficheroCsv);
+					FICHERO_ENTRADA = new File(FDS + File.separator + "libros.csv");
+					lecFichero.leerFicheroCsv(FICHERO_ENTRADA);
 					break;
 				}
 				
@@ -64,11 +75,11 @@ public class ControladorMenu {
 //////////////////////////////////////////////////////////////////////////
 //				DESCOMENTAR PARA MOSTRAR LOS LIBROS QUE HAY EN LA MEMORIA DESPUES DE REALIZAR UNA LECTURA DE FICHERO
 //				
-				
-				for(Libro libro : libros) {
-					System.out.println(libro.toString());
-				}
-				System.out.println("\nNum libros en memoria: " + libros.size());
+//				
+//				for(Libro libro : libros) {
+//					System.out.println(libro.toString());
+//				}
+//				System.out.println("\nNum libros en memoria: " + libros.size());
 //////////////////////////////////////////////////////////////////////////				
 				
 				break;
@@ -77,30 +88,29 @@ public class ControladorMenu {
 				
 				EscritorFichero escFichero = new EscritorFichero(libros);
 				
-				System.out.println(Menu.mostrarSubmenu("Escribir"));
+				System.out.println(Menu.mostrarSubmenu(ESCR));
 								
-				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, "submenuEscribir")) {
+				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, SUB_E)) {
 				
 				case 1: 
 				
-					File ficheroTxt = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".txt");
-					boolean sobreescribir = EscritorFichero.aniadirDatosFicheroExistente(sc, ficheroTxt);
-					escFichero.escribirFicheroTxt(ficheroTxt, sobreescribir);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".txt");
+					escFichero.escribirFicheroTxt(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
 					break;
 					
 				case 2:
-					File ficheroDat = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".dat");
-					escFichero.escribirFicheroDat(ficheroDat);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".dat");
+					escFichero.escribirFicheroDat(FICHERO_SALIDA);
 					break;
 					
 				case 3:
-					File ficheroXml = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".xml");
-					escFichero.escribirFicheroXml(ficheroXml);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".xml");
+					escFichero.escribirFicheroXml(FICHERO_SALIDA);
 					break;
 					
 				case 4:
-					File ficheroCsv = new File("ficherosDeSalida\\" + EscritorFichero.solicitarNombreFichero(sc) + ".csv");
-					escFichero.escribirFicheroCsv(ficheroCsv);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".csv");
+					escFichero.escribirFicheroCsv(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
 					break;
 				}
 				

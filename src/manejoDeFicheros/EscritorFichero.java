@@ -166,13 +166,13 @@ public class EscritorFichero {
 		return cargado;
 	}
 	
-	public boolean escribirFicheroCsv(File pFichero){
+	public boolean escribirFicheroCsv(File pFichero, boolean sobreeescribir){
 
 		int numLibros = 0;
 
 		try{
 		
-			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(pFichero));
+			BufferedWriter bwFichero = new BufferedWriter(new FileWriter(pFichero, sobreeescribir));
 			
 			for (int i = 0; i < this.libros.size(); i++){
 				Libro libro = this.libros.get(i);

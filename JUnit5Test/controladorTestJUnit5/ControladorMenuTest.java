@@ -43,7 +43,7 @@ class ControladorMenuTest {
 	void testControladorMenu3() {
 		ControladorMenu cM = new ControladorMenu();
 
-		String input = "2\na\n2\n*\nlibros\n2\n3\nlibros\n2\n4\nlibros\n0\n0\n";
+		String input = "2\na\n2\n*\nlibros\n2\n3\nlibros\n2\n4\nlibros\n1\n0\n0\n";
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
