@@ -1,10 +1,10 @@
-package pruebasJUnit5;
+package manejoDeDatosTestJUnit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import controlador.Patron;
+import manejoDeDatos.Patron;
 
 class PatronTest {
 

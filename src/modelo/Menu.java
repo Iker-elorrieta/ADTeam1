@@ -11,7 +11,7 @@ public class Menu {
 		
 		System.out.println(mostrarIntro());
 		
-		return "\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 0) Salir";
+		return "\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 2) Escribir ficheros\n 3) Insertar libro\n\n 0) Salir";
 	}
 	
 	public static String mostrarSubmenu(String categoria) {
@@ -47,9 +47,13 @@ public class Menu {
 		
 		String sOS = MetodosAdicionales.comprobarOS();
 		
-		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+		
+		//Descomentar en equipos Linux
+		/*if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			
+			
 			sOS = "  " + System.getProperty("os.name") + "   ";
-		}
+		}*/
 		
 		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n";
 	}

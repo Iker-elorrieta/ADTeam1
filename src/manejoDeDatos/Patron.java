@@ -1,4 +1,4 @@
-package controlador;
+package manejoDeDatos;
 
 public class Patron {
 	

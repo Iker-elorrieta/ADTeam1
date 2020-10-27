@@ -1,4 +1,4 @@
-package controlador;
+package manejoDeFicheros;
 
 import java.io.BufferedReader;
 import java.io.EOFException;
@@ -28,10 +28,13 @@ import modelo.Libro;
 public class LectorFichero {
 
 	private ArrayList<Libro> libros;
+	boolean aniadido = true;
+	
 	
 	public LectorFichero(ArrayList<Libro> pLibros) {
 		this.libros = pLibros;
 	}	
+	
 	
 	public ArrayList<Libro> getLibros(){
 		return this.libros;
@@ -72,17 +75,18 @@ public class LectorFichero {
 			
 			if (this.libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro ");
+				aniadido = false;
 			}
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas + " libro(s)");
 			}
 		}catch (FileNotFoundException fn ){
 			System.out.println("\nNo se encuentra el fichero de carga");
-			return false;
+			aniadido =  false;
 		}catch (IOException io) {
 			System.out.println("\nError de E/S ");
 		}
-		return true;
+		return aniadido;
 	}
 	
 	public boolean leerFicheroDat(File pFichero) {
@@ -101,8 +105,7 @@ public class LectorFichero {
 	                if (liburu != null) {
 	                    this.libros.add(liburu);
 	                    contadorEntradas++;
-	                }
-	                
+	                } 
 	            }
         	} catch (EOFException eo) {
 	        	System.out.println("\nFIN DE LECTURA");
@@ -110,14 +113,14 @@ public class LectorFichero {
 	        	
         	} 
 	        catch (StreamCorruptedException x) {
-	        	System.out.println("Stream corrupto");
+	        	System.out.println("\nStream corrupto");
 	        } catch (ClassNotFoundException e) {
-				System.out.println("Class not found");			}
+				System.out.println("\nClass not found");			
+			}
 
-		
-			
 	        if (libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro");
+				aniadido = false;
 			}
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
@@ -127,15 +130,13 @@ public class LectorFichero {
 			System.out.println("\nNo se encuentra el fichero de carga");
 			return false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("\nError de E/S ");
 		}
-		
-		return true;
+
+		return aniadido;
 	}
 	
 	public boolean leerFicheroXml(File pFichero){
-		
 		
 		int contadorEntradas = 0;
 		
@@ -144,18 +145,17 @@ public class LectorFichero {
 		try {
 			documentBuilder = dbf.newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
+			System.out.println("\nError en la configuracion para la creacion del DocumentBuilder");
 			e.printStackTrace();
 		}
 		Document document = null;
 		try {
 			document = documentBuilder.parse(pFichero);
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("SAX exception");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			aniadido = false;
+			System.out.println("Error de E/S");
 		}
 		document.getDocumentElement().normalize();
 		NodeList listalibros = document.getElementsByTagName("LIBRO");
@@ -181,13 +181,13 @@ public class LectorFichero {
 		}
 		if (this.libros.isEmpty()){
 			System.out.println("\nNo se ha cargado ningun libro");
+			aniadido = false;
 		}
 		else {
 			System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas +" libro(s)");
 		}
-		
-		
-		return true;
+
+		return aniadido;
 	}
 	
 	public boolean leerFicheroCsv(File pFichero){
@@ -221,7 +221,7 @@ public class LectorFichero {
 			brFichero.close();
 			if (this.libros.isEmpty()){
 				System.out.println("\nNo se ha cargado ningun libro ");
-
+				aniadido = false;
 			}
 			else {
 				System.out.println("\nSe ha(n) cargado en memoria " + contadorEntradas + " libro(s)");
@@ -234,7 +234,7 @@ public class LectorFichero {
 		}catch (IOException io) {
 			System.out.println("\nError de E/S ");}
 
-		return true;
+		return aniadido;
 		
 	}
 }
