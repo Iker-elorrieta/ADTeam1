@@ -49,13 +49,13 @@ public class Menu {
 		
 		
 		//Descomentar en equipos Linux
-		/*if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+		if(sOS.equalsIgnoreCase("Linux")) {
 			
 			
-			sOS = "  " + System.getProperty("os.name") + "   ";
-		}*/
+			sOS = "  " + sOS + "   ";
+		}
 		
-		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.0  *\n********************************\n";
+		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.1  *\n********************************\n";
 	}
 
 }
