@@ -4,7 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JFileChooser;
+
 import manejoDeFicheros.EscritorFichero;
+import manejoDeFicheros.ExploradorDeArchivos;
 import manejoDeFicheros.LectorFichero;
 import modelo.Libro;
 import modelo.Menu;
@@ -12,6 +15,7 @@ import modelo.Menu;
 public class ControladorMenu {
 	
 	Scanner sc = new Scanner(System.in);
+	JFileChooser fc = new JFileChooser();
 	
 	public ControladorMenu() {
 		
@@ -21,6 +25,7 @@ public class ControladorMenu {
 		
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
+		ExploradorDeArchivos exp;
 		
 		boolean salir = false;
 				
@@ -37,24 +42,75 @@ public class ControladorMenu {
 				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, "submenuLeer")) {
 				
 				case 1: 
-				
-					File ficheroTxt = new File("ficherosDeSalida" + File.separator + "libros.txt");
-					lecFichero.leerFicheroTxt(ficheroTxt);
+					
+					//Creamos el explorador de archivos y lanzamos su ejecucion
+					exp = new ExploradorDeArchivos(1, ".txt");
+					exp.start();
+					
+					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
+					try {
+						exp.join();
+					} catch (InterruptedException e) {
+						System.out.println("Interrupted Exception");
+					}
+					
+					//Creamos el fichero a leer y lo leemos, solo si el usuario ha seleccionado un archivo
+					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
+						lecFichero.leerFicheroTxt(exp.generarFichero());
+					}
+					
 					break;
 					
 				case 2:
-					File ficheroDat = new File("ficherosDeSalida" + File.separator + "libros.dat");
-					lecFichero.leerFicheroDat(ficheroDat);
+					//Creamos el explorador de archivos y lanzamos su ejecucion
+					exp = new ExploradorDeArchivos(1, ".dat");
+					exp.start();
+					
+					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
+					try {
+						exp.join();
+					} catch (InterruptedException e) {
+						System.out.println("Interrupted Exception");
+					}
+					
+					//Creamos el fichero a leer y lo leemos, solo si el usuario ha seleccionado un archivo
+					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
+						lecFichero.leerFicheroDat(exp.generarFichero());
+					}
+					
 					break;
 					
 				case 3:
-					File ficheroXml = new File("ficherosDeSalida" + File.separator + "libros.xml");
-					lecFichero.leerFicheroXml(ficheroXml);
+					//Creamos el explorador de archivos y lanzamos su ejecucion
+					exp = new ExploradorDeArchivos(1, ".xml");
+					exp.start();
+					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
+					try {
+						exp.join();
+					} catch (InterruptedException e) {
+						System.out.println("Interrupted Exception");
+					}
+					//Creamos el fichero a leer y lo leemos, solo si el usuario ha seleccionado un archivo
+					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
+						lecFichero.leerFicheroXml(exp.generarFichero());
+					}
+					
 					break;
 					
 				case 4:
-					File ficheroCsv = new File("ficherosDeSalida" + File.separator + "libros.csv");
-					lecFichero.leerFicheroCsv(ficheroCsv);
+					//Creamos el explorador de archivos y lanzamos su ejecucion
+					exp = new ExploradorDeArchivos(1, ".csv");
+					exp.start();
+					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
+					try {
+						exp.join();
+					} catch (InterruptedException e) {
+						System.out.println("Interrupted Exception");
+					}
+					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
+						lecFichero.leerFicheroCsv(exp.generarFichero());
+					}
+					
 					break;
 				}
 				
@@ -65,10 +121,10 @@ public class ControladorMenu {
 //				DESCOMENTAR PARA MOSTRAR LOS LIBROS QUE HAY EN LA MEMORIA DESPUES DE REALIZAR UNA LECTURA DE FICHERO
 //				
 //				
-//				for(Libro libro : libros) {
-//					System.out.println(libro.toString());
-//				}
-//				System.out.println("\nNum libros en memoria: " + libros.size());
+				for(Libro libro : libros) {
+					System.out.println(libro.toString());
+				}
+				System.out.println("\nNum libros en memoria: " + libros.size());
 //////////////////////////////////////////////////////////////////////////				
 				
 				break;

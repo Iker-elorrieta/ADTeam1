@@ -49,11 +49,11 @@ public class Menu {
 		
 		
 		//Descomentar en equipos Linux
-		if(sOS.equalsIgnoreCase("Linux")) {
-			
-			
-			sOS = "  " + sOS + "   ";
-		}
+//		if(sOS.equalsIgnoreCase("Linux")) {
+//			
+//			
+//			sOS = "  " + sOS + "   ";
+//		}
 		
 		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.1  *\n********************************\n";
 	}
