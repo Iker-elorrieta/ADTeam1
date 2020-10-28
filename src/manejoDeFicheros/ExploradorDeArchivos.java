@@ -92,9 +92,6 @@ public class ExploradorDeArchivos extends Thread{
 	}
 
 	//GETTERTS & SETTERS
-	public String getRutafichero() {
-		return rutaFichero;
-	}
 
 	public int getSeleccionUsuario() {
 		return seleccionUsuario;

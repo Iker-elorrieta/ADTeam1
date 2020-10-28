@@ -12,7 +12,21 @@ import controlador.ControladorMenu;
 
 class ControladorMenuTest {
 
+	
+	
+	@Test
+	void testControladorMenuX() {
+		ControladorMenu cM = new ControladorMenu();
 
+		String input = "\n1\na\n1\n0\n0\n";
+		
+		InputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		Scanner sc = new Scanner(System.in);
+		
+		assertTrue(cM.iniciarControladorMenu(sc));
+	}	
+/*
 	@Test
 	void testControladorMenu() {
 		ControladorMenu cM = new ControladorMenu();
@@ -25,6 +39,8 @@ class ControladorMenuTest {
 		
 		assertTrue(cM.iniciarControladorMenu(sc));
 	}	
+	
+	
 	
 	@Test
 	void testControladorMenu2() {
@@ -63,5 +79,5 @@ class ControladorMenuTest {
 		Scanner sc = new Scanner(System.in);
 		
 		assertTrue(cM.iniciarControladorMenu(sc));
-	}
+	}*/
 }
