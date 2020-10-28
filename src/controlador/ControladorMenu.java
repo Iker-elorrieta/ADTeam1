@@ -45,7 +45,7 @@ public class ControladorMenu {
 					
 					//Creamos el explorador de archivos y lanzamos su ejecucion
 					exp = new ExploradorDeArchivos(1, ".txt");
-					exp.start();
+					exp.iniciarHilo();
 					
 					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
 					try {

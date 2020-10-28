@@ -50,6 +50,11 @@ public class ExploradorDeArchivos extends Thread{
 
 	}
 	
+	public String iniciarHilo(){
+		
+		this.start();
+		return this.rutaFichero;
+	}
 	
 	private boolean directorioDeInicio() {
 		if(MetodosAdicionales.comprobarOS().equals("Linux")) {
