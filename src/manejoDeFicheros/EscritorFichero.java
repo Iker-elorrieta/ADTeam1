@@ -57,18 +57,31 @@ public class EscritorFichero {
 	}
 		
 
-	public boolean escribirFicheroDat(File pFichero){
+	public boolean escribirFicheroDat(File pFichero, boolean pAniadir){
 		
 		numLibros = 0;
 		
 		ObjectOutputStream dataOS = null;
-		try {
-			dataOS = new ObjectOutputStream(new FileOutputStream(pFichero));
-		} catch (FileNotFoundException e1) {
-			System.out.println("\nNo se encuentra el fichero");
-		} catch (IOException e1) {
-			System.out.println("\nError de E/S ");
+		
+		if(!pAniadir) {
+			try {
+				dataOS = new ObjectOutputStream(new FileOutputStream(pFichero));
+			} catch (FileNotFoundException e1) {
+				System.out.println("\nNo se encuentra el fichero");
+			} catch (IOException e1) {
+				System.out.println("\nError de E/S ");
+			}
 		}
+		else{
+			try {
+				dataOS = new ObjectOutputStream2(new FileOutputStream(pFichero, pAniadir));
+			} catch (FileNotFoundException e1) {
+				System.out.println("\nNo se encuentra el fichero");
+			} catch (IOException e1) {
+				System.out.println("\nError de E/S ");
+			}
+		}
+		
 		
 		for (Libro libro : this.libros){
 			

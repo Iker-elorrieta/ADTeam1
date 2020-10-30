@@ -76,10 +76,10 @@ public class ControladorMenu {
 //				DESCOMENTAR PARA MOSTRAR LOS LIBROS QUE HAY EN LA MEMORIA DESPUES DE REALIZAR UNA LECTURA DE FICHERO
 //				
 //				
-//				for(Libro libro : libros) {
-//					System.out.println(libro.toString());
-//				}
-//				System.out.println("\nNum libros en memoria: " + libros.size());
+				for(Libro libro : libros) {
+					System.out.println(libro.toString());
+				}
+				System.out.println("\nNum libros en memoria: " + libros.size());
 //////////////////////////////////////////////////////////////////////////				
 				
 				break;
@@ -100,7 +100,7 @@ public class ControladorMenu {
 					
 				case 2:
 					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".dat");
-					escFichero.escribirFicheroDat(FICHERO_SALIDA);
+					escFichero.escribirFicheroDat(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
 					break;
 					
 				case 3:

@@ -23,18 +23,18 @@ class EscritorFicheroTest {
 	@Test
 	void test() {		
 
-		assertTrue(escFichero.escribirFicheroTxt(new File(fTE + File.separator + "libros.txt"),true));
+		assertTrue(escFichero.escribirFicheroTxt(new File(fTE + File.separator + "libros.txt"), true));
 		pLibros.add(libro);
-		assertTrue(escFichero.escribirFicheroTxt(new File(fTE + File.separator + "libros.txt"),true));
+		assertTrue(escFichero.escribirFicheroTxt(new File(fTE + File.separator + "libros.txt"), true));
 
 	}
 	
 	
 	@Test
 	void test2() {
-		assertTrue(escFichero.escribirFicheroDat(new File(fTE + File.separator + "libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File(fTE + File.separator + "libros.dat"), true));
 		pLibros.add(libro);
-		assertTrue(escFichero.escribirFicheroDat(new File(fTE + File.separator + "libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File(fTE + File.separator + "libros.dat"), true));
 	}
 	
 	@Test
