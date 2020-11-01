@@ -15,6 +15,7 @@ import modelo.Libro;
 
 class EscritorFicheroTest {
 
+	private final String fTE = "ficherosTestEscritor";
 	Libro libro = new Libro("1", "1", 1, 1, "1", "1", "1");
 	ArrayList<Libro> pLibros = new ArrayList<Libro>();
 	EscritorFichero escFichero = new EscritorFichero(pLibros);
@@ -22,32 +23,32 @@ class EscritorFicheroTest {
 	@Test
 	void test() {		
 
-		assertTrue(escFichero.escribirFicheroTxt(new File("ficherosTestEscritor\\libros.txt"),true));
+		assertTrue(escFichero.escribirFicheroTxt(new File(fTE + File.separator + "libros.txt"), true));
 		pLibros.add(libro);
-		assertTrue(escFichero.escribirFicheroTxt(new File("ficherosTestEscritor\\libros.txt"),true));
+		assertTrue(escFichero.escribirFicheroTxt(new File(fTE + File.separator + "libros.txt"), true));
 
 	}
 	
 	
 	@Test
 	void test2() {
-		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor\\libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File(fTE + File.separator + "libros.dat"), true));
 		pLibros.add(libro);
-		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor\\libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File(fTE + File.separator + "libros.dat"), true));
 	}
 	
 	@Test
 	void test3() {
 		pLibros.add(libro);
 
-		assertTrue(escFichero.escribirFicheroXml(new File("ficherosTestEscritor\\libros.xml")));
+		assertTrue(escFichero.escribirFicheroXml(new File(fTE + File.separator + "libros.xml")));
 	}
 
 	@Test
 	void test4() {
 		pLibros.add(libro);
 
-		assertTrue(escFichero.escribirFicheroCsv(new File("ficherosTestEscritor\\libros.csv")));
+		assertTrue(escFichero.escribirFicheroCsv(new File(fTE + File.separator + "libros.csv"), true));
 	}
 	
 	@Test
@@ -58,7 +59,7 @@ class EscritorFicheroTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 		
-		assertFalse(EscritorFichero.aniadirDatosFicheroExistente(sc, new File("ficherosTestEscritor\\libros.txt")));
+		assertFalse(EscritorFichero.aniadirDatosFicheroExistente(sc, new File(fTE + File.separator + "libros.txt")));
 	}	
 	
 	@Test
@@ -69,7 +70,7 @@ class EscritorFicheroTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 		
-		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File("ficherosTestEscritor\\libros.txt")));
+		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File(fTE + File.separator + "libros.txt")));
 	}
 	
 	@Test
@@ -80,6 +81,6 @@ class EscritorFicheroTest {
 		System.setIn(in);
 		Scanner sc = new Scanner(System.in);
 		
-		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File("ficherosTestEscritor\\noExiste.txt")));
+		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File(fTE + File.separator + "noExiste.txt")));
 	}
 }

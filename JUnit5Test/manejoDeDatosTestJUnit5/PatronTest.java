@@ -16,6 +16,7 @@ class PatronTest {
 	
 	@Test
 	void test2() {
+		@SuppressWarnings("unused")
 		Patron pat = new Patron();
 		assertEquals("[A-Za-z_0-9]{1,20}",Patron.devolverPatron("nomfich"));
 	}
