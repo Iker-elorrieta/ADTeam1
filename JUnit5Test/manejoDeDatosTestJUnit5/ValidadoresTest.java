@@ -12,16 +12,24 @@ class ValidadoresTest {
 	void test() {
 		@SuppressWarnings("unused")
 		Validadores validador = new Validadores();
-		String pDatoAValidar = "";
-		String pPatron = "12345";
+		String pDatoAValidar = "+";
+		String pPatron = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789_;1;20";
 		assertEquals(false, Validadores.validador(pDatoAValidar, pPatron));
 	}
 	
 	@Test
 	void test2() {
 		String pDatoAValidar = "hola";
-		String pPatron = "[A-Za-z_0-9]{1,20}";
+		String pPatron = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789_;1;20";
 		assertEquals(true, Validadores.validador(pDatoAValidar, pPatron));
 	}
-
+	
+	@Test
+	void test3() {
+		@SuppressWarnings("unused")
+		Validadores validador = new Validadores();
+		String pDatoAValidar = "";
+		String pPatron = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789_;1;20";
+		assertEquals(false, Validadores.validador(pDatoAValidar, pPatron));
+	}
 }
