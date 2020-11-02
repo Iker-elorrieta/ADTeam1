@@ -8,7 +8,7 @@ public class Patron {
 		
 		if (pPatron.equalsIgnoreCase("nombreFichero")) {
 			
-			patronADevolver = "[A-Za-z_0-9]{1,20}";
+			patronADevolver = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789_;1;20";
 		}
 		
 		return patronADevolver;
