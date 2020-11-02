@@ -10,6 +10,7 @@ import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 import controlador.MetodosAdicionales;
+import main.Main;
 import modelo.Libro;
 
 class MetodosAdicionalesTest {
@@ -22,9 +23,9 @@ class MetodosAdicionalesTest {
 		String input = "prueba\n";
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 
-		assertEquals("prueba",MetodosAdicionales.verificarInsercionDatos(sc,"escriba dato"));
+		assertEquals("prueba",MetodosAdicionales.verificarInsercionDatos("escriba dato"));
 	}
 
 	@Test
@@ -32,9 +33,9 @@ class MetodosAdicionalesTest {
 		String input = "1\n1\n.\n1\n.\n1\n1\n\1\n1\n";
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 
-		assertEquals(pLibros, MetodosAdicionales.insertarLibro(sc, pLibros));
+		assertEquals(pLibros, MetodosAdicionales.insertarLibro(pLibros));
 	}
 	
 	@Test
@@ -46,9 +47,9 @@ class MetodosAdicionalesTest {
 		String tipoMenu = "menuPrincipal";
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 	
-		assertEquals(1,  MetodosAdicionales.solicitarOpcion(sc, maxOpcion, minOpcion, tipoMenu));
+		assertEquals(1,  MetodosAdicionales.solicitarOpcion(maxOpcion, minOpcion, tipoMenu));
 	}
 	
 	

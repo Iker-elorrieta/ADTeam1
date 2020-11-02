@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
+import main.Main;
 import manejoDeFicheros.EscritorFichero;
 import modelo.Libro;
 
@@ -57,9 +58,9 @@ class EscritorFicheroTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertFalse(EscritorFichero.aniadirDatosFicheroExistente(sc, new File(fTE + File.separator + "libros.txt")));
+		assertFalse(EscritorFichero.aniadirDatosFicheroExistente(new File(fTE + File.separator + "libros.txt")));
 	}	
 	
 	@Test
@@ -68,9 +69,9 @@ class EscritorFicheroTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File(fTE + File.separator + "libros.txt")));
+		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(new File(fTE + File.separator + "libros.txt")));
 	}
 	
 	@Test
@@ -79,8 +80,8 @@ class EscritorFicheroTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(sc, new File(fTE + File.separator + "noExiste.txt")));
+		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(new File(fTE + File.separator + "noExiste.txt")));
 	}
 }
