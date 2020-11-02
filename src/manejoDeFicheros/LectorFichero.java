@@ -25,7 +25,8 @@ import org.xml.sax.SAXException;
 import modelo.Libro;
 
 public class LectorFichero {
-
+	
+	private static final String TOKEN_SEPARATOR = ";";
 	private ArrayList<Libro> libros;
 	boolean aniadido = true;
 	
@@ -52,7 +53,7 @@ public class LectorFichero {
 			
 			while((linea = brFichero.readLine())!=null) {
 				
-				StringTokenizer st = new StringTokenizer(linea, ";");
+				StringTokenizer st = new StringTokenizer(linea, TOKEN_SEPARATOR);
 				
 				Libro libro = new Libro();	
 
