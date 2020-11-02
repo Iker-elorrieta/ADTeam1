@@ -15,6 +15,7 @@ import org.w3c.dom.*;
 
 import controlador.MetodosAdicionales;
 import excepciones.ExcepcionNombreArchivo;
+import main.Main;
 import modelo.Libro;
 import modelo.Menu;
 
@@ -207,14 +208,14 @@ public class EscritorFichero {
 	}
 	
 	
-	public static boolean aniadirDatosFicheroExistente(Scanner sc, File pFichero) {
+	public static boolean aniadirDatosFicheroExistente(File pFichero) {
 
 		boolean aniadir = true;
 		
 		if (pFichero.exists()) {
 			
 			System.out.println(Menu.mostrarSubmenuSobreescribir());
-			switch(MetodosAdicionales.solicitarOpcion(sc,2, 1, "submenuSobreescribir")) {
+			switch(MetodosAdicionales.solicitarOpcion(2, 1, "submenuSobreescribir")) {
 			
 			case 1:
 				aniadir = false;
@@ -232,7 +233,7 @@ public class EscritorFichero {
 	}
 	
 	
-	public static String solicitarNombreFichero(Scanner sc){
+	public static String solicitarNombreFichero(){
 
 		String nombreFichero = "";
 		boolean error = true;
@@ -240,9 +241,9 @@ public class EscritorFichero {
 		do {
 			try{
 				System.out.print("\nIntroduce el nombre del archivo: ");
-				nombreFichero =  sc.next();
+				nombreFichero =  Main.sc.next();
 				ExcepcionNombreArchivo.comprobarNombreFichero(nombreFichero);
-				sc.nextLine();
+				Main.sc.nextLine();
 				error = false;
 			}catch(ExcepcionNombreArchivo exNA) {
 				

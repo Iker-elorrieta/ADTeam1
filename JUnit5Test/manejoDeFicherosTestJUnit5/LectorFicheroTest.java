@@ -1,4 +1,4 @@
-package manejoDeFIcherosTestJUnit5;
+package manejoDeFicherosTestJUnit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -10,12 +10,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import controlador.ControladorMenu;
+import main.Main;
 
 class ControladorMenuTest {
 
 
 	@Test
-	@DisplayName("--testControladorMenu--")
 	void testControladorMenu() {
 		ControladorMenu cM = new ControladorMenu();
 
@@ -23,9 +23,10 @@ class ControladorMenuTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertTrue(cM.iniciarControladorMenu(sc));
+		assertTrue(cM.iniciarControladorMenu());
+
 	}	
 	
 	@Test
@@ -37,9 +38,9 @@ class ControladorMenuTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertTrue(cM.iniciarControladorMenu(sc));
+		assertTrue(cM.iniciarControladorMenu());
 	}
 	
 	@Test
@@ -50,9 +51,9 @@ class ControladorMenuTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertTrue(cM.iniciarControladorMenu(sc));
+		assertTrue(cM.iniciarControladorMenu());
 	}
 	
 	@Test
@@ -63,9 +64,9 @@ class ControladorMenuTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertTrue(cM.iniciarControladorMenu(sc));
+		assertTrue(cM.iniciarControladorMenu());
 	}	
 	
 	@Test
@@ -76,8 +77,8 @@ class ControladorMenuTest {
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		Scanner sc = new Scanner(System.in);
+		Main.sc = new Scanner(System.in);
 		
-		assertTrue(cM.iniciarControladorMenu(sc));
+		assertTrue(cM.iniciarControladorMenu());
 	}
 }

@@ -5,12 +5,13 @@ import java.util.Scanner;
 
 import excepciones.ExcepcionCampoVacio;
 import excepciones.ExcepcionIntervalo;
+import main.Main;
 import modelo.Libro;
 import modelo.Menu;
 
 public class MetodosAdicionales {
 	
-	public static ArrayList<Libro> insertarLibro(Scanner sc, ArrayList<Libro> pLibros){
+	public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros){
 		//Recoger ArrayList de la memoria
 		ArrayList<Libro> libros = pLibros;
 		
@@ -30,18 +31,18 @@ public class MetodosAdicionales {
 		System.out.println("\n  --INSERTAR LIBRO--");
 
 		//Pedir nombre del libro
-		tituloNuevoLibro = verificarInsercionDatos(sc, "\nEscriba el nombre del libro: ");
+		tituloNuevoLibro = verificarInsercionDatos("\nEscriba el nombre del libro: ");
 		
 		
 		//pedir editorial del libro
-		editorialNuevoLibro = verificarInsercionDatos(sc, "\nEscriba la editorial del libro: ");
+		editorialNuevoLibro = verificarInsercionDatos("\nEscriba la editorial del libro: ");
 		
 		
 		do {
 			//Pedir numero de paginas del libro
 			try{
 				//Recoger las paginas
-				paginasNuevoLibro = Integer.parseInt(verificarInsercionDatos(sc, "\nEscriba el numero de paginas que tiene el libro: "));
+				paginasNuevoLibro = Integer.parseInt(verificarInsercionDatos("\nEscriba el numero de paginas que tiene el libro: "));
 				//En caso de que no sea un int va al catch sino sigue
 				//si es un int error cambia a false 
 				error = false;
@@ -61,7 +62,7 @@ public class MetodosAdicionales {
 			
 			//Se pide la altura del libro y se compruba igual que las paginas
 			try{
-				alturaNuevoLibro = Integer.parseInt(verificarInsercionDatos(sc, "\nEscriba la altura del libro: "));
+				alturaNuevoLibro = Integer.parseInt(verificarInsercionDatos("\nEscriba la altura del libro: "));
 				error = false;
 			}catch(Exception w) {
 				System.out.println("\nERROR: No introduzca caracteres no numericos a la hora de indicar la altura del libro");
@@ -70,13 +71,13 @@ public class MetodosAdicionales {
 		}while(alturaNuevoLibro == 0 || error== true);
 
 		//Se piden anotaciones del libro
-		notasNuevoLibro = verificarInsercionDatos(sc, "\nEscriba alguna anotacion para el libro: ");
+		notasNuevoLibro = verificarInsercionDatos("\nEscriba alguna anotacion para el libro: ");
 		
 		//Se pide el ISBN del libro
-		isbnNuevoLibro = verificarInsercionDatos(sc, "\nEscriba el ISBN del libro: ");
+		isbnNuevoLibro = verificarInsercionDatos("\nEscriba el ISBN del libro: ");
 		
 		//Se pide la materia del libro
-		materiasNuevoLibro = verificarInsercionDatos(sc, "\nEscriba la materia para la que fue creado el libro: ");
+		materiasNuevoLibro = verificarInsercionDatos("\nEscriba la materia para la que fue creado el libro: ");
 		
 		//Se crea el nuevo libro
 		Libro libro = new Libro(tituloNuevoLibro, editorialNuevoLibro, paginasNuevoLibro, alturaNuevoLibro,notasNuevoLibro,isbnNuevoLibro,materiasNuevoLibro );
@@ -91,7 +92,7 @@ public class MetodosAdicionales {
 	
 	
 	
-	public static int solicitarOpcion(Scanner sc, int maxOpcion, int minOpcion, String tipoMenu) {
+	public static int solicitarOpcion(int maxOpcion, int minOpcion, String tipoMenu) {
 		
 		boolean error = true;
 		int opcion = 0;
@@ -99,7 +100,7 @@ public class MetodosAdicionales {
 		do {
 				
 			try {
-				opcion = Integer.parseInt(verificarInsercionDatos(sc,"\nIntroduzca una opcion: "));	
+				opcion = Integer.parseInt(verificarInsercionDatos("\nIntroduzca una opcion: "));	
 				ExcepcionIntervalo.rango(opcion, maxOpcion, minOpcion);
 				error = false;
 				break;
@@ -132,14 +133,14 @@ public class MetodosAdicionales {
 	}
 	
 	
-	public static String verificarInsercionDatos(Scanner sc, String pMensaje){;
+	public static String verificarInsercionDatos(String pMensaje){;
 		
 		boolean error = true;
 		String str = null;
 		do {
 			System.out.print(pMensaje);
 			try {
-				str = sc.nextLine();
+				str = Main.sc.nextLine();
 				ExcepcionCampoVacio.comprobarCampoVacio(str);
 				error = false;
 			} catch (ExcepcionCampoVacio exCV) {

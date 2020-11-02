@@ -24,14 +24,14 @@ public class ControladorMenu {
 	private static File FICHERO_ENTRADA;
 	private static File FICHERO_SALIDA;
 
-	JFileChooser jfc = new JFileChooser();
+	public JFileChooser jfc = new JFileChooser();
 	Scanner sc = new Scanner(System.in);
 	
 	public ControladorMenu() {
 		
 	}
 	
-	public boolean iniciarControladorMenu(Scanner sc){
+	public boolean iniciarControladorMenu(){
 		
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
@@ -42,7 +42,7 @@ public class ControladorMenu {
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, MP)) {
+			switch (MetodosAdicionales.solicitarOpcion(3, 0, MP)) {
 			
 			case 1:
 				LectorFichero lecFichero = new LectorFichero(libros);
@@ -50,7 +50,7 @@ public class ControladorMenu {
 
 				System.out.println(Menu.mostrarSubmenu(LEER));
 					
-				int opcionSubMenu = MetodosAdicionales.solicitarOpcion(sc, 4, 0, SUB_L);
+				int opcionSubMenu = MetodosAdicionales.solicitarOpcion(4, 0, SUB_L);
 				switch(opcionSubMenu) {
 				
 				
@@ -131,33 +131,33 @@ public class ControladorMenu {
 				
 				System.out.println(Menu.mostrarSubmenu(ESCR));
 								
-				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, SUB_E)) {
+				switch(MetodosAdicionales.solicitarOpcion(4, 0, SUB_E)) {
 				
 				case 1: 
 				
-					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".txt");
-					escFichero.escribirFicheroTxt(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero() + ".txt");
+					escFichero.escribirFicheroTxt(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(FICHERO_SALIDA));
 					break;
 					
 				case 2:
-					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".dat");
-					escFichero.escribirFicheroDat(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero() + ".dat");
+					escFichero.escribirFicheroDat(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(FICHERO_SALIDA));
 					break;
 					
 				case 3:
-					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".xml");
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero() + ".xml");
 					escFichero.escribirFicheroXml(FICHERO_SALIDA);
 					break;
 					
 				case 4:
-					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".csv");
-					escFichero.escribirFicheroCsv(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero() + ".csv");
+					escFichero.escribirFicheroCsv(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(FICHERO_SALIDA));
 					break;
 				}
 				
 				break;
 			case 3:
-				MetodosAdicionales.insertarLibro(sc, libros);
+				MetodosAdicionales.insertarLibro(libros);
 				break;
 			case 0:
 				System.out.println("\nSaliendo del programa...");

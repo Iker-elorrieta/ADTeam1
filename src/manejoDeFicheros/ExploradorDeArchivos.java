@@ -56,6 +56,7 @@ public class ExploradorDeArchivos extends Thread{
 		return this.rutaFichero;
 	}
 	
+	
 	private boolean directorioDeInicio() {
 		if(MetodosAdicionales.comprobarOS().equals("Linux")) {
 			this.fc = new JFileChooser(RUTA_LINUX);
@@ -65,6 +66,7 @@ public class ExploradorDeArchivos extends Thread{
 		}
 		return true;
 	}
+	
 	
 	public File generarFichero() {
 		File fichero = new File(this.rutaFichero);
