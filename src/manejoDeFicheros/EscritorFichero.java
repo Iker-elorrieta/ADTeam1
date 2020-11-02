@@ -2,8 +2,6 @@ package manejoDeFicheros;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.xml.parsers.*;
 
 import javax.xml.transform.*;
