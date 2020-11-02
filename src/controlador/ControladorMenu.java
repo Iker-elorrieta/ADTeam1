@@ -14,8 +14,18 @@ import modelo.Menu;
 
 public class ControladorMenu {
 	
+	private static final String FDS = "ficherosDeSalida";
+	private static final String MP = "menuPrincipal";
+	private static final String SUB_L = "submenuLeer";
+	private static final String SUB_E = "submenuEscribir";
+	private static final String LEER = "leer";
+	private static final String ESCR = "escribir";
+	
+	private static File FICHERO_ENTRADA;
+	private static File FICHERO_SALIDA;
+
+	JFileChooser jfc = new JFileChooser();
 	Scanner sc = new Scanner(System.in);
-	JFileChooser fc = new JFileChooser();
 	
 	public ControladorMenu() {
 		
@@ -25,93 +35,79 @@ public class ControladorMenu {
 		
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
-		ExploradorDeArchivos exp;
+
 		
 		boolean salir = false;
 				
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, "menuPrincipal")) {
+			switch (MetodosAdicionales.solicitarOpcion(sc,3, 0, MP)) {
 			
 			case 1:
 				LectorFichero lecFichero = new LectorFichero(libros);
+				ExploradorDeArchivos exp = null;
 
-				System.out.println(Menu.mostrarSubmenu("Leer"));
-								
-				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, "submenuLeer")) {
+				System.out.println(Menu.mostrarSubmenu(LEER));
+					
+				int opcionSubMenu = MetodosAdicionales.solicitarOpcion(sc, 4, 0, SUB_L);
+				switch(opcionSubMenu) {
+				
 				
 				case 1: 
-					
+				
 					//Creamos el explorador de archivos y lanzamos su ejecucion
 					exp = new ExploradorDeArchivos(1, ".txt");
-					exp.iniciarHilo();
-					
-					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
-					try {
-						exp.join();
-					} catch (InterruptedException e) {
-						System.out.println("Interrupted Exception");
-					}
-					
-					//Creamos el fichero a leer y lo leemos, solo si el usuario ha seleccionado un archivo
-					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
-						lecFichero.leerFicheroTxt(exp.generarFichero());
-					}
 					
 					break;
-					
-				case 2:
+				
+				case 2: 
 					//Creamos el explorador de archivos y lanzamos su ejecucion
 					exp = new ExploradorDeArchivos(1, ".dat");
-					exp.start();
-					
-					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
-					try {
-						exp.join();
-					} catch (InterruptedException e) {
-						System.out.println("Interrupted Exception");
-					}
-					
-					//Creamos el fichero a leer y lo leemos, solo si el usuario ha seleccionado un archivo
-					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
-						lecFichero.leerFicheroDat(exp.generarFichero());
-					}
 					
 					break;
-					
 				case 3:
 					//Creamos el explorador de archivos y lanzamos su ejecucion
 					exp = new ExploradorDeArchivos(1, ".xml");
-					exp.start();
-					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
-					try {
-						exp.join();
-					} catch (InterruptedException e) {
-						System.out.println("Interrupted Exception");
-					}
-					//Creamos el fichero a leer y lo leemos, solo si el usuario ha seleccionado un archivo
-					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
-						lecFichero.leerFicheroXml(exp.generarFichero());
-					}
 					
 					break;
-					
 				case 4:
 					//Creamos el explorador de archivos y lanzamos su ejecucion
 					exp = new ExploradorDeArchivos(1, ".csv");
-					exp.start();
-					//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
-					try {
-						exp.join();
-					} catch (InterruptedException e) {
-						System.out.println("Interrupted Exception");
-					}
-					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
-						lecFichero.leerFicheroCsv(exp.generarFichero());
-					}
 					
 					break;
+				}
+			
+				if(exp != null) {
+					//Creamos el fichero a leer y lo leemos, solo si el usuario ha seleccionado un archivo
+					if(exp.getSeleccionUsuario() == JFileChooser.APPROVE_OPTION) {
+						exp.iniciarHilo();
+						
+						//Paramos el hilo principal hasta que el usuario seleccione un archivo o cancele la operacion
+						try {
+							exp.join();
+						} catch (InterruptedException e) {
+							System.out.println("Interrupted Exception");
+						}
+						
+						switch(opcionSubMenu) {
+						
+						case 1: 
+							lecFichero.leerFicheroTxt(exp.generarFichero());
+							break;
+						case 2: 
+							lecFichero.leerFicheroDat(exp.generarFichero());
+							break;
+						case 3: 
+							lecFichero.leerFicheroXml(exp.generarFichero());
+							break;
+						case 4: 
+							lecFichero.leerFicheroCsv(exp.generarFichero());
+							break;
+							
+						}
+	
+					}
 				}
 				
 				libros = lecFichero.getLibros();
@@ -133,30 +129,29 @@ public class ControladorMenu {
 				
 				EscritorFichero escFichero = new EscritorFichero(libros);
 				
-				System.out.println(Menu.mostrarSubmenu("Escribir"));
+				System.out.println(Menu.mostrarSubmenu(ESCR));
 								
-				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, "submenuEscribir")) {
+				switch(MetodosAdicionales.solicitarOpcion(sc, 4, 0, SUB_E)) {
 				
 				case 1: 
 				
-					File ficheroTxt = new File("ficherosDeSalida" + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".txt");
-					boolean sobreescribir = EscritorFichero.aniadirDatosFicheroExistente(sc, ficheroTxt);
-					escFichero.escribirFicheroTxt(ficheroTxt, sobreescribir);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".txt");
+					escFichero.escribirFicheroTxt(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
 					break;
 					
 				case 2:
-					File ficheroDat = new File("ficherosDeSalida" + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".dat");
-					escFichero.escribirFicheroDat(ficheroDat);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".dat");
+					escFichero.escribirFicheroDat(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
 					break;
 					
 				case 3:
-					File ficheroXml = new File("ficherosDeSalida" + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".xml");
-					escFichero.escribirFicheroXml(ficheroXml);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".xml");
+					escFichero.escribirFicheroXml(FICHERO_SALIDA);
 					break;
 					
 				case 4:
-					File ficheroCsv = new File("ficherosDeSalida" + File.separator +  EscritorFichero.solicitarNombreFichero(sc) + ".csv");
-					escFichero.escribirFicheroCsv(ficheroCsv);
+					FICHERO_SALIDA = new File(FDS + File.separator + EscritorFichero.solicitarNombreFichero(sc) + ".csv");
+					escFichero.escribirFicheroCsv(FICHERO_SALIDA, EscritorFichero.aniadirDatosFicheroExistente(sc, FICHERO_SALIDA));
 					break;
 				}
 				

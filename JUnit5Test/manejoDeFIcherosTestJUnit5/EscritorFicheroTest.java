@@ -31,9 +31,9 @@ class EscritorFicheroTest {
 	
 	@Test
 	void test2() {
-		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor" + File.separator + "libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor" + File.separator + "libros.dat"), true));
 		pLibros.add(libro);
-		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor" + File.separator + "libros.dat")));
+		assertTrue(escFichero.escribirFicheroDat(new File("ficherosTestEscritor" + File.separator + "libros.dat"), true));
 	}
 	
 	@Test
@@ -45,9 +45,11 @@ class EscritorFicheroTest {
 
 	@Test
 	void test4() {
+		assertTrue(escFichero.escribirFicheroCsv(new File("ficherosTestEscritor" + File.separator + "libros.csv"), true));
+
 		pLibros.add(libro);
 
-		assertTrue(escFichero.escribirFicheroCsv(new File("ficherosTestEscritor" + File.separator + "libros.csv")));
+		assertTrue(escFichero.escribirFicheroCsv(new File("ficherosTestEscritor" + File.separator + "libros.csv"), true));
 	}
 	
 	@Test
