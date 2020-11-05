@@ -19,7 +19,7 @@ class ControladorMenuTest {
 	void testControladorMenu() {
 		ControladorMenu cM = new ControladorMenu();
 
-		String input = "\n1\na\n1\n1\n0\n";
+		String input = "\n1\na\n1\n3\n1\n0\n";
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);

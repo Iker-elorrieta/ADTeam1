@@ -155,7 +155,7 @@ public class MetodosAdicionales {
 	public static boolean mostrarLibrosMemoria(ArrayList<Libro> pLibros) {
 		
 		for(Libro libro : pLibros) {
-			System.out.println(libro.toString());
+			System.out.println(libro.toStringFormateado());
 		}
 		System.out.println("\nNum libros en memoria: " + pLibros.size());
 		return true;

@@ -202,9 +202,7 @@ public class GestorDeArchivos extends Thread{
 	}
 	//GETTERTS & SETTERS
 
-	public int getSeleccionUsuario() {
-		return seleccionUsuario;
-	}
+
 	
 	public String getRutaFichero() {
 		return rutaFichero;
