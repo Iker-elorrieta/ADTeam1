@@ -28,7 +28,6 @@ public class ControladorMenu {
 	Scanner sc = new Scanner(System.in);
 	
 	public ControladorMenu() {
-		
 	}
 	
 	public boolean iniciarControladorMenu(){
@@ -44,7 +43,7 @@ public class ControladorMenu {
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(4, 0, MP)) {
+			switch (MetodosAdicionales.solicitarOpcion(5, 0, MP)) {
 			
 			case 1:
 				LectorFichero lecFichero = new LectorFichero(libros);
@@ -52,7 +51,7 @@ public class ControladorMenu {
 
 				System.out.println(Menu.mostrarSubmenu(LEER));
 					
-				opcionSubMenu = MetodosAdicionales.solicitarOpcion(4, 0, SUB_L);
+				opcionSubMenu = MetodosAdicionales.solicitarOpcion(5, 0, SUB_L);
 				switch(opcionSubMenu) {
 				
 				
@@ -187,6 +186,10 @@ public class ControladorMenu {
 				
 			case 4:
 				MetodosAdicionales.mostrarLibrosMemoria(libros);
+				break;
+				
+			case 5: 
+				libros = MetodosAdicionales.borrarMemoria(libros);
 				break;
 				
 			case 0:

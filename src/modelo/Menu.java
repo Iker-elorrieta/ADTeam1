@@ -11,20 +11,28 @@ public class Menu {
 		
 		System.out.println(mostrarIntro());
 		
-		return "\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 2) Escribir ficheros\n 3) Insertar libro\n 4) Mostrar libros en memoria\n\n 0) Salir";
+		return "\n  --MENU PRINCIPAL--\n\n "
+				+ "1) Leer ficheros\n "
+				+ "2) Escribir ficheros\n "
+				+ "3) Insertar libro\n "
+				+ "4) Mostrar libros en memoria\n "
+				+ "5) Borrar memoria\n\n "
+				+ "0) Salir";
 	}
 	
 	public static String mostrarSubmenu(String categoria) {
 			
 		String cabecera = "";
 		System.out.println(mostrarIntro());
-		if (categoria.equalsIgnoreCase("leer")) {
-			
+		switch(categoria) {
+		
+		case "leer":			
 			cabecera = "\n  --LEER FICHEROS--\n";
-		}
-		else if(categoria.equalsIgnoreCase("escribir")) {
-			
+			break;
+		
+		case "escribir":
 			cabecera = "\n  --ESCRIBIR FICHEROS--\n";
+			break;
 		}
 		
 		return (cabecera + "\nEn que formato desea " + categoria.toLowerCase() + " los datos:\n\n"
@@ -44,6 +52,7 @@ public class Menu {
 	}
 	
 	public static String mostrarSubmenuFicheros() {
+				
 		return "\nSe va a proceder a realizar modificaciones de ficheros.\n"
 				+ " Que desea utilizar?\n\n"
 				+ " 1) Ficheros de prueba\n"
@@ -56,13 +65,13 @@ public class Menu {
 		String sOS = MetodosAdicionales.comprobarOS();
 		
 		
-//		DESCOMENTAR EN EQUIPOS LINUX PARA UN FORMATEO DE LA INTRO CORRECTO
+//		DESCOMENTAR EN EQUIPOS LINUX PARA UN FORMATEO CORRECTO DE LA INTRO 
 //
 //		if(sOS.equalsIgnoreCase("Linux")) {			
 //			sOS = "  " + sOS + "   ";
 //		}
 		
-		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v1.1  *\n********************************\n";
+		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v3.2  *\n********************************\n";
 	}
 
 }

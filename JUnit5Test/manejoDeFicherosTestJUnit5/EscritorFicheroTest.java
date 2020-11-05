@@ -89,10 +89,4 @@ class EscritorFicheroTest {
 		
 		assertTrue(EscritorFichero.aniadirDatosFicheroExistente(new File("ficherosTestEscritor" + File.separator + "noExiste.txt")));
 	}
-
-	
-	@Test
-	void testThrows() throws IOException {
-	    assertThrows(IOException.class, ()-> new FileWriter("/no/such/place"));
-	}
 }

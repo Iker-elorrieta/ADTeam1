@@ -72,8 +72,10 @@ public class GestorDeArchivos extends Thread{
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-	    System.out.println(Menu.mostrarSubmenuFicheros());
+		
+		
+		System.out.println(Menu.mostrarSubmenuFicheros());
+		
 	    switch (MetodosAdicionales.solicitarOpcion(2, 1, SUB_FIC)) {
 	    
 	    case 1:

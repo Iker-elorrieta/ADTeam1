@@ -12,7 +12,13 @@ class MenuTest {
 	void test() {
 		@SuppressWarnings("unused")
 		Menu menu = new Menu();
-		assertEquals("\n  --MENU PRINCIPAL--\n\n 1) Leer ficheros\n 2) Escribir ficheros\n 3) Insertar libro\n 4) Mostrar libros en memoria\n\n 0) Salir", Menu.mostrarMenu());
+		assertEquals("\n  --MENU PRINCIPAL--\n\n "
+				+ "1) Leer ficheros\n "
+				+ "2) Escribir ficheros\n "
+				+ "3) Insertar libro\n "
+				+ "4) Mostrar libros en memoria\n "
+				+ "5) Borrar memoria\n\n "
+				+ "0) Salir", Menu.mostrarMenu());
 	}
 	
 	@Test

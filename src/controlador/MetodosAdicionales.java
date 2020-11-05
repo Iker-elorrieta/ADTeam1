@@ -3,6 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import excepciones.ExcepcionCampoVacio;
 import excepciones.ExcepcionIntervalo;
+import excepciones.ExcepcionRespuesta;
 import main.Main;
 import modelo.Libro;
 import modelo.Menu;
@@ -79,9 +80,9 @@ public class MetodosAdicionales {
 		
 		//Se crea el nuevo libro
 		Libro libro = new Libro(tituloNuevoLibro, editorialNuevoLibro, paginasNuevoLibro, alturaNuevoLibro,notasNuevoLibro,isbnNuevoLibro,materiasNuevoLibro );
-		//se a�ade el nuevo libro al array
+		//se añade el nuevo libro al array
 		libros.add(libro);
-		//se muestra la informacion del libro a�adido
+		//se muestra la informacion del libro añadido
 		System.out.println(libro.toStringFormateado());
 		System.out.println("\nLIBRO AÑADIDO A LA MEMORIA CON EXITO");
 		//Devuelve el array con los libros
@@ -152,6 +153,7 @@ public class MetodosAdicionales {
 		return str;
 	}
 	
+	
 	public static boolean mostrarLibrosMemoria(ArrayList<Libro> pLibros) {
 		
 		for(Libro libro : pLibros) {
@@ -160,6 +162,44 @@ public class MetodosAdicionales {
 		System.out.println("\nNum libros en memoria: " + pLibros.size());
 		return true;
 	}
+	
+	
+public static ArrayList<Libro> borrarMemoria(ArrayList<Libro> pLibros){
+		
+		ArrayList<Libro> libros = pLibros;
+		
+		boolean error = true;
+		String respuesta = null;
+		
+		do {
+		
+			System.out.print("\nEsta seguro de que desea borrar la memoria? (S/N): ");
+			try{
+				respuesta = Main.sc.nextLine();
+				ExcepcionRespuesta.comprobarRespuesta(respuesta);
+				error = false;
+						
+			}
+			catch(ExcepcionRespuesta exR) {
+				
+				System.out.println(exR.getMessage());
+			}
+		} while(error);
+		
+		if (respuesta.equalsIgnoreCase("S")) {
+			libros.clear();
+			
+			System.out.println("\nMEMORIA BORRADA");
+			
+		}
+		else {
+			System.out.println("\nOperacion cancelada\nVolviendo al menu principal...");
+		}
+		
+		return libros;
+		
+	}
+	
 	
 	public static String comprobarOS() {
 		

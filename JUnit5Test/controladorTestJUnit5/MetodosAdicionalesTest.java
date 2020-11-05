@@ -56,10 +56,12 @@ class MetodosAdicionalesTest {
 	@Test
 	void testMostrarLibros() {
 		Libro libro = new Libro("1", "1", 1, 1, "1", "1", "1");
-		ArrayList<Libro> libros = new ArrayList<Libro>();
-		libros.add(libro);
-		assertTrue(MetodosAdicionales.mostrarLibrosMemoria(libros));
+		pLibros.add(libro);
+		assertTrue(MetodosAdicionales.mostrarLibrosMemoria(pLibros));
 	}
+	
+	
+
 	
 
 }

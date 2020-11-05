@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import controlador.ControladorMenu;
 import main.Main;
+import modelo.Libro;
 
 class ControladorMenuTest {
 
@@ -143,6 +145,32 @@ class ControladorMenuTest {
 		ControladorMenu cM = new ControladorMenu();
 
 		String input = "4\n0\n";
+		
+		InputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		Main.sc = new Scanner(System.in);
+		
+		assertTrue(cM.iniciarControladorMenu());
+	}
+	
+	@Test
+	void testControladorMenu11() {
+		ControladorMenu cM = new ControladorMenu();
+	
+		String input = "5\nñ\nS\n0\n";
+		
+		InputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		Main.sc = new Scanner(System.in);
+		
+		assertTrue(cM.iniciarControladorMenu());
+	}
+	
+	@Test
+	void testControladorMenu12() {
+		ControladorMenu cM = new ControladorMenu();
+	
+		String input = "5\nN\n0\n";
 		
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
