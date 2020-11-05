@@ -1,8 +1,6 @@
 package controlador;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import excepciones.ExcepcionCampoVacio;
 import excepciones.ExcepcionIntervalo;
 import main.Main;
@@ -91,7 +89,6 @@ public class MetodosAdicionales {
 	}
 	
 	
-	
 	public static int solicitarOpcion(int maxOpcion, int minOpcion, String tipoMenu) {
 		
 		boolean error = true;
@@ -125,6 +122,9 @@ public class MetodosAdicionales {
 			else if (tipoMenu.equalsIgnoreCase("submenuEscribir")) {
 				System.out.println(Menu.mostrarSubmenu("escribir"));
 			}
+			else if (tipoMenu.equalsIgnoreCase("submenuFicheros")) {
+				System.out.println(Menu.mostrarSubmenuFicheros());
+			}
 			
 		}while(error);
 		
@@ -150,6 +150,15 @@ public class MetodosAdicionales {
 		}while(error);
 		
 		return str;
+	}
+	
+	public static boolean mostrarLibrosMemoria(ArrayList<Libro> pLibros) {
+		
+		for(Libro libro : pLibros) {
+			System.out.println(libro.toString());
+		}
+		System.out.println("\nNum libros en memoria: " + pLibros.size());
+		return true;
 	}
 	
 	public static String comprobarOS() {

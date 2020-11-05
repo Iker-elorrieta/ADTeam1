@@ -1,15 +1,12 @@
 package manejoDeFicheros;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.StreamCorruptedException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -96,9 +93,9 @@ public class LectorFichero {
 			
 			FileInputStream fi = new FileInputStream(pFichero);
 			ObjectInputStream oi = new ObjectInputStream(fi);
-	   
+	  
 	        try {
-	            while (true) {
+	            while(fi.getChannel().position() < fi.getChannel().size()) {
 
 	                Libro liburu = (Libro)oi.readObject();
 
@@ -107,14 +104,10 @@ public class LectorFichero {
 	                    contadorEntradas++;
 	                } 
 	            }
-        	} catch (EOFException eo) {
-	        	System.out.println("\nFIN DE LECTURA");
-	        	oi.close();
-	        	
-        	} 
-	        catch (StreamCorruptedException x) {
-	        	System.out.println("\nStream corrupto");
-	        } catch (ClassNotFoundException e) {
+	            oi.close();
+	            fi.close();
+        	}
+	         catch (ClassNotFoundException e) {
 				System.out.println("\nClass not found");			
 			}
 
