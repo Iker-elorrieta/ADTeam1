@@ -17,10 +17,9 @@ public class GestorDeArchivos extends Thread{
 	private static final String XML = ".xml";
 	private static final String CSV = ".csv";
 	private static final String SUB_FIC = "submenuFicheros";
-	private static final String RUTA_LINUX = "";
-//	private static final String RUTA_WINDOWS = "C:" + File.separator + "users" + File.separator 
-//													+ System.getProperty("user.name") + File.separator + "desktop";
-	private static final String RUTA_WINDOWS ="ficherosDeSalida";
+	private static final String RUTA_LINUX = File.separator + "home" + File.separator + System.getProperty("user.name");
+	private static final String RUTA_WINDOWS = "C:" + File.separator + "users" + File.separator + System.getProperty("user.name");
+	//private static final String RUTA_WINDOWS ="ficherosDeSalida";
 	private static final String FDS ="ficherosDeSalida";
 	private static String NOMBRE_FIC;
 	private static File FICHERO_SALIDA;
