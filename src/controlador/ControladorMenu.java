@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 
+import manejoDeDatos.Buscador;
 import manejoDeFicheros.EscritorFichero;
 import manejoDeFicheros.GestorDeArchivos;
 import manejoDeFicheros.LectorFichero;
@@ -43,7 +44,7 @@ public class ControladorMenu {
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(5, 0, MP)) {
+			switch (MetodosAdicionales.solicitarOpcion(6, 0, MP)) {
 			
 			case 1:
 				LectorFichero lecFichero = new LectorFichero(libros);
@@ -190,6 +191,11 @@ public class ControladorMenu {
 				
 			case 5: 
 				libros = MetodosAdicionales.borrarMemoria(libros);
+				break;
+				
+			case 6: 
+				Buscador busca = new Buscador(libros);
+				busca.como_buscar();
 				break;
 				
 			case 0:
