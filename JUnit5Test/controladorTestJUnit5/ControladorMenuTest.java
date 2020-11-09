@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import controlador.ControladorMenu;
 import main.Main;
-import modelo.Libro;
 
 class ControladorMenuTest {
 

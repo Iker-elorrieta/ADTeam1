@@ -193,7 +193,7 @@ public static ArrayList<Libro> borrarMemoria(ArrayList<Libro> pLibros){
 			
 		}
 		else {
-			System.out.println("\nOperacion cancelada\nVolviendo al menu principal...");
+			System.out.println("\nOperacion cancelada\n\nVolviendo al menu principal...");
 		}
 		
 		return libros;
