@@ -10,6 +10,11 @@ import modelo.Menu;
 
 public class MetodosAdicionales {
 	
+	/**
+	 * se carga un libro en el arraylist de libros
+	 * @param el ArrayList de libros para añadirlo 
+	 * @return el ArrayList con el libro
+	 */
 	public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros){
 		//Recoger ArrayList de la memoria
 		ArrayList<Libro> libros = pLibros;
@@ -90,6 +95,13 @@ public class MetodosAdicionales {
 	}
 	
 	
+	/**
+	 * Se encarga de pedir la opcion y de controlar que este dentro de las posibilidades
+	 * @param Opcion maxima
+	 * @param Opcion minima
+	 * @param Tipo de menu
+	 * @return opcion seleccionada
+	 */
 	public static int solicitarOpcion(int maxOpcion, int minOpcion, String tipoMenu) {
 		
 		boolean error = true;
@@ -133,7 +145,11 @@ public class MetodosAdicionales {
 	
 	}
 	
-	
+	/**
+	 * Verifica los espacion vacios a la hora de meter las opciones, en caso de que haya espacios vacios lo pide otra ve<
+	 * @param mensaje a comprobar
+	 * @return frase 
+	 */
 	public static String verificarInsercionDatos(String pMensaje){;
 		
 		boolean error = true;
@@ -153,7 +169,11 @@ public class MetodosAdicionales {
 		return str;
 	}
 	
-	
+	/**
+	 * muestra los libros que estan cargados en la memoria de la aplicacion es ese momento
+	 * @param ArrayList con los libros cargados
+	 * @return true si se ejecuta bien
+	 */
 	public static boolean mostrarLibrosMemoria(ArrayList<Libro> pLibros) {
 		
 		for(Libro libro : pLibros) {
@@ -163,8 +183,12 @@ public class MetodosAdicionales {
 		return true;
 	}
 	
-	
-public static ArrayList<Libro> borrarMemoria(ArrayList<Libro> pLibros){
+	/**
+	 * elimina todos los libros cargados de la memoria
+	 * @param ArrayList de los libros que se quieren eliminar
+	 * @return el ArrayList vacio
+	 */
+	public static ArrayList<Libro> borrarMemoria(ArrayList<Libro> pLibros){
 		
 		ArrayList<Libro> libros = pLibros;
 		
@@ -200,7 +224,10 @@ public static ArrayList<Libro> borrarMemoria(ArrayList<Libro> pLibros){
 		
 	}
 	
-	
+	/**
+	 * Comprueba el nombre del sistema operativo
+	 * @return el sistema operativo
+	 */
 	public static String comprobarOS() {
 		
 		String sOS = System.getProperty("os.name");

@@ -23,6 +23,10 @@ public class EscritorFichero {
 	boolean cargado = true;
 	int numLibros = 0;
 	
+	/**
+	 * se crea el objeto con los libros que hay en memoria
+	 * @param pLibros
+	 */
 	public EscritorFichero(ArrayList<Libro> pLibros) {
 		this.libros = pLibros;
 	}

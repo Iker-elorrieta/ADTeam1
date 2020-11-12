@@ -28,9 +28,16 @@ public class ControladorMenu {
 	public JFileChooser jfc = new JFileChooser();
 	Scanner sc = new Scanner(System.in);
 	
+	/**
+	 * se crea el objeto sin necesidad de parametros
+	 */
 	public ControladorMenu() {
 	}
 	
+	/**
+	 * se encarga de crear los menus en el orden que se deben crear
+	 * @return true si se ha ejecutado bien
+	 */
 	public boolean iniciarControladorMenu(){
 		
 		

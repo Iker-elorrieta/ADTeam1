@@ -12,11 +12,17 @@ public class Buscador {
 	ArrayList<Libro> resultados = new ArrayList<Libro>();
 	ArrayList<Libro> libros;
 	
-	
+	/**
+	 * Guardamos los libros para poder hacer la busqueda sobre los libros que tenemos guardados
+	 * @param pLibros
+	 */
 	public Buscador(ArrayList<Libro> pLibros) {
 		this.libros = pLibros;
 	}
 	
+	/**
+	 * Pedimos los datos para crear el patron de busqueda que se quiere
+	 */
 	public void busca_guiado() {
 		
 		boolean error= true;
@@ -148,7 +154,9 @@ public class Buscador {
 	}
 	
 	
-	 
+	 /**
+	  * pedimos que se escriba el patron que se quiere buscar 
+	  */
 	public void busca_libre() {
 		Main.sc.nextLine();
 		System.out.println("Introduce patron: ");
@@ -157,6 +165,10 @@ public class Buscador {
 			
 	}
 	
+	/**
+	 * se pide el modo en el que se va a buscar
+	 * @return true si se ejecuta bien
+	 */
 	public boolean como_buscar() {
 		
 		boolean error = true;
@@ -190,13 +202,19 @@ public class Buscador {
 		return true;
 	}
 	
-	
+	/**
+	 * Escribe los libros que cumplen con el patron
+	 */
 	public void imprimir_resultados() {
 		for(Libro libro: resultados ) {
 			System.out.println(libro.toStringFormateado());
 		}
 	}
 	
+	/**
+	 * Con el parametro y los libros busca los que lo cumplan
+	 * @param patron
+	 */
 	public void buscar(String patron) {
 		
 		String[] params =patron.split(";");
