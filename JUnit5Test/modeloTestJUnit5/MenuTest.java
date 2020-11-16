@@ -18,7 +18,8 @@ class MenuTest {
 				+ "3) Insertar libro\n "
 				+ "4) Mostrar libros en memoria\n "
 				+ "5) Borrar memoria\n "
-				+ "6) Buscar libro\n\n "
+				+ "6) Buscar libro\n "
+				+ "7) Mover ficheros\n\n "
 				+ "0) Salir", Menu.mostrarMenu());
 	}
 	

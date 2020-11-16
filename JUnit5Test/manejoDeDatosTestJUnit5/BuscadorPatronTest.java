@@ -11,10 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import main.Main;
 import manejoDeDatos.Buscador;
-import manejoDeDatos.Validadores;
 import modelo.Libro;
 
-class BuscadorPatrosnTest {
+class BuscadorPatronTest {
 	
 	
 

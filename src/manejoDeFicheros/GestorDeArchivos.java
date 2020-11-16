@@ -2,6 +2,13 @@ package manejoDeFicheros;
 
 import java.awt.Dimension;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static java.nio.file.StandardCopyOption.*;
+
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -61,6 +68,9 @@ public class GestorDeArchivos extends Thread{
 			break;
 		case 2: 
 			this.fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			break;
+		case 3: 
+			break;
 		}
 		
 
@@ -71,11 +81,16 @@ public class GestorDeArchivos extends Thread{
 
 	@Override
 	public void run() {
+		int opcionD = 0;
+		if(tipo == 1 || tipo == 2) {
+			System.out.println(Menu.mostrarSubmenuFicheros());
+			opcionD = MetodosAdicionales.solicitarOpcion(2, 1, SUB_FIC);
+		}
+		else {
+			opcionD = 2;
+		}
 		
-		
-		System.out.println(Menu.mostrarSubmenuFicheros());
-		
-	    switch (MetodosAdicionales.solicitarOpcion(2, 1, SUB_FIC)) {
+	    switch (opcionD) {
 	    
 	    case 1:
 	    	this.defaultFiles = true;
@@ -92,9 +107,13 @@ public class GestorDeArchivos extends Thread{
 				case 2:
 				    this.seleccionUsuario = fc.showSaveDialog(null);
 					break;
+				case 3: 
+				    this.seleccionUsuario = fc.showOpenDialog(null);
+					break;
 				}
 			    if(this.seleccionUsuario == JFileChooser.APPROVE_OPTION) {
 			      this.rutaFichero = fc.getSelectedFile().getAbsolutePath();
+			      System.out.println(rutaFichero);
 			    }
 			    
 			    if (this.seleccionUsuario == JFileChooser.CANCEL_OPTION) {
@@ -201,11 +220,26 @@ public class GestorDeArchivos extends Thread{
 		}
 		return FICHERO_SALIDA;
 	}
-	//GETTERTS & SETTERS
+	//GETTERS & SETTERS
 
 
 	
 	public String getRutaFichero() {
 		return rutaFichero;
+	}
+	
+	
+	public boolean modificarUbicacionFichero(String rutaOrigen, String rutaDestino, File fichero) {
+		
+		Path pathOrigen = Paths.get(rutaOrigen);
+		Path pathDestino = Paths.get(rutaDestino);
+		
+		try {
+			Files.move(pathOrigen, pathDestino, REPLACE_EXISTING);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
 	}
 }

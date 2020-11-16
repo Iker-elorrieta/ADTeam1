@@ -1,10 +1,12 @@
 package controlador;
 
+import java.io.File;
 import java.util.ArrayList;
 import excepciones.ExcepcionCampoVacio;
 import excepciones.ExcepcionIntervalo;
 import excepciones.ExcepcionRespuesta;
 import main.Main;
+import manejoDeFicheros.GestorDeArchivos;
 import modelo.Libro;
 import modelo.Menu;
 
@@ -222,6 +224,38 @@ public class MetodosAdicionales {
 		
 		return libros;
 		
+	}
+	
+	
+	public static boolean modificarUbicacionFicheros() {
+		GestorDeArchivos exp = new GestorDeArchivos(3, null);
+		exp.start();
+		try {
+			exp.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		File fichero = new File(exp.getRutaFichero());
+		String rutaOrigen = fichero.getAbsolutePath();
+		
+
+		
+		exp = new GestorDeArchivos(2, null);
+		exp.start();
+		try {
+			exp.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String rutaDestino = exp.getRutaFichero() + File.separator + fichero.getName();
+	
+		
+		exp.modificarUbicacionFichero(rutaOrigen, rutaDestino, fichero);
+		System.out.println("Fichero movido con exito");
+		
+		return true;
 	}
 	
 	/**
