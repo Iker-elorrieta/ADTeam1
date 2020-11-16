@@ -6,7 +6,10 @@ import controlador.MetodosAdicionales;
 
 public class Menu {
 	static Scanner sc = new Scanner(System.in);
-	
+	/**
+	 * metodo que genera el menu principal
+	 * @return String con el menu principal
+	 */
 	public static String mostrarMenu(){
 		
 		System.out.println(mostrarIntro());
@@ -22,6 +25,11 @@ public class Menu {
 				+ "0) Salir";
 	}
 	
+	/**
+	 * metodo que muestra el submenu depenciendo de si se va a leer o escribir
+	 * @param categoria
+	 * @return String con el submenu
+	 */
 	public static String mostrarSubmenu(String categoria) {
 			
 		String cabecera = "";
@@ -45,6 +53,10 @@ public class Menu {
 				+ " 0) Cancelar");
 	}
 	
+	/**
+	 * metodo que devuelve el submenu cuando queremos saber si va a sobreescribir
+	 * @return String con el submenu
+	 */
 	public static String mostrarSubmenuSobreescribir() {
 		return "\nEl nombre del fichero introducido ya existe.\n"
 				+ " Que desea realizar?\n\n"
@@ -53,6 +65,10 @@ public class Menu {
 
 	}
 	
+	/**
+	 * metodo que devuelve el submenu cuando queremos saber si va a modificar
+	 * @return String con el submenu
+	 */
 	public static String mostrarSubmenuFicheros() {
 				
 		return "\nSe va a proceder a realizar modificaciones de ficheros.\n"
@@ -61,7 +77,10 @@ public class Menu {
 				+ " 2) Seleccionar fichero con el explorador de archivos\n";
 
 	}
-	
+	/**
+	 * metodo que devuelve la intro del programa
+	 * @return String con la intro del programa
+	 */
 	public static String mostrarIntro() {
 		
 		String sOS = MetodosAdicionales.comprobarOS();

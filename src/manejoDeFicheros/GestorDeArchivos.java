@@ -78,7 +78,6 @@ public class GestorDeArchivos extends Thread{
 
 	}
 	
-
 	@Override
 	public void run() {
 		int opcionD = 0;
@@ -123,7 +122,6 @@ public class GestorDeArchivos extends Thread{
 	    }
 	}
 
-	
 	public String iniciarHilo(){
 		
 		this.start();
@@ -222,8 +220,6 @@ public class GestorDeArchivos extends Thread{
 	}
 	//GETTERS & SETTERS
 
-
-	
 	public String getRutaFichero() {
 		return rutaFichero;
 	}

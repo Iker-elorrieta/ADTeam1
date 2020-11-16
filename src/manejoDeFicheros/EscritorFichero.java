@@ -31,7 +31,12 @@ public class EscritorFichero {
 		this.libros = pLibros;
 	}
 	
-	
+	/**
+	 * se escribe en el fichero TXT que se nos pasa lo que se quiere escribir o sobreescribir 
+	 * @param fichero TXT a escribir
+	 * @param boolean si se sobreescribe o no
+	 * @return devuelve el fichero cargado
+	 */
 	public boolean escribirFicheroTxt(File pFichero, boolean sobreeescribir){
 
 		numLibros = 0;
@@ -59,6 +64,12 @@ public class EscritorFichero {
 		return cargado;
 	}
 		
+	/**
+	 * se escribe en el fichero DAT que se nos pasa lo que se quiere escribir o sobreescribir 
+	 * @param fichero DAT a escribir
+	 * @param boolean si se sobreescribe o no
+	 * @return devuelve el fichero cargado
+	 */
 
 	public boolean escribirFicheroDat(File pFichero, boolean pAniadir){
 		
@@ -105,7 +116,12 @@ public class EscritorFichero {
 		return cargado;
 	}
 	 
-	
+	/**
+	 * se escribe en el fichero XML que se nos pasa lo que se quiere escribir o sobreescribir 
+	 * @param fichero XML a escribir
+	 * @param boolean si se sobreescribe o no
+	 * @return devuelve el fichero cargado
+	 */
 	public boolean escribirFicheroXml(File pFichero){
 						
 		DocumentBuilderFactory  dbFactory = DocumentBuilderFactory.newInstance();
@@ -181,7 +197,12 @@ public class EscritorFichero {
 		
 		return cargado;
 	}
-	
+	/**
+	 * se escribe en el fichero CSV que se nos pasa lo que se quiere escribir o sobreescribir 
+	 * @param fichero CSV a escribir
+	 * @param boolean si se sobreescribe o no
+	 * @return devuelve el fichero cargado
+	 */
 	public boolean escribirFicheroCsv(File pFichero, boolean pSobreescribir){
 
 		int numLibros = 0;
@@ -209,7 +230,11 @@ public class EscritorFichero {
 		return cargado;
 	}
 	
-	
+	/**
+	 * pregunta si se va a querer sobrescribir o no
+	 * @param fichero al que añadir los datos
+	 * @return true si se quiere añadido false si se quiere sobreescribir
+	 */
 	public static boolean aniadirDatosFicheroExistente(File pFichero) {
 
 		boolean aniadir = true;
@@ -234,7 +259,10 @@ public class EscritorFichero {
 		return aniadir;
 	}
 	
-	
+	/**
+	 * pide el nombre del fichero con el que vamos a trabajar
+	 * @return el nombre del fichero
+	 */
 	public static String solicitarNombreFichero(){
 
 		String nombreFichero = "";
