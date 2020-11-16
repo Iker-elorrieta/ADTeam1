@@ -27,17 +27,27 @@ public class LectorFichero {
 	private ArrayList<Libro> libros;
 	boolean aniadido = true;
 	
-	
+	/**
+	 * instancia la clase de leer ficheros con los libros de la memoria
+	 * @param libros en la memoria
+	 */
 	public LectorFichero(ArrayList<Libro> pLibros) {
 		this.libros = pLibros;
 	}	
 	
-	
+	/**
+	 * devuelve los libros a la memoria
+	 * @return ArrayList de libros
+	 */
 	public ArrayList<Libro> getLibros(){
 		return this.libros;
 	}
 	
-	
+	/**
+	 * metodo que lee un fichero TXT y guarda los libros en la memoria
+	 * @param fichero TXT a leer
+	 * @return true si se han añadido bien False si no
+	 */
 	public boolean leerFicheroTxt(File pFichero){
 
 		int contadorEntradas = 0;
@@ -86,6 +96,11 @@ public class LectorFichero {
 		return aniadido;
 	}
 	
+	/**
+	 * metodo que lee un fichero DAT y guarda los libros en la memoria
+	 * @param fichero DAT a leer
+	 * @return true si se han añadido bien False si no
+	 */
 	public boolean leerFicheroDat(File pFichero) {
 				
 		try {
@@ -129,6 +144,11 @@ public class LectorFichero {
 		return aniadido;
 	}
 	
+	/**
+	 * metodo que lee un fichero XML y guarda los libros en la memoria
+	 * @param fichero XML a leer
+	 * @return true si se han añadido bien False si no
+	 */
 	public boolean leerFicheroXml(File pFichero){
 		
 		int contadorEntradas = 0;
@@ -182,7 +202,11 @@ public class LectorFichero {
 
 		return aniadido;
 	}
-	
+	/**
+	 * metodo que lee un fichero CSV y guarda los libros en la memoria
+	 * @param fichero CSV a leer
+	 * @return true si se han añadido bien False si no
+	 */
 	public boolean leerFicheroCsv(File pFichero){
 				
 		try{
