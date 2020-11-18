@@ -1,7 +1,11 @@
 package controlador;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import excepciones.ExcepcionCampoVacio;
 import excepciones.ExcepcionIntervalo;
 import excepciones.ExcepcionRespuesta;
@@ -12,12 +16,16 @@ import modelo.Menu;
 
 public class MetodosAdicionales {
 	
+	
+	final static String LINUX = "Linux";
+	final static String WINDOWS = "Windows 10";
 	/**
 	 * se carga un libro en el arraylist de libros
 	 * @param el ArrayList de libros para añadirlo 
 	 * @return el ArrayList con el libro
 	 */
 	public static ArrayList<Libro> insertarLibro(ArrayList<Libro> pLibros){
+	
 		//Recoger ArrayList de la memoria
 		ArrayList<Libro> libros = pLibros;
 		
@@ -228,6 +236,8 @@ public class MetodosAdicionales {
 	
 	
 	public static boolean modificarUbicacionFicheros() {
+        JOptionPane.showMessageDialog(null, "Seleccione el fichero que desea mover");
+
 		GestorDeArchivos exp = new GestorDeArchivos(3, null);
 		exp.start();
 		try {
@@ -236,12 +246,38 @@ public class MetodosAdicionales {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		File fichero = new File(exp.getRutaFichero());
-		String rutaOrigen = fichero.getAbsolutePath();
-		
+		if(exp.getRutaFichero() != null) {
 
+			File fichero = new File(exp.getRutaFichero());
+			String rutaOrigen = fichero.getAbsolutePath();
+			
+
+	        JOptionPane.showMessageDialog(null, "Seleccione el directorio al que desea mover el fichero");
+	        
+			exp = new GestorDeArchivos(4, null);
+			exp.start();
+
+			try {
+				exp.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(exp.getRutaFichero() != null) {
+				String rutaDestino = exp.getRutaFichero() + File.separator + fichero.getName();
+				
+				exp.modificarUbicacionFichero(rutaOrigen, rutaDestino, fichero);
+				System.out.println("\nFICHERO MOVIDO CON EXITO\n");
+			}
+		}
+		return true;
+	}
+	
+	public static boolean modificarPermisos() {
 		
-		exp = new GestorDeArchivos(2, null);
+        JOptionPane.showMessageDialog(null, "Seleccione el fichero al que desea modificarle los permisos");
+
+		GestorDeArchivos exp = new GestorDeArchivos(3, null);
 		exp.start();
 		try {
 			exp.join();
@@ -249,11 +285,76 @@ public class MetodosAdicionales {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String rutaDestino = exp.getRutaFichero() + File.separator + fichero.getName();
+		if(exp.getRutaFichero() != null) {
+			System.out.println(Menu.mostrarSubmenuPermisos());
+			switch(MetodosAdicionales.solicitarOpcion(3, 1, Menu.mostrarSubmenuPermisos())) {
+			
+			case 1:
+				switch(comprobarOS()) {
+				
+				case LINUX:
+					
+					break;
+				case WINDOWS:
+					ProcessBuilder pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /grant " + System.getProperty("user.name") + ":(F)");
+					try {
+						
+					
+						Process p = pb.start();
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+				}
+				break;
+			case 2:
+				switch(comprobarOS()) {
+				
+				case LINUX:
+					
+					break;
+				case WINDOWS:	
+					ProcessBuilder pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /deny " + System.getProperty("user.name") + ":(W)");
+					try {
+						Process p = pb.start();
 	
-		
-		exp.modificarUbicacionFichero(rutaOrigen, rutaDestino, fichero);
-		System.out.println("Fichero movido con exito");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+				}
+				break;
+			case 3:
+				switch(comprobarOS()) {
+				
+				case LINUX:
+					
+					break;
+				case WINDOWS:
+					ProcessBuilder pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /deny " + System.getProperty("user.name") + ":(F)");
+					try {
+						File file = new File("C:\\Users\\Jon\\Desktop\\CarpetaPrueba\\Prueba2\\log.txt");
+						pb.redirectError(file);
+						Process p = pb.start();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("Permisos denegados");
+	
+					break;
+					
+				}
+				break;
+			}
+			
+		}
+		else {
+			
+		}
 		
 		return true;
 	}

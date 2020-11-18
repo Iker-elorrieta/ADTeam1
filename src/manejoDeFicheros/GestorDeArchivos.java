@@ -46,9 +46,8 @@ public class GestorDeArchivos extends Thread{
 		
 		directorioDeInicio();
 		
-		switch(tipo) {
+		if(tipo == 1) {
 		
-		case 1:
 			switch (extension) {
 			case ".txt":
 				this.filter = new FileNameExtensionFilter(".txt Files", "txt");
@@ -65,17 +64,11 @@ public class GestorDeArchivos extends Thread{
 			}
 		    this.fc.setFileFilter(this.filter);
 
-			break;
-		case 2: 
-			this.fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			break;
-		case 3: 
-			break;
 		}
-		
-
+		else if(tipo == 2 || tipo == 4) {
+			this.fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		}
 		fc.setPreferredSize(new Dimension(800,500));
-
 	}
 	
 	@Override
@@ -98,17 +91,13 @@ public class GestorDeArchivos extends Thread{
 	    case 2:
 	    	this.defaultFiles = false;
 	    	if(fc != null) {
-			    switch (this.tipo) {
-				case 1:
-					
+			    if (tipo == 1 || tipo == 3) {
+				
 				    this.seleccionUsuario = fc.showOpenDialog(null);
-					break;
-				case 2:
+			    }
+			    else if(tipo == 2 || tipo == 4){
 				    this.seleccionUsuario = fc.showSaveDialog(null);
-					break;
-				case 3: 
-				    this.seleccionUsuario = fc.showOpenDialog(null);
-					break;
+				
 				}
 			    if(this.seleccionUsuario == JFileChooser.APPROVE_OPTION) {
 			      this.rutaFichero = fc.getSelectedFile().getAbsolutePath();

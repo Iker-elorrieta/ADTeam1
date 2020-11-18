@@ -51,7 +51,7 @@ public class ControladorMenu {
 		do {
 			System.out.println(Menu.mostrarMenu());		
 					
-			switch (MetodosAdicionales.solicitarOpcion(7, 0, MP)) {
+			switch (MetodosAdicionales.solicitarOpcion(8, 0, MP)) {
 			
 			case 1:
 				LectorFichero lecFichero = new LectorFichero(libros);
@@ -207,6 +207,10 @@ public class ControladorMenu {
 				
 			case 7: 
 				MetodosAdicionales.modificarUbicacionFicheros();
+				break;
+				
+			case 8: 
+				MetodosAdicionales.modificarPermisos();
 				break;
 				
 			case 0:

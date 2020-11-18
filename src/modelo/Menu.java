@@ -21,7 +21,8 @@ public class Menu {
 				+ "4) Mostrar libros en memoria\n "
 				+ "5) Borrar memoria\n "
 				+ "6) Buscar libro\n "
-				+ "7) Mover ficheros\n\n "
+				+ "7) Mover ficheros\n "
+				+ "8) Modificar permisos\n\n "
 				+ "0) Salir";
 	}
 	
@@ -75,6 +76,16 @@ public class Menu {
 				+ " Que desea utilizar?\n\n"
 				+ " 1) Ficheros de prueba\n"
 				+ " 2) Seleccionar fichero con el explorador de archivos\n";
+
+	}
+	
+	public static String mostrarSubmenuPermisos() {
+		
+		return "\nSe va a proceder a modificar los permisos del usuario actual respecto al fichero seleccionado.\n"
+				+ " Que permisos desea asignarle?\n\n"
+				+ " 1) Asignar todos los permisos\n"
+				+ " 2) Asignar permisos de solo lectura\n"
+				+ " 3) Denegar todos los permisos\n\n";
 
 	}
 	/**
