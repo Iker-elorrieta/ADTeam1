@@ -38,5 +38,66 @@ public class Validadores {
 		}	
 		return true;	
 	}
+	
+	
+	
+	/**
+	 * Esta Funcion valida isbn de 13 numeros recibiendo el isbn con guiones y devolviendo true o false
+	 * @param ISBN
+	 * @return si el ISBN es correcto devuelve true si no devuelve false
+	 */
+	public static boolean validador(String ISBN) {
+		
+		int contador_numeros = 0;
+		int contador_Palos = 0;
+		int producto=0;
+		int contador=1;
+		
+		for(int x = 0; x < ISBN.length() ; x++) {
+			
+			if(Character.isDigit(ISBN.charAt(x))) {
+				contador_numeros++;
+			}
+			
+			if(ISBN.charAt(x) == '-') {
+				contador_Palos++;
+			}
+			
+		}
+		
+		if(contador_numeros!=13 || contador_Palos ==0 || contador_Palos > 4) {
+			return false;
+		}
+		
+		if(ISBN.charAt(3)!='-') {
+			return false;
+		}
+		
+		String cad_ini= ISBN.substring(0,4);
+		if(!cad_ini.equals("978-")) {			
+			return false;
+		}
+		
+		for(int x=0; x<=ISBN.length()-2; x++) {
+			if(Character.isDigit(ISBN.charAt(x))) {
+				if(contador == 1) {
+					producto += ((1)*Integer.parseInt(String.valueOf(""+ISBN.charAt(x))));
+				}
+				if (contador == 2) {
+					producto += ((3)*Integer.parseInt(String.valueOf(""+ISBN.charAt(x))));
+				}
+				
+				contador++;
+				if(contador>2) {
+					contador=1;
+				}
+			}
+		}
+		
+		if(10-producto%10!=Integer.parseInt(String.valueOf(""+ISBN.charAt(ISBN.length()-1)))) {
+			return false;
+		}
+		return true;	
+	}
 
 }
