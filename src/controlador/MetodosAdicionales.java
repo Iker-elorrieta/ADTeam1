@@ -234,7 +234,10 @@ public class MetodosAdicionales {
 		
 	}
 	
-	
+	/**
+	 * Modifica la ubicacion del fichero o directorio seleccionados
+	 * @return true
+	 */
 	public static boolean modificarUbicacionFicheros() {
         JOptionPane.showMessageDialog(null, "Seleccione el fichero que desea mover");
 
@@ -273,9 +276,14 @@ public class MetodosAdicionales {
 		return true;
 	}
 	
+	
+	/**
+	 * Modifica los permisos del fichero o directorio seleccionados
+	 * @return true
+	 */
 	public static boolean modificarPermisos() {
 		
-        JOptionPane.showMessageDialog(null, "Seleccione el fichero al que desea modificarle los permisos");
+        JOptionPane.showMessageDialog(null, "Seleccione el fichero o directorio al que desea modificarle los permisos");
 
 		GestorDeArchivos exp = new GestorDeArchivos(3, null);
 		exp.start();
@@ -310,9 +318,7 @@ public class MetodosAdicionales {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
-				
+
 				break;
 				
 			case WINDOWS:
@@ -323,9 +329,7 @@ public class MetodosAdicionales {
 				case 1:
 					pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /grant " + System.getProperty("user.name") + ":(F)");
 					try {
-						
-					
-						Process p = pb.start();
+						pb.start();
 						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -337,7 +341,7 @@ public class MetodosAdicionales {
 				
 					pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /deny " + System.getProperty("user.name") + ":(W)");
 					try {
-						Process p = pb.start();
+						pb.start();
 	
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -351,20 +355,20 @@ public class MetodosAdicionales {
 					try {
 						File file = new File("C:\\Users\\Jon\\Desktop\\CarpetaPrueba\\Prueba2\\log.txt");
 						pb.redirectError(file);
-						Process p = pb.start();
+						pb.start();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					System.out.println("Permisos denegados");
 					break;
 				}
-				break;
+				break;	
 			}
-			
+			System.out.println("\n Permisos denegados con exito");
+
 		}
 		else {
-			
+			System.out.println("Error al modificar permisos");
 		}
 		
 		return true;

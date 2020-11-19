@@ -79,6 +79,10 @@ public class Menu {
 
 	}
 	
+	/**
+	 * metodo que devuelve el submenu cuando cambiamos los permisos en Windows
+	 * @return String con el submenu
+	 */
 	public static String mostrarSubmenuPermisosW() {
 		
 		return "\nSe va a proceder a modificar los permisos del usuario actual respecto al fichero seleccionado.\n"
@@ -89,6 +93,10 @@ public class Menu {
 
 	}
 	
+	/**
+	 * metodo que devuelve el submenu cuando cambiamos los permisos en Linux
+	 * @return String con el submenu
+	 */
 	public static String mostrarSubmenuPermisosL() {
 		
 		return " Que permisos desea asignarle?\n\n"
@@ -119,7 +127,7 @@ public class Menu {
 //			sOS = "  " + sOS + "   ";
 //		}
 		
-		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v4.0  *\n********************************\n";
+		return "\n\n********************************\n*          BIBLIOTECA          *\n*          " + sOS + "          *\n*                              *\n*                              *\n* Grupo 1                v5.2  *\n********************************\n";
 	}
 
 }
