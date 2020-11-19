@@ -104,7 +104,6 @@ public class GestorDeArchivos extends Thread{
 				}
 			    if(this.seleccionUsuario == JFileChooser.APPROVE_OPTION) {
 			      this.rutaFichero = fc.getSelectedFile().getAbsolutePath();
-			      System.out.println(rutaFichero);
 			    }
 			    
 			    if (this.seleccionUsuario == JFileChooser.CANCEL_OPTION) {
