@@ -286,17 +286,42 @@ public class MetodosAdicionales {
 			e.printStackTrace();
 		}
 		if(exp.getRutaFichero() != null) {
-			System.out.println(Menu.mostrarSubmenuPermisos());
-			switch(MetodosAdicionales.solicitarOpcion(3, 1, Menu.mostrarSubmenuPermisos())) {
-			
-			case 1:
-				switch(comprobarOS()) {
+			switch(comprobarOS()) {
+			case LINUX:
+				String chmod;
+				System.out.println("\n - USUARIO -\n\n");
 				
-				case LINUX:
-					
-					break;
-				case WINDOWS:
-					ProcessBuilder pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /grant " + System.getProperty("user.name") + ":(F)");
+				System.out.println(Menu.mostrarSubmenuPermisosL());
+				chmod = String.valueOf(MetodosAdicionales.solicitarOpcion(7, 0, Menu.mostrarSubmenuPermisosL()));
+				System.out.println("\n - GRUPOS -\n\n");
+				
+				System.out.println(Menu.mostrarSubmenuPermisosL());
+				chmod = chmod + String.valueOf(MetodosAdicionales.solicitarOpcion(7, 0, Menu.mostrarSubmenuPermisosL()));
+				System.out.println("\n - OTROS -\n\n");
+				
+				System.out.println(Menu.mostrarSubmenuPermisosL());
+				chmod = chmod + String.valueOf(MetodosAdicionales.solicitarOpcion(7, 0, Menu.mostrarSubmenuPermisosL()));
+				
+				System.out.println(chmod);
+				
+				try {
+					Runtime.getRuntime().exec("chmod " + chmod + " " + exp.getRutaFichero());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
+				break;
+				
+			case WINDOWS:
+				System.out.println(Menu.mostrarSubmenuPermisosW());
+				ProcessBuilder pb;
+				switch(MetodosAdicionales.solicitarOpcion(3, 1, Menu.mostrarSubmenuPermisosW())) {
+				
+				case 1:
+					pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /grant " + System.getProperty("user.name") + ":(F)");
 					try {
 						
 					
@@ -306,17 +331,11 @@ public class MetodosAdicionales {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					break;
-				}
-				break;
-			case 2:
-				switch(comprobarOS()) {
-				
-				case LINUX:
 					
 					break;
-				case WINDOWS:	
-					ProcessBuilder pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /deny " + System.getProperty("user.name") + ":(W)");
+				case 2:
+				
+					pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /deny " + System.getProperty("user.name") + ":(W)");
 					try {
 						Process p = pb.start();
 	
@@ -325,16 +344,10 @@ public class MetodosAdicionales {
 						e.printStackTrace();
 					}
 					break;
-				}
-				break;
-			case 3:
-				switch(comprobarOS()) {
-				
-				case LINUX:
 					
-					break;
-				case WINDOWS:
-					ProcessBuilder pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /deny " + System.getProperty("user.name") + ":(F)");
+				case 3:
+					
+					pb = new ProcessBuilder("CMD", "/C", "ICACLS \"" + exp.getRutaFichero() + "\" /deny " + System.getProperty("user.name") + ":(F)");
 					try {
 						File file = new File("C:\\Users\\Jon\\Desktop\\CarpetaPrueba\\Prueba2\\log.txt");
 						pb.redirectError(file);
@@ -344,9 +357,7 @@ public class MetodosAdicionales {
 						e.printStackTrace();
 					}
 					System.out.println("Permisos denegados");
-	
 					break;
-					
 				}
 				break;
 			}

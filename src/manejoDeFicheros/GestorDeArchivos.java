@@ -68,6 +68,9 @@ public class GestorDeArchivos extends Thread{
 		else if(tipo == 2 || tipo == 4) {
 			this.fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		}
+		else if(tipo == 3) {
+			this.fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		}
 		fc.setPreferredSize(new Dimension(800,500));
 	}
 	

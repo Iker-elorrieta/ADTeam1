@@ -79,13 +79,29 @@ public class Menu {
 
 	}
 	
-	public static String mostrarSubmenuPermisos() {
+	public static String mostrarSubmenuPermisosW() {
 		
 		return "\nSe va a proceder a modificar los permisos del usuario actual respecto al fichero seleccionado.\n"
 				+ " Que permisos desea asignarle?\n\n"
 				+ " 1) Asignar todos los permisos\n"
 				+ " 2) Asignar permisos de solo lectura\n"
 				+ " 3) Denegar todos los permisos\n\n";
+
+	}
+	
+	public static String mostrarSubmenuPermisosL() {
+		
+		return " Que permisos desea asignarle?\n\n"
+				+ " 0) Ningun permiso\n"
+				+ " 1) Ejecucion\n"
+				+ " 2) Escritura\n"
+				+ " 3) Escritura y ejecucion\n"
+				+ " 4) Lectura\n"
+				+ " 5) Lectura y ejecucion\n"
+				+ " 6) Lectura y escritura\n"
+				+ " 7) Lectura, esritura y ejecucion\n\n";
+
+		
 
 	}
 	/**
